@@ -19,7 +19,7 @@
 - White-label branding per organization
 - Commerce with course marketplace, subscriptions, and credit packages
 
-**Repo:** `https://github.com/LearnPlayAI/LearnPlayLocal`
+**Repo:** `https://github.com/LearnPlayAI/LearnPlayMyAI.git`
 **Current Commit:** `e091607 fix table import from docx and gamma table generation`
 **Branch:** `main`
 
