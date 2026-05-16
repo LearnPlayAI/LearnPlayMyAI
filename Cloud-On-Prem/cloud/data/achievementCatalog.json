@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Quiz Novice",
+    "description": "Complete your first 10 quizzes",
+    "category": "quizzes",
+    "requirement": "complete_100_quizzes",
+    "targetValue": 10,
+    "coinReward": 100,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Quiz Master",
+    "description": "Complete 100 quizzes to prove your dedication",
+    "category": "quizzes",
+    "requirement": "complete_100_quizzes",
+    "targetValue": 100,
+    "coinReward": 500,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Quiz Legend",
+    "description": "Complete 500 quizzes — the ultimate achievement",
+    "category": "quizzes",
+    "requirement": "complete_100_quizzes",
+    "targetValue": 500,
+    "coinReward": 2000,
+    "badgeUrl": null,
+    "permanentBonus": {"xpMultiplier": 1.05},
+    "isActive": true
+  },
+  {
+    "name": "On Fire",
+    "description": "Maintain a 7-day learning streak",
+    "category": "streaks",
+    "requirement": "perfect_streak_10",
+    "targetValue": 7,
+    "coinReward": 200,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Unstoppable",
+    "description": "Maintain a 30-day learning streak",
+    "category": "streaks",
+    "requirement": "perfect_streak_10",
+    "targetValue": 30,
+    "coinReward": 1000,
+    "badgeUrl": null,
+    "permanentBonus": {"coinsMultiplier": 1.10},
+    "isActive": true
+  },
+  {
+    "name": "Perfect 10",
+    "description": "Score 100% on 10 quizzes",
+    "category": "perfection",
+    "requirement": "perfect_score_10",
+    "targetValue": 10,
+    "coinReward": 300,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Perfectionist",
+    "description": "Score 100% on 50 quizzes",
+    "category": "perfection",
+    "requirement": "perfect_score_10",
+    "targetValue": 50,
+    "coinReward": 1500,
+    "badgeUrl": null,
+    "permanentBonus": {"xpMultiplier": 1.10},
+    "isActive": true
+  },
+  {
+    "name": "Level 10",
+    "description": "Reach player level 10",
+    "category": "milestones",
+    "requirement": "reach_level_50",
+    "targetValue": 10,
+    "coinReward": 500,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Level 25",
+    "description": "Reach player level 25",
+    "category": "milestones",
+    "requirement": "reach_level_50",
+    "targetValue": 25,
+    "coinReward": 1500,
+    "badgeUrl": null,
+    "permanentBonus": null,
+    "isActive": true
+  },
+  {
+    "name": "Level 50",
+    "description": "Reach player level 50 — you are a true legend",
+    "category": "milestones",
+    "requirement": "reach_level_50",
+    "targetValue": 50,
+    "coinReward": 5000,
+    "badgeUrl": null,
+    "permanentBonus": {"xpMultiplier": 1.15, "coinsMultiplier": 1.15},
+    "isActive": true
+  }
+]

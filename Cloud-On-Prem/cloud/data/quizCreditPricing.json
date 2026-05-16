@@ -1,0 +1,20 @@
+[
+  {
+    "organizationId": null,
+    "questionTier": "10",
+    "creditCost": 50,
+    "isActive": true
+  },
+  {
+    "organizationId": null,
+    "questionTier": "15",
+    "creditCost": 75,
+    "isActive": true
+  },
+  {
+    "organizationId": null,
+    "questionTier": "20",
+    "creditCost": 100,
+    "isActive": true
+  }
+]

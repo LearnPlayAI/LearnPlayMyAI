@@ -1,0 +1,10 @@
+[
+  {"name": "Infrastructure", "type": "infrastructure", "description": "Cloud hosting, servers, CDN, database, and infrastructure services", "isActive": true, "displayOrder": 1},
+  {"name": "Payment Processing", "type": "payment_processing", "description": "Transaction fees from payment processors (YOCO, Stripe)", "isActive": true, "displayOrder": 2},
+  {"name": "API Services", "type": "api_services", "description": "Third-party API costs (AI/ML, Gemini, OpenAI, etc.)", "isActive": true, "displayOrder": 3},
+  {"name": "Staffing", "type": "staffing", "description": "Staff salaries, contractors, and HR costs", "isActive": true, "displayOrder": 4},
+  {"name": "Marketing", "type": "marketing", "description": "Advertising, campaigns, and promotional costs", "isActive": true, "displayOrder": 5},
+  {"name": "Revenue Share", "type": "revenue_share", "description": "Payouts to content creators and partners", "isActive": true, "displayOrder": 6},
+  {"name": "Refunds & Payouts", "type": "refund_payout", "description": "Customer refunds and miscellaneous payouts", "isActive": true, "displayOrder": 7},
+  {"name": "Other", "type": "other", "description": "Miscellaneous costs not fitting other categories", "isActive": true, "displayOrder": 99}
+]

@@ -1,0 +1,2666 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Settings, Crown, User, X, Clock, GraduationCap, Users, Sparkles, Target, ArrowRight, Trophy, Zap, Brain, BookOpen, TrendingUp, Award, CheckCircle, BarChart3, Star, Flame, Shield, MessageSquare, Youtube, ChevronDown, CreditCard, Wallet, FileText, Server, Home, Upload, Play, Eye, DollarSign, Video, FileQuestion, Presentation, ChevronRight, Briefcase, Smartphone, Download, Share2, Building2, PenTool, Mail, ExternalLink, FileCheck, Store } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import trexCardImage from "@assets/generated_images/T-Rex_trading_card_artwork_b728905a.png";
+import { InlineLeaderboard } from '@/components/ui/InlineLeaderboard';
+import { PlayerAvatar } from '@/components/ui/PlayerAvatar';
+import { FloatingCloseButton } from '@/components/FloatingCloseButton';
+import CollectionModal from '@/components/ui/CollectionModal';
+import { apiRequest } from '@/lib/queryClient';
+import { PricingCTA } from '@/components/PricingCTA';
+import { LessonCreditTiers } from '@/components/LessonCreditTiers';
+import { SalesInquiryModal } from '@/components/SalesInquiryModal';
+import { useToast } from '@/hooks/use-toast';
+import { TrialStatusIndicator, TrialStatusMobileItem } from '@/components/TrialStatusIndicator';
+import { HeroMessageRotator } from '@/components/HeroMessageRotator';
+import { AUDIENCES, TRUST_INDICATORS, FEATURE_STEPS } from '@/config/landingPageData';
+import { AudienceFeatureGrid } from '@/components/AudienceFeatureCard';
+import { FeatureTabsCarousel } from '@/components/FeatureTabsCarousel';
+import { CreditStatusBar } from '@/components/CreditCenter';
+import { useCurrencyDisplay } from '@/hooks/useCurrencyDisplay';
+import { CurrencySelectorBadge } from '@/components/CurrencyIndicatorBadge';
+import { useAuth } from '@/hooks/useAuth';
+import { useBrandingLogo, useBranding } from '@/contexts/BrandingContext';
+
+// Premium Header Banner with User Menu
+export const PremiumHeader = ({ isAuthenticated, isAdmin, isSuperAdmin, user, isAdminLoading }) => {
+  const [, setLocation] = useLocation();
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showUserMenuTooltip, setShowUserMenuTooltip] = useState(false);
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const { isImpersonating, impersonatedOrganization, isOrgAdmin: authIsOrgAdmin, isTeacher } = useAuth();
+  const { orgName, logoUrl } = useBrandingLogo();
+  
+  // Exit impersonation mutation
+  const exitImpersonationMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest('/api/superadmin/impersonation', {
+        method: 'DELETE',
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/auth/user'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/check'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/user/roles'] });
+      toast({
+        title: 'Exited impersonation',
+        description: 'You are no longer acting as an organization admin.',
+      });
+      setShowUserMenu(false);
+    },
+    onError: (error) => {
+      console.error('Exit impersonation error:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to exit impersonation',
+        variant: 'destructive',
+      });
+    },
+  });
+
+  // Check if first-time tooltip should be shown
+  useEffect(() => {
+    if (isAuthenticated && typeof window !== 'undefined') {
+      const hasSeenTooltip = localStorage.getItem('user-menu-tooltip-seen');
+      if (!hasSeenTooltip) {
+        // Show tooltip after a short delay for better UX
+        const timer = setTimeout(() => {
+          setShowUserMenuTooltip(true);
+          // Auto-hide after 5 seconds
+          setTimeout(() => {
+            setShowUserMenuTooltip(false);
+            localStorage.setItem('user-menu-tooltip-seen', 'true');
+          }, 5000);
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isAuthenticated]);
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      return await apiRequest('/api/auth/logout', {
+        method: 'POST',
+      });
+    },
+    onSuccess: () => {
+      // Clear all cached data
+      queryClient.clear();
+      
+      // Force a full page reload to homepage to ensure UI updates completely
+      window.location.href = '/';
+    },
+    onError: (error) => {
+      console.error('Logout error:', error);
+    },
+  });
+
+  return (
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl border-b"
+      style={{ 
+        backgroundColor: 'var(--nav-bg)', 
+        borderColor: 'var(--nav-border)' 
+      }}
+      data-testid="header-banner"
+    >
+      <div className="max-w-7xl mx-auto p-[var(--container-padding)] sm:px-4 py-3 sm:py-4">
+        <div className="flex items-center justify-between gap-[var(--space-sm)]">
+          {/* Logo/Brand */}
+          <Link href="/">
+            <motion.div
+              className="cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <div className="flex items-center gap-3">
+                {/* Logo */}
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center shadow-elevated group-hover:shadow-dialog group-hover:shadow-[var(--game-glow)] transition-all overflow-hidden">
+                  <img src={logoUrl || "/icons/learnplay-logo.jpg"} alt={`${orgName} Logo`} className="w-full h-full object-cover" />
+                </div>
+                
+                {/* Brand text */}
+                <div className="flex flex-col">
+                  <h1 className="text-2xl md:text-3xl font-black tracking-tight">
+                    <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent drop-shadow-elevated">
+                      {orgName}
+                    </span>
+                  </h1>
+                  <span className="text-xs text-muted-foreground font-semibold tracking-wide flex items-center gap-1.5">
+                    <span className="fi fi-za" style={{ fontSize: '14px' }}></span>
+                    Learning made easy for everyone
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {isAuthenticated ? (
+              <>
+                <Link href="/">
+                  <button 
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors flex items-center gap-2 touch-manipulation" 
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-home"
+                  >
+                    <Home className="w-4 h-4" />
+                    <span>Home</span>
+                  </button>
+                </Link>
+                <Link href="/quiz-lobby">
+                  <button 
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors touch-manipulation" 
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-quizzes"
+                  >
+                    Gamification
+                  </button>
+                </Link>
+                {(isAdmin || authIsOrgAdmin || isTeacher) && (
+                  <button 
+                    onClick={() => {
+                      if (isAdminLoading) {
+                        toast({
+                          title: "Loading...",
+                          description: "Please wait while we verify your permissions",
+                        });
+                        return;
+                      }
+                      setLocation(isSuperAdmin ? '/super-admin' : '/course-builder');
+                    }}
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors flex items-center gap-2 touch-manipulation" 
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-admin"
+                  >
+                    <Settings className="w-4 h-4" />
+                    <span>Admin</span>
+                  </button>
+                )}
+                
+                {/* Trial Status Indicator - Desktop */}
+                <TrialStatusIndicator variant="compact" showDismiss={false} />
+                
+                {/* User Menu Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(!showUserMenu);
+                      setShowUserMenuTooltip(false);
+                      localStorage.setItem('user-menu-tooltip-seen', 'true');
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 min-h-[44px] hover:opacity-90 font-bold rounded-lg transition-all hover:scale-105 shadow-elevated touch-manipulation"
+                    style={{ background: 'linear-gradient(to right, var(--cta-gradient-from), var(--cta-gradient-to))', color: 'var(--cta-fg)' }}
+                    aria-expanded={showUserMenu}
+                    aria-controls="user-menu-dropdown"
+                    aria-haspopup="true"
+                    data-testid="nav-user-menu"
+                  >
+                    <PlayerAvatar user={user} size="sm" className="!w-6 !h-6" />
+                    <span className="max-w-[100px] truncate">{user?.gamerName}</span>
+                    {(isAdmin || authIsOrgAdmin || isTeacher) && <Crown className="w-4 h-4" />}
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showUserMenu ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {/* First-time tooltip */}
+                  <AnimatePresence>
+                    {showUserMenuTooltip && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="absolute top-full right-0 mt-2 w-64 bg-secondary text-secondary-foreground text-sm p-3 rounded-lg shadow-elevated z-50"
+                        role="tooltip"
+                      >
+                        <div className="relative">
+                          <div className="absolute -top-7 right-4 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-secondary"></div>
+                          <p className="font-semibold mb-1">👋 Welcome!</p>
+                          <p>Click here to access your profile, settings, and more.</p>
+                          <button
+                            onClick={() => {
+                              setShowUserMenuTooltip(false);
+                              localStorage.setItem('user-menu-tooltip-seen', 'true');
+                            }}
+                            className="absolute top-0 right-0 text-[hsl(var(--secondary-foreground)/0.8)] hover:text-secondary-foreground"
+                            aria-label="Close tooltip"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <AnimatePresence>
+                    {showUserMenu && (
+                      <motion.div
+                        id="user-menu-dropdown"
+                        role="menu"
+                        aria-label="User menu"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-dialog overflow-hidden"
+                      >
+                        <div className="p-2 space-y-1">
+                          {/* LP Credits Status */}
+                          <div 
+                            className="px-2 py-2" 
+                            onClick={(e) => e.stopPropagation()}
+                            data-testid="nav-credits-status"
+                          >
+                            <CreditStatusBar className="w-full" />
+                          </div>
+                          
+                          {/* Impersonation Status - Only for SuperAdmin when impersonating */}
+                          {isSuperAdmin && isImpersonating && impersonatedOrganization && (
+                            <>
+                              <div className="border-t border-border my-1"></div>
+                              <div 
+                                className="px-2 py-2" 
+                                onClick={(e) => e.stopPropagation()}
+                                data-testid="nav-impersonation-status"
+                              >
+                                <div className="flex items-center justify-between p-2 rounded-lg bg-[hsl(var(--warning)/0.1)] border border-[hsl(var(--warning)/0.3)]">
+                                  <div className="flex items-center gap-2 min-w-0">
+                                    <Building2 className="w-4 h-4 text-warning shrink-0" />
+                                    <div className="min-w-0">
+                                      <p className="text-[10px] text-warning font-medium">Acting as</p>
+                                      <p className="text-xs text-foreground font-semibold truncate">{impersonatedOrganization.name}</p>
+                                    </div>
+                                  </div>
+                                  <button
+                                    onClick={() => exitImpersonationMutation.mutate()}
+                                    disabled={exitImpersonationMutation.isPending}
+                                    className="px-2 py-1 text-[10px] font-medium text-warning hover:text-warning/80 hover:bg-[hsl(var(--warning)/0.2)] rounded transition-colors shrink-0 disabled:opacity-50"
+                                    data-testid="nav-exit-impersonation"
+                                  >
+                                    {exitImpersonationMutation.isPending ? 'Exiting...' : 'Exit'}
+                                  </button>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                          
+                          <div className="border-t border-border my-1"></div>
+                          
+                          <Link href="/browse-courses">
+                            <button
+                              className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                              data-testid="nav-browse-marketplace"
+                              onClick={() => setShowUserMenu(false)}
+                            >
+                              <Store className="w-4 h-4" />
+                              <span>Browse Marketplace</span>
+                            </button>
+                          </Link>
+                          <Link href="/my-courses">
+                            <button
+                              className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                              data-testid="nav-my-courses"
+                              onClick={() => setShowUserMenu(false)}
+                            >
+                              <BookOpen className="w-4 h-4" />
+                              <span>My Courses</span>
+                            </button>
+                          </Link>
+                          <Link href="/profile">
+                            <button
+                              className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                              data-testid="nav-profile"
+                              onClick={() => setShowUserMenu(false)}
+                            >
+                              <User className="w-4 h-4" />
+                              <span>My Profile</span>
+                            </button>
+                          </Link>
+                          <Link href="/certificates">
+                            <button
+                              className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                              data-testid="nav-certificates"
+                              onClick={() => setShowUserMenu(false)}
+                            >
+                              <Award className="w-4 h-4" />
+                              <span>My Certificates</span>
+                            </button>
+                          </Link>
+                          <Link href="/invoices">
+                            <button
+                              className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                              data-testid="nav-invoices"
+                              onClick={() => setShowUserMenu(false)}
+                            >
+                              <FileText className="w-4 h-4" />
+                              <span>Invoices</span>
+                            </button>
+                          </Link>
+                          {isAdmin && (
+                            <>
+                              <div className="border-t border-border my-1"></div>
+                              <Link href="/subscriptions">
+                                <button
+                                  className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                                  data-testid="nav-subscriptions"
+                                  onClick={() => setShowUserMenu(false)}
+                                >
+                                  <CreditCard className="w-4 h-4" />
+                                  <span>Subscriptions</span>
+                                </button>
+                              </Link>
+                            </>
+                          )}
+                          
+                          <div className="border-t border-border my-1"></div>
+                          
+                          {/* Tutorials Link - YouTube Red */}
+                          <a 
+                            href="https://www.youtube.com/@learnplay-coza" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="w-full px-4 py-3 text-left text-destructive hover:bg-[hsl(var(--destructive)/0.1)] rounded-lg transition-colors flex items-center gap-3 font-semibold"
+                            data-testid="nav-tutorials-dropdown"
+                            onClick={() => setShowUserMenu(false)}
+                          >
+                            <Youtube className="w-4 h-4" />
+                            <span>Tutorials</span>
+                          </a>
+                          
+                          {/* Webhooks Link (SuperAdmin only) */}
+                          {isSuperAdmin && (
+                            <Link href="/webhooks">
+                              <button
+                                className="w-full px-4 py-3 text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3"
+                                data-testid="nav-webhooks-dropdown"
+                                onClick={() => setShowUserMenu(false)}
+                              >
+                                <Server className="w-4 h-4" />
+                                <span>Webhooks</span>
+                              </button>
+                            </Link>
+                          )}
+                          
+                          <div className="border-t border-border my-1"></div>
+                          <button
+                            onClick={() => {
+                              setShowUserMenu(false);
+                              logoutMutation.mutate();
+                            }}
+                            disabled={logoutMutation.isPending}
+                            className="w-full px-4 py-3 text-left text-destructive hover:bg-[hsl(var(--destructive)/0.1)] rounded-lg transition-colors flex items-center gap-3 disabled:opacity-50"
+                            data-testid="nav-logout"
+                          >
+                            <X className="w-4 h-4" />
+                            <span>{logoutMutation.isPending ? 'Signing Out...' : 'Sign Out'}</span>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link href="/">
+                  <button 
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors flex items-center gap-2 touch-manipulation" 
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-home-guest"
+                  >
+                    <Home className="w-4 h-4" />
+                    <span>Home</span>
+                  </button>
+                </Link>
+                
+                {/* Browse Courses Link */}
+                <Link href="/browse-courses">
+                  <button 
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors touch-manipulation flex items-center gap-2"
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-browse-courses"
+                  >
+                    <BookOpen className="w-5 h-5" />
+                    <span>Browse Courses</span>
+                  </button>
+                </Link>
+                
+                <Link href="/login">
+                  <button 
+                    className="px-4 py-2 min-h-[44px] text-sm font-semibold transition-colors touch-manipulation" 
+                    style={{ color: 'var(--nav-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-link)'}
+                    data-testid="nav-login"
+                  >
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/register">
+                  <button 
+                    className="px-5 py-2 min-h-[44px] hover:opacity-90 font-bold rounded-lg transition-all hover:scale-105 shadow-elevated touch-manipulation" 
+                    style={{ background: 'linear-gradient(to right, var(--cta-gradient-from), var(--cta-gradient-to))', color: 'var(--cta-fg)' }}
+                    data-testid="nav-register"
+                  >
+                    Get Started
+                  </button>
+                </Link>
+              </>
+            )}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-[var(--space-xs)] sm:gap-[var(--space-sm)]">
+            {isAuthenticated ? (
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="flex items-center gap-1.5 px-2 py-2 font-semibold rounded-lg text-xs sm:text-sm sm:px-3 min-h-[44px] touch-manipulation"
+                style={{ background: 'linear-gradient(to right, var(--cta-gradient-from), var(--cta-gradient-to))', color: 'var(--cta-fg)' }}
+                aria-expanded={showMobileMenu}
+                aria-controls="mobile-menu"
+                aria-haspopup="true"
+                data-testid="nav-mobile-menu"
+              >
+                <PlayerAvatar user={user} size="sm" className="!w-5 !h-5 sm:!w-6 sm:!h-6" />
+                <span className="max-w-[50px] sm:max-w-[80px] truncate">{user?.gamerName}</span>
+                <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform duration-200 ${showMobileMenu ? 'rotate-180' : ''}`} />
+              </button>
+            ) : (
+              <div className="flex gap-[var(--space-xs)] sm:gap-[var(--space-sm)]">
+                <Link href="/login">
+                  <button className="px-2 py-2 min-h-[44px] text-foreground font-semibold rounded-lg text-xs sm:text-sm sm:px-4 hover:bg-muted transition-colors touch-manipulation" data-testid="nav-login-mobile">
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/register">
+                  <button 
+                    className="px-2 py-2 min-h-[44px] font-semibold rounded-lg text-xs sm:text-sm sm:px-4 whitespace-nowrap touch-manipulation" 
+                    style={{ background: 'linear-gradient(to right, var(--cta-gradient-from), var(--cta-gradient-to))', color: 'var(--cta-fg)' }}
+                    data-testid="nav-register-mobile"
+                  >
+                    Register
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {showMobileMenu && isAuthenticated && (
+          <motion.div
+            id="mobile-menu"
+            role="menu"
+            aria-label="Mobile navigation menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-card/95 border-t border-border overflow-hidden max-h-[calc(100vh-100px)]"
+          >
+            <div className="px-4 py-4 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)]">
+              {/* Trial Status - Mobile */}
+              <TrialStatusMobileItem />
+              
+              {/* LP Credits Status - Mobile */}
+              <div 
+                className="py-1" 
+                onClick={(e) => e.stopPropagation()}
+                data-testid="nav-credits-status-mobile"
+              >
+                <CreditStatusBar className="w-full" />
+              </div>
+              
+              <div className="border-t border-border my-2"></div>
+              
+              {/* Main Navigation */}
+              <Link href="/quiz-lobby">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-quizzes-mobile"
+                >
+                  Gamification
+                </button>
+              </Link>
+              
+              <div className="border-t border-border my-2"></div>
+              
+              {/* Admin & Resources Section */}
+              {(isAdmin || authIsOrgAdmin) && (
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-2 touch-manipulation"
+                  onClick={() => {
+                    if (isAdminLoading) {
+                      toast({
+                        title: "Loading...",
+                        description: "Please wait while we verify your permissions",
+                      });
+                      return;
+                    }
+                    setShowMobileMenu(false);
+                    setLocation(isSuperAdmin ? '/super-admin' : '/management-hub');
+                  }}
+                  data-testid="nav-admin-mobile"
+                >
+                  <Settings className="w-4 h-4" />
+                  <span>Admin</span>
+                </button>
+              )}
+              {isSuperAdmin && (
+                <Link href="/webhooks">
+                  <button
+                    className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                    onClick={() => setShowMobileMenu(false)}
+                    data-testid="nav-webhooks-mobile"
+                  >
+                    <Server className="w-4 h-4" />
+                    <span>Webhooks</span>
+                  </button>
+                </Link>
+              )}
+              
+              {/* Browse Courses Link - Mobile */}
+              <Link href="/browse-courses">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-browse-courses-mobile"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Browse Courses</span>
+                </button>
+              </Link>
+              
+              <div className="border-t border-border my-2"></div>
+              <Link href="/browse-courses">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-browse-marketplace-mobile"
+                >
+                  <Store className="w-4 h-4" />
+                  <span>Browse Marketplace</span>
+                </button>
+              </Link>
+              <Link href="/my-courses">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-my-courses-mobile"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>My Courses</span>
+                </button>
+              </Link>
+              <Link href="/profile">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-profile-mobile"
+                >
+                  <User className="w-4 h-4" />
+                  <span>My Profile</span>
+                </button>
+              </Link>
+              <Link href="/certificates">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-certificates-mobile"
+                >
+                  <Award className="w-4 h-4" />
+                  <span>My Certificates</span>
+                </button>
+              </Link>
+              <Link href="/invoices">
+                <button
+                  className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                  onClick={() => setShowMobileMenu(false)}
+                  data-testid="nav-invoices-mobile"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Invoices</span>
+                </button>
+              </Link>
+              {isAdmin && (
+                <>
+                  <div className="border-t border-border my-1"></div>
+                  <Link href="/subscriptions">
+                    <button
+                      className="w-full px-4 py-3 min-h-[44px] text-left text-foreground hover:bg-muted rounded-lg transition-colors flex items-center gap-3 touch-manipulation"
+                      onClick={() => setShowMobileMenu(false)}
+                      data-testid="nav-subscriptions-mobile"
+                    >
+                      <CreditCard className="w-4 h-4" />
+                      <span>Subscriptions</span>
+                    </button>
+                  </Link>
+                </>
+              )}
+              <div className="border-t border-border my-1"></div>
+              <button
+                onClick={() => {
+                  setShowMobileMenu(false);
+                  logoutMutation.mutate();
+                }}
+                disabled={logoutMutation.isPending}
+                className="w-full px-4 py-3 min-h-[44px] text-left text-destructive hover:bg-[hsl(var(--destructive)/0.1)] rounded-lg transition-colors flex items-center gap-3 disabled:opacity-50 touch-manipulation"
+                data-testid="nav-logout-mobile"
+              >
+                <X className="w-4 h-4" />
+                <span>{logoutMutation.isPending ? 'Signing Out...' : 'Sign Out'}</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+};
+
+// Premium Starfield Background
+const StarfieldBackground = () => {
+  return <div className="starfield"></div>;
+};
+
+// Animated Counter Component
+const AnimatedCounter = ({ end, duration = 2000, suffix = "" }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime;
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = (currentTime - startTime) / duration;
+      
+      if (progress < 1) {
+        setCount(Math.floor(end * progress));
+        requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }, [end, duration]);
+
+  return <span>{count.toLocaleString()}{suffix}</span>;
+};
+
+// LMS Hero Section - AI-Powered Learning Management System
+const LMSHeroSection = ({ setIsRequestModalOpen, isAuthenticated, user, isOrgAdmin }) => {
+  const [, setLocation] = useLocation();
+  const [activeCreationStep, setActiveCreationStep] = useState(0);
+  
+  // Check if user is a student
+  const isStudent = user?.role === 'student' || (user?.organizationRoles && user.organizationRoles.some(r => r.role === 'student'));
+
+  // Creation flow steps for animated demo - matches the 4 AI feature buttons
+  const creationSteps = [
+    {
+      step: 'Course Builder',
+      title: 'AI-Assisted Course Builder',
+      subtitle: 'Describe your course and get an instant framework',
+      content: (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 p-3 bg-primary/20 border border-primary rounded-xl">
+            <GraduationCap className="w-6 h-6 text-primary" />
+            <div>
+              <p className="text-foreground font-semibold text-sm">Introduction to Data Science</p>
+              <p className="text-primary/80 text-xs">12 Lessons • 6 Quizzes • 8 Hours</p>
+            </div>
+          </div>
+          <div className="space-y-2">
+            {['Module 1: Python Basics', 'Module 2: Data Analysis', 'Module 3: Machine Learning'].map((module, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.2 }}
+                className="flex items-center gap-2 p-2 bg-muted rounded-lg border border-border"
+              >
+                <CheckCircle className="w-4 h-4 text-success" />
+                <span className="text-foreground text-sm">{module}</span>
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 text-success text-sm">
+            <Sparkles className="w-4 h-4" />
+            <span>Course framework generated in 30 seconds</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      step: 'Lesson Creator',
+      title: 'AI-Assisted Lesson Creator',
+      subtitle: 'Upload Word Doc or PPT, get interactive lessons',
+      content: (
+        <div className="space-y-4">
+          <div className="p-4 bg-secondary/20 border border-secondary rounded-xl">
+            <div className="flex items-center gap-2 mb-3">
+              <BookOpen className="w-5 h-5 text-secondary" />
+              <span className="text-foreground font-semibold">Lesson: Python Variables</span>
+            </div>
+            <div className="space-y-2 text-sm">
+              <div className="p-2 bg-muted rounded-lg">
+                <p className="text-secondary/80">Variables store data values...</p>
+              </div>
+              <div className="flex gap-2">
+                <span className="px-2 py-1 bg-[hsl(var(--success)/0.2)] text-success rounded text-xs">Interactive</span>
+                <span className="px-2 py-1 bg-primary/20 text-primary/80 rounded text-xs">Video Ready</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 p-3 bg-secondary/20 border border-secondary rounded-xl">
+            <BookOpen className="w-5 h-5 text-secondary" />
+            <span className="text-secondary/90 text-sm">Word Doc → Rich Lesson in minutes</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      step: 'Quiz Generator',
+      title: 'AI-Assisted Quiz Generator',
+      subtitle: 'Generate quizzes from any lesson content',
+      content: (
+        <div className="space-y-4">
+          <div className="p-4 bg-[hsl(var(--success)/0.2)] border border-[hsl(var(--success))] rounded-xl">
+            <p className="text-foreground font-semibold mb-3">Generated Quiz Question:</p>
+            <p className="text-success/90 text-sm mb-3">What is the primary purpose of a variable in Python?</p>
+            <div className="space-y-2">
+              {['Store data values', 'Run calculations', 'Display output', 'Connect to database'].map((opt, i) => (
+                <div key={i} className={`p-2 rounded-lg text-sm ${i === 0 ? 'bg-[hsl(var(--success)/0.3)] border border-[hsl(var(--success))] text-success/90' : 'bg-muted border border-border text-muted-foreground'}`}>
+                  {opt}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-success text-sm">
+            <Brain className="w-4 h-4" />
+            <span>4 question types • AI explanations included</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      step: 'Video Creator',
+      title: 'PowerPoint to Video',
+      subtitle: 'Transform presentations into engaging videos',
+      content: (
+        <div className="space-y-4">
+          <div className="p-4 bg-[hsl(var(--warning)/0.2)] border border-[hsl(var(--warning))] rounded-xl">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap className="w-5 h-5 text-warning" />
+              <span className="text-foreground font-semibold">Video Generation</span>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-12 bg-gradient-to-br from-[hsl(var(--warning)/0.3)] to-[hsl(var(--accent)/0.3)] rounded-lg flex items-center justify-center border border-[hsl(var(--warning)/0.5)]">
+                  <Play className="w-6 h-6 text-warning" />
+                </div>
+                <div>
+                  <p className="text-warning/90 text-sm font-medium">Python Introduction.pptx</p>
+                  <p className="text-[hsl(var(--warning)/0.6)] text-xs">12 slides • 8:32 video</p>
+                </div>
+              </div>
+              <div className="w-full bg-muted rounded-full h-2">
+                <motion.div 
+                  className="bg-gradient-to-r from-[hsl(var(--warning))] to-[hsl(var(--accent))] h-2 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 2, ease: "easeOut" }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-warning text-sm">
+            <CheckCircle className="w-4 h-4" />
+            <span>Professional narration & animations</span>
+          </div>
+        </div>
+      )
+    },
+    {
+      step: 'Gamification',
+      title: 'Gamification & Rewards',
+      subtitle: 'Make learning addictively fun',
+      content: (
+        <div className="space-y-4">
+          <div className="p-4 bg-[hsl(var(--accent)/0.2)] border border-[hsl(var(--accent))] rounded-xl">
+            <div className="flex items-center gap-2 mb-3">
+              <Trophy className="w-5 h-5 text-accent" />
+              <span className="text-foreground font-semibold">Learning Through Play</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { icon: <Flame className="w-4 h-4 text-warning" />, label: 'XP & Levels', desc: 'Earn XP for learning' },
+                { icon: <Zap className="w-4 h-4 text-accent" />, label: 'Power-Ups', desc: '2x & 3x XP boosts' },
+                { icon: <Star className="w-4 h-4 text-primary" />, label: 'Cosmetics', desc: 'Unlock avatars' },
+                { icon: <Crown className="w-4 h-4 text-accent" />, label: 'Season Pass', desc: 'Exclusive rewards' }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-center gap-2 p-2 bg-muted rounded-lg border border-border"
+                >
+                  {item.icon}
+                  <div>
+                    <p className="text-foreground text-xs font-medium">{item.label}</p>
+                    <p className="text-muted-foreground text-[10px]">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 p-3 bg-gradient-to-r from-primary/20 to-[hsl(var(--accent)/0.2)] border border-[hsl(var(--accent)/0.5)] rounded-xl">
+            <TrendingUp className="w-5 h-5 text-accent" />
+            <span className="text-[hsl(var(--accent)/0.9)] text-sm">Leaderboards • Daily Challenges • Coin Multipliers</span>
+          </div>
+        </div>
+      )
+    }
+  ];
+
+  // Auto-rotate creation steps
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCreationStep((prev) => (prev + 1) % creationSteps.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full -mx-4" data-testid="banner-lms-hero">
+      {/* Modern gradient background with mesh effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/60 to-secondary/60 opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+      {/* Animated gradient mesh overlay */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[hsl(var(--accent))] rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+      {/* Main content container */}
+      <div className="relative px-4 py-20 md:py-28 lg:py-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left side: Content */}
+            <motion.div 
+              className="text-center lg:text-left space-y-6 z-10"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Target Audience Badges */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="flex flex-wrap items-center gap-2 justify-center lg:justify-start"
+                data-testid="audience-badges"
+              >
+                {AUDIENCES.map((audience, index) => {
+                  const IconComponent = audience.icon;
+                  return (
+                    <motion.div
+                      key={audience.id}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 + index * 0.1, duration: 0.4 }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[44px] backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium touch-manipulation shadow-md"
+                      style={{
+                        backgroundColor: 'var(--hero-audience-pill-bg)',
+                        color: 'var(--hero-audience-pill-fg)',
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: 'var(--hero-audience-pill-border)',
+                      }}
+                      data-testid={`badge-${audience.id}`}
+                    >
+                      <IconComponent className="w-4 h-4" />
+                      <span>{audience.label}</span>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              {/* Main headline with rotating messages */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                data-testid="hero-headline-container"
+              >
+                <HeroMessageRotator className="text-center lg:text-left" />
+              </motion.div>
+              
+              {/* CTA Buttons - Dual CTAs for Enterprise & Education */}
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 mx-auto lg:mx-0 justify-center lg:justify-start max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                {/* For Authenticated OrgAdmin - Show course builder and browse */}
+                {isAuthenticated && isOrgAdmin && (
+                  <>
+                    <Link href="/course-builder" className="flex-1">
+                      <button className="group relative w-full min-h-[48px] px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-[hsl(var(--warning))] via-[hsl(var(--accent))] to-[hsl(var(--warning))] hover:from-[hsl(var(--warning)/0.9)] hover:via-[hsl(var(--accent)/0.9)] hover:to-[hsl(var(--warning)/0.9)] text-warning-foreground font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[hsl(var(--warning)/0.5)] overflow-hidden touch-manipulation" data-testid="button-start-creating">
+                        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--warning))] to-[hsl(var(--accent))] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                          <Sparkles className="h-6 w-6 sm:h-7 sm:w-7" />
+                          <span className="text-lg sm:text-xl">Create Course</span>
+                          <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </button>
+                    </Link>
+                    <Link href="/browse-courses" className="flex-1">
+                      <button className="group relative w-full min-h-[48px] px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-primary via-secondary to-primary hover:from-primary/90 hover:via-secondary/90 hover:to-primary/90 text-primary-foreground font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[var(--game-glow)] overflow-hidden touch-manipulation" data-testid="button-browse-courses">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                          <GraduationCap className="h-6 w-6 sm:h-7 sm:w-7" />
+                          <span className="text-lg sm:text-xl">Browse Courses</span>
+                          <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </button>
+                    </Link>
+                  </>
+                )}
+
+                {/* For Authenticated Non-OrgAdmin - Browse courses only */}
+                {isAuthenticated && !isOrgAdmin && (
+                  <Link href="/browse-courses" className="flex-1">
+                    <button className="group relative w-full min-h-[48px] px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-primary via-secondary to-primary hover:from-primary/90 hover:via-secondary/90 hover:to-primary/90 text-primary-foreground font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[var(--game-glow)] overflow-hidden touch-manipulation" data-testid="button-browse-courses">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                        <GraduationCap className="h-6 w-6 sm:h-7 sm:w-7" />
+                        <span className="text-lg sm:text-xl">Browse Courses</span>
+                        <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </button>
+                  </Link>
+                )}
+
+                {/* For Unauthenticated - Dual CTAs: Enterprise Training & Education Solutions */}
+                {!isAuthenticated && (
+                  <>
+                    <Link href="/org-registration?type=business" className="flex-1">
+                      <button className="group relative w-full min-h-[48px] px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-primary via-[hsl(var(--secondary))] to-primary hover:from-primary/90 hover:via-[hsl(var(--secondary)/0.9)] hover:to-primary/90 text-primary-foreground font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[var(--game-glow)] overflow-hidden touch-manipulation" data-testid="button-enterprise-training">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-[hsl(var(--secondary))] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                          <Briefcase className="h-6 w-6 sm:h-7 sm:w-7" />
+                          <span className="text-base sm:text-lg lg:text-xl">Enterprise Training</span>
+                          <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </button>
+                    </Link>
+                    <Link href="/org-registration?type=education" className="flex-1">
+                      <button className="group relative w-full min-h-[48px] px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-primary/50 overflow-hidden touch-manipulation" data-testid="button-education-solutions">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center gap-2 sm:gap-3">
+                          <GraduationCap className="h-6 w-6 sm:h-7 sm:w-7" />
+                          <span className="text-base sm:text-lg lg:text-xl">Education Solutions</span>
+                          <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </button>
+                    </Link>
+                  </>
+                )}
+              </motion.div>
+
+              {/* Request More Info Button - Hidden for authenticated students */}
+              {!(isAuthenticated && isStudent) && (
+                <motion.div
+                  className="mx-auto lg:mx-0 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.8 }}
+                >
+                  <button
+                    onClick={() => setIsRequestModalOpen(true)}
+                    className="group min-h-[48px] px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-hero-cta-primary to-hero-cta-primary-hover hover:from-hero-cta-primary/90 hover:to-hero-cta-primary-hover/90 text-hero-cta-primary-fg font-bold rounded-xl transition-all duration-300 hover:scale-105 shadow-elevated hover:shadow-dialog hover:shadow-hero-glow touch-manipulation"
+                    data-testid="button-request-more-info-hero"
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <MessageSquare className="h-5 w-5 sm:h-6 sm:w-6" />
+                      <span className="text-base sm:text-lg">Request Help or Enhancement</span>
+                    </div>
+                  </button>
+                </motion.div>
+              )}
+              
+              {/* Trust indicators */}
+              <motion.div
+                className="flex flex-wrap items-center gap-6 text-sm text-secondary/80 mx-auto lg:mx-0 justify-center lg:justify-start"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9, duration: 0.8 }}
+                data-testid="trust-indicators"
+              >
+                {TRUST_INDICATORS.map((indicator, index) => {
+                  const IconComponent = indicator.icon;
+                  return (
+                    <div key={index} className="flex items-center gap-2">
+                      <IconComponent className={`w-4 h-4 ${indicator.color}`} />
+                      <span>{indicator.text}</span>
+                    </div>
+                  );
+                })}
+              </motion.div>
+            </motion.div>
+            
+            {/* Right side: Animated Demo - Course/Lesson/Quiz Creation Flow */}
+            <motion.div 
+              className="relative h-auto md:h-[550px] lg:h-[650px]"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              data-testid="creation-demo"
+            >
+              {/* Creation Flow Demo */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center">
+                {/* Main creation card with AnimatePresence for smooth transitions */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeCreationStep}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipe = Math.abs(offset.x) * velocity.x;
+                      if (swipe < -50) {
+                        setActiveCreationStep((prev) => Math.min(prev + 1, creationSteps.length - 1));
+                      } else if (swipe > 50) {
+                        setActiveCreationStep((prev) => Math.max(prev - 1, 0));
+                      }
+                    }}
+                    className="w-full max-w-md bg-gradient-to-br from-card/80 to-card/50 backdrop-blur-xl rounded-3xl border border-border shadow-dialog overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+                    data-testid="creation-card"
+                  >
+                    <div className="p-4 sm:p-6 md:p-8">
+                      {/* Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h3 className="text-foreground font-bold text-lg">{creationSteps[activeCreationStep].title}</h3>
+                          <p className="text-primary/80 text-xs">{creationSteps[activeCreationStep].subtitle}</p>
+                        </div>
+                        <div className="flex items-center gap-1 px-2 py-1 bg-primary/20 rounded-full">
+                          <Brain className="w-4 h-4 text-primary" />
+                          <span className="text-primary/80 text-xs font-semibold">AI</span>
+                        </div>
+                      </div>
+                      
+                      {/* Dynamic Content */}
+                      {creationSteps[activeCreationStep].content}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Swipe indicator dots - visible on mobile */}
+                <div className="flex items-center justify-center gap-2 mt-4 md:hidden" data-testid="swipe-indicators">
+                  {creationSteps.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveCreationStep(index)}
+                      className={`min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation`}
+                      aria-label={`Go to step ${index + 1}`}
+                    >
+                      <span
+                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                          activeCreationStep === index
+                            ? 'bg-primary scale-125'
+                            : 'bg-muted/50 hover:bg-muted'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                  <span className="text-xs text-muted-foreground ml-2">Swipe to navigate</span>
+                </div>
+
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+    </div>
+  );
+};
+
+// Popular Courses Section - Fetches and displays top-rated courses
+const PopularCoursesSection = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['/api/public/popular-courses'],
+    retry: 1,
+  });
+  
+  const courses = data?.courses || [];
+  
+  const { 
+    displayCurrency, 
+    formatPrice, 
+    setGuestCurrencyPreference, 
+    availableCurrencies 
+  } = useCurrencyDisplay();
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating || 0);
+    const hasHalfStar = (rating || 0) % 1 >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    return (
+      <div className="flex items-center gap-0.5" data-testid="course-rating-stars">
+        {[...Array(fullStars)].map((_, i) => (
+          <Star key={`full-${i}`} className="w-4 h-4 fill-accent text-accent" />
+        ))}
+        {hasHalfStar && (
+          <div className="relative">
+            <Star className="w-4 h-4 text-muted-foreground" />
+            <div className="absolute inset-0 overflow-hidden w-1/2">
+              <Star className="w-4 h-4 fill-accent text-accent" />
+            </div>
+          </div>
+        )}
+        {[...Array(emptyStars)].map((_, i) => (
+          <Star key={`empty-${i}`} className="w-4 h-4 text-muted-foreground" />
+        ))}
+      </div>
+    );
+  };
+
+  const getDifficultyBadge = (difficulty) => {
+    const colors = {
+      beginner: 'bg-[hsl(var(--success)/0.2)] text-success border-[hsl(var(--success)/0.3)]',
+      intermediate: 'bg-[hsl(var(--warning)/0.2)] text-warning border-[hsl(var(--warning)/0.3)]',
+      advanced: 'bg-[hsl(var(--destructive)/0.2)] text-destructive border-[hsl(var(--destructive)/0.3)]',
+    };
+    return colors[difficulty?.toLowerCase()] || colors.beginner;
+  };
+
+  const SkeletonCard = () => (
+    <div className="bg-gradient-to-br from-muted/20 to-muted/10 backdrop-blur-sm rounded-2xl border border-border overflow-hidden animate-pulse">
+      <div className="h-40 bg-muted/20"></div>
+      <div className="p-4 space-y-3">
+        <div className="h-5 bg-muted/20 rounded w-3/4"></div>
+        <div className="h-4 bg-muted/20 rounded w-1/2"></div>
+        <div className="flex justify-between items-center">
+          <div className="h-4 bg-muted/20 rounded w-20"></div>
+          <div className="h-6 bg-muted/20 rounded w-16"></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-20" data-testid="section-popular-courses">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4">
+          <span className="bg-gradient-to-r from-primary via-secondary to-[hsl(var(--accent))] bg-clip-text text-transparent">
+            Popular Courses
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          Discover top-rated courses created by our community of educators
+        </p>
+        <div className="flex justify-center mt-4">
+          <CurrencySelectorBadge
+            onCurrencyChange={setGuestCurrencyPreference}
+            currentCurrency={displayCurrency}
+            availableCurrencies={availableCurrencies}
+            className="bg-muted/20 p-2 rounded-lg border border-border"
+          />
+        </div>
+      </motion.div>
+
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-testid="courses-skeleton-grid">
+          {[...Array(4)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      ) : error || courses.length === 0 ? (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center py-16"
+          data-testid="courses-empty-state"
+        >
+          <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center">
+            <GraduationCap className="w-12 h-12 text-primary" />
+          </div>
+          <h3 className="text-2xl font-bold text-foreground mb-3">Courses Coming Soon</h3>
+          <p className="text-muted-foreground max-w-md mx-auto mb-6">
+            Our educators are creating amazing courses. Check back soon to explore our growing library!
+          </p>
+          <Link href="/browse-courses">
+            <button 
+              className="min-h-[44px] px-6 py-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground font-bold rounded-xl transition-all hover:scale-105 touch-manipulation"
+              data-testid="button-browse-all-courses-empty"
+            >
+              Browse All Courses
+            </button>
+          </Link>
+        </motion.div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-testid="courses-grid">
+            {courses.slice(0, 8).map((course, index) => (
+              <motion.div
+                key={course.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
+                <Link href={`/course/${course.id}`}>
+                  <div 
+                    className="bg-gradient-to-br from-card/80 to-card/50 backdrop-blur-sm rounded-2xl border border-border hover:border-primary/50 transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[var(--game-glow)] overflow-hidden cursor-pointer"
+                    data-testid={`course-card-${course.id}`}
+                  >
+                    <div className="relative h-40 bg-gradient-to-br from-primary/30 to-secondary/30">
+                      {course.thumbnailUrl ? (
+                        <img 
+                          src={course.thumbnailUrl} 
+                          alt={course.title}
+                          className="w-full h-full object-cover"
+                          data-testid={`course-thumbnail-${course.id}`}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <GraduationCap className="w-16 h-16 text-primary/50" />
+                        </div>
+                      )}
+                      <div className="absolute top-3 right-3">
+                        <span 
+                          className={`px-2 py-1 text-xs font-semibold rounded-full border ${getDifficultyBadge(course.difficulty)}`}
+                          data-testid={`course-difficulty-${course.id}`}
+                        >
+                          {course.difficulty || 'Beginner'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 space-y-3">
+                      <h3 
+                        className="text-lg font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors"
+                        data-testid={`course-title-${course.id}`}
+                      >
+                        {course.title}
+                      </h3>
+                      
+                      <div className="flex items-center gap-2">
+                        {renderStars(course.averageRating)}
+                        <span className="text-sm text-muted-foreground" data-testid={`course-rating-value-${course.id}`}>
+                          ({course.totalRatings || 0})
+                        </span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center pt-2">
+                        <div className="flex items-center gap-1 text-muted-foreground">
+                          <BookOpen className="w-4 h-4" />
+                          <span className="text-sm">{course.lessonCount || 0} lessons</span>
+                        </div>
+                        <div 
+                          className="text-lg font-bold text-accent"
+                          data-testid={`course-price-${course.id}`}
+                        >
+                          {course.price ? formatPrice(course.price, 'ZAR') : 'Free'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center mt-12"
+          >
+            <Link href="/browse-courses">
+              <button 
+                className="group px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground font-bold rounded-xl transition-all hover:scale-105 shadow-elevated hover:shadow-[var(--game-glow)]"
+                data-testid="button-view-all-courses"
+              >
+                <div className="flex items-center gap-3">
+                  <span>View All Courses</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </button>
+            </Link>
+          </motion.div>
+        </>
+      )}
+    </div>
+  );
+};
+
+// AI Creation Suite Section - Uses centralized FEATURE_STEPS data and FeatureTabsCarousel
+const AICreationSuiteSection = () => {
+  return (
+    <section 
+      className="w-full max-w-7xl mx-auto px-4 py-20" 
+      data-testid="section-ai-creation-suite"
+      aria-labelledby="ai-suite-heading"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30 rounded-full mb-6">
+          <Sparkles className="w-5 h-5 text-primary" aria-hidden="true" />
+          <span className="text-primary/80 font-semibold">AI-Assisted Creation Suite</span>
+        </div>
+        <h2 
+          id="ai-suite-heading"
+          className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4"
+        >
+          <span className="bg-gradient-to-r from-primary via-secondary to-[hsl(var(--accent))] bg-clip-text text-transparent">
+            Create Content in Minutes
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-balance" style={{ color: 'var(--section-subheading)' }}>
+          Our AI suite handles the heavy lifting so you can focus on what matters - teaching and inspiring learners
+        </p>
+      </motion.div>
+
+      {/* Feature Tabs Carousel - Centered tabs with auto-play */}
+      <FeatureTabsCarousel 
+        features={FEATURE_STEPS}
+        autoPlay={true}
+        autoPlayInterval={5000}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="text-center mt-12"
+      >
+        <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/20 to-primary/20 border border-primary/30 rounded-full">
+          <Zap className="w-5 h-5 text-primary" aria-hidden="true" />
+          <span className="text-primary/90 font-semibold">AI gets you 95% ready - just add your expert polish</span>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+// Launch In Minutes Section - Replaces HowQuizWorksSection
+const LaunchInMinutesSection = () => {
+  const steps = [
+    {
+      number: 1,
+      title: 'Upload',
+      subtitle: 'Your Content',
+      description: 'Upload your Word documents, PowerPoints, or simply describe what you want to teach.',
+      icon: <Upload className="w-10 h-10" />,
+      gradient: 'from-secondary to-secondary',
+      time: '2 min'
+    },
+    {
+      number: 2,
+      title: 'AI Assists',
+      subtitle: 'Creation',
+      description: 'Get complete courses, lessons, and quizzes - 95% ready for your learners.',
+      icon: <Sparkles className="w-10 h-10" />,
+      gradient: 'from-hero-headline-from to-hero-headline-to',
+      time: '5 min'
+    },
+    {
+      number: 3,
+      title: 'Review & Publish',
+      subtitle: 'In Minutes',
+      description: 'Polish with your expertise and publish to your learners in minutes, not days.',
+      icon: <Play className="w-10 h-10" />,
+      gradient: 'from-primary to-primary',
+      time: '3 min'
+    }
+  ];
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-20" data-testid="section-launch-in-minutes">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4">
+          <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent">
+            Launch in Minutes, Not Days
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--section-subheading)' }}>
+          From idea to published course in under 10 minutes - our AI handles the heavy lifting
+        </p>
+      </motion.div>
+
+      <div className="relative">
+        <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-primary to-accent opacity-30 -translate-y-1/2 mx-20" data-testid="progress-line"></div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="relative"
+              data-testid={`workflow-step-${index + 1}`}
+            >
+              <div className="relative">
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:flex absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                    >
+                      <ChevronRight className="w-8 h-8 text-primary" />
+                    </motion.div>
+                  </div>
+                )}
+
+                <div className="group relative p-8 bg-gradient-to-br from-card/80 to-card/50 backdrop-blur-xl rounded-3xl border border-border hover:border-primary/40 transition-all duration-300 hover:scale-105 hover:shadow-dialog">
+                  <div className={`absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-gradient-to-br ${step.gradient} rounded-full flex items-center justify-center text-primary-foreground font-black text-lg shadow-elevated z-10`}>
+                    {step.number}
+                  </div>
+
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-[hsl(var(--warning)/0.2)] to-[hsl(var(--accent)/0.2)] border border-[hsl(var(--warning)/0.3)] rounded-full">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-accent" />
+                      <span className="text-accent font-bold text-sm">{step.time}</span>
+                    </div>
+                  </div>
+
+                  <div className={`w-20 h-20 mx-auto mb-6 mt-4 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center text-primary-foreground shadow-elevated group-hover:shadow-dialog transition-shadow`}>
+                    {step.icon}
+                  </div>
+
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold text-foreground">{step.title}</h3>
+                    <p className={`text-lg font-semibold bg-gradient-to-r ${step.gradient} bg-clip-text text-transparent mb-3`}>
+                      {step.subtitle}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                  </div>
+
+                  <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity blur-2xl`}></div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="text-center mt-16"
+        data-testid="time-savings-indicator"
+      >
+        <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-gradient-to-r from-primary/20 to-primary/20 border border-primary/30 rounded-2xl">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-[hsl(var(--destructive)/0.3)] to-[hsl(var(--destructive)/0.3)] rounded-full flex items-center justify-center border border-[hsl(var(--destructive)/0.3)]">
+              <span className="text-destructive font-bold line-through">Days</span>
+            </div>
+            <ArrowRight className="w-6 h-6 text-muted-foreground" />
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary rounded-full flex items-center justify-center shadow-elevated">
+              <span className="text-primary-foreground font-bold">10m</span>
+            </div>
+          </div>
+          <div className="text-left">
+            <p className="text-primary/90 font-bold text-lg">Total Time: ~10 Minutes</p>
+            <p className="text-muted-foreground text-sm">From content upload to published course</p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+
+// Target Audience Solutions Section - Uses centralized AUDIENCES data
+const PersonaCardsSection = () => {
+  return (
+    <section 
+      className="w-full max-w-7xl mx-auto px-4 py-20" 
+      data-testid="section-target-audience"
+      aria-labelledby="who-we-serve-heading"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 
+          id="who-we-serve-heading"
+          className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4"
+        >
+          <span className="bg-gradient-to-r from-primary via-[hsl(var(--accent))] to-primary bg-clip-text text-transparent">
+            Who We Serve
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto text-balance" style={{ color: 'var(--section-subheading)' }}>
+          AI-powered learning solutions tailored for your specific needs
+        </p>
+      </motion.div>
+
+      <AudienceFeatureGrid audiences={AUDIENCES} />
+      
+      {/* CTA for each audience type */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="mt-12 text-center"
+      >
+        <div className="inline-flex flex-wrap justify-center gap-4">
+          {AUDIENCES.map((audience) => {
+            const IconComponent = audience.icon;
+            return (
+              <Link key={audience.id} href={audience.ctaLink}>
+                <button 
+                  className={`group min-h-[48px] px-6 py-3 bg-gradient-to-r ${audience.gradient} hover:shadow-elevated hover:shadow-${audience.glowColor}-500/30 text-primary-foreground font-bold rounded-xl transition-all duration-300 hover:scale-[1.02] touch-manipulation`}
+                  data-testid={`button-cta-${audience.id}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <IconComponent className="w-5 h-5" aria-hidden="true" />
+                    <span>{audience.cta}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </div>
+                </button>
+              </Link>
+            );
+          })}
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+// Platform Capabilities Section
+const PlatformCapabilitiesSection = () => {
+  const capabilities = [
+    {
+      id: 'analytics',
+      title: 'Real-time Analytics',
+      description: 'Track learner progress, completion rates, quiz scores, and identify knowledge gaps with comprehensive dashboards.',
+      icon: <BarChart3 className="w-8 h-8" />,
+      gradient: 'from-primary to-secondary',
+      glowColor: 'primary'
+    },
+    {
+      id: 'mobile',
+      title: 'Mobile App Ready',
+      description: 'Learn anywhere with responsive design and PWA support. Download for offline access on any device.',
+      icon: <Smartphone className="w-8 h-8" />,
+      gradient: 'from-secondary to-secondary',
+      glowColor: 'blue'
+    },
+    {
+      id: 'gamification',
+      title: 'Gamification Engine',
+      description: 'XP & levels, leaderboards, power-ups (2x/3x coin multipliers), cosmetic avatars, season passes with exclusive rewards, and daily challenges that make learning addictive.',
+      icon: <Trophy className="w-8 h-8" />,
+      gradient: 'from-[hsl(var(--warning))] to-[hsl(var(--accent))]',
+      glowColor: 'yellow'
+    },
+    {
+      id: 'ai-explanations',
+      title: 'AI Explanations',
+      description: 'Instant explanations for quiz answers and terminology - understand concepts, don\'t just memorize.',
+      icon: <Brain className="w-8 h-8" />,
+      gradient: 'from-primary to-primary',
+      glowColor: 'green'
+    },
+    {
+      id: 'download-edit',
+      title: 'Download & Edit',
+      description: 'Export courses and lessons as editable files. Customize content for your specific needs and preferences.',
+      icon: <Download className="w-8 h-8" />,
+      gradient: 'from-[hsl(var(--secondary))] to-[hsl(var(--secondary)/0.8)]',
+      glowColor: 'pink'
+    },
+    {
+      id: 'video-generation',
+      title: 'Video Generation',
+      description: 'Convert PowerPoint and lessons into engaging video content automatically with professional narration.',
+      icon: <Play className="w-8 h-8" />,
+      gradient: 'from-secondary to-primary',
+      glowColor: 'secondary'
+    }
+  ];
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-20" data-testid="section-platform-capabilities">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4" data-testid="title-platform-capabilities">
+          <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent">
+            Everything You Need to Succeed
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--section-subheading)' }} data-testid="subtitle-platform-capabilities">
+          Powerful tools that make learning management effortless
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {capabilities.map((capability, index) => (
+          <motion.div
+            key={capability.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            data-testid={`card-capability-${capability.id}`}
+          >
+            <div 
+              className="group h-full relative p-6 backdrop-blur-xl rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-dialog"
+              style={{
+                backgroundColor: 'var(--glass-card-bg)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'var(--glass-card-border)',
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--glass-card-hover-border)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--glass-card-border)'}
+            >
+              <div className={`w-16 h-16 mb-5 bg-gradient-to-br ${capability.gradient} rounded-2xl flex items-center justify-center text-primary-foreground shadow-elevated group-hover:shadow-elevated transition-all duration-300 group-hover:scale-110`}>
+                {capability.icon}
+              </div>
+
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--glass-card-title)' }} data-testid={`title-capability-${capability.id}`}>
+                {capability.title}
+              </h3>
+
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--glass-card-body)' }} data-testid={`desc-capability-${capability.id}`}>
+                {capability.description}
+              </p>
+
+              <div className={`absolute inset-0 bg-gradient-to-br ${capability.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300 blur-2xl -z-10`}></div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// White-Label Branding Section
+const WhiteLabelSection = () => {
+  // INTENTIONAL: These are source color definitions for landing page demo swatches.
+  // They are NOT used in production themes - production themes use buildFullTokens()
+  // from @shared/themeTokenBuilder.ts which generates all 578 tokens.
+  const themeExamples = [
+    {
+      id: 'royal-purple',
+      name: 'Royal Purple',
+      primary: 'hsl(270, 65%, 60%)',
+      secondary: 'hsl(270, 95%, 40%)',
+      accent: 'hsl(43, 96%, 56%)',
+      background: 'hsl(220, 13%, 9%)',
+      card: 'hsl(220, 13%, 11%)',
+      foreground: 'hsl(210, 40%, 98%)',
+      border: 'hsl(220, 13%, 18%)',
+      isDark: true,
+    },
+    {
+      id: 'corporate-blue',
+      name: 'Corporate Blue',
+      primary: 'hsl(215, 90%, 45%)',
+      secondary: 'hsl(200, 85%, 40%)',
+      accent: 'hsl(38, 92%, 50%)',
+      background: 'hsl(210, 15%, 98%)',
+      card: 'hsl(0, 0%, 100%)',
+      foreground: 'hsl(215, 30%, 15%)',
+      border: 'hsl(0, 0%, 90%)',
+      isDark: false,
+    },
+    {
+      id: 'emerald-pro',
+      name: 'Emerald Pro',
+      primary: 'hsl(152, 70%, 40%)',
+      secondary: 'hsl(165, 65%, 35%)',
+      accent: 'hsl(45, 90%, 50%)',
+      background: 'hsl(150, 10%, 97%)',
+      card: 'hsl(0, 0%, 100%)',
+      foreground: 'hsl(150, 30%, 12%)',
+      border: 'hsl(150, 10%, 88%)',
+      isDark: false,
+    },
+  ];
+
+  const features = [
+    { icon: <PenTool className="w-5 h-5" />, text: 'Custom logo & favicon' },
+    { icon: <Sparkles className="w-5 h-5" />, text: '36+ preset themes' },
+    { icon: <Eye className="w-5 h-5" />, text: '575+ customizable tokens' },
+    { icon: <Smartphone className="w-5 h-5" />, text: 'Branded mobile app (PWA)' },
+    { icon: <Mail className="w-5 h-5" />, text: 'Custom email templates' },
+    { icon: <FileCheck className="w-5 h-5" />, text: 'Branded certificates' },
+  ];
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-20" data-testid="section-white-label">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-[length:var(--text-3xl)] sm:text-[length:var(--text-4xl)] md:text-[length:var(--text-5xl)] font-black mb-4" data-testid="title-white-label">
+          <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Make It Your Own
+          </span>
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'var(--section-subheading)' }} data-testid="subtitle-white-label">
+          Full white-label branding - your logo, colors, and domain. Your learners will think you built it.
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Theme Previews */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-3 gap-4"
+        >
+          {themeExamples.map((theme, index) => (
+            <motion.div
+              key={theme.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="rounded-xl overflow-hidden shadow-elevated hover:shadow-dialog transition-all hover:scale-105"
+              style={{ 
+                backgroundColor: theme.background,
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: theme.border
+              }}
+              data-testid={`theme-preview-${theme.id}`}
+            >
+              {/* Mini Theme Preview */}
+              <div className="aspect-[4/3] p-3">
+                {/* Nav bar */}
+                <div 
+                  className="h-4 rounded-md mb-2 flex items-center px-2 gap-1"
+                  style={{ backgroundColor: theme.primary }}
+                >
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.card }} />
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.card }} />
+                </div>
+                
+                {/* Content area */}
+                <div className="flex gap-2 h-[calc(100%-1.5rem)]">
+                  {/* Sidebar */}
+                  <div 
+                    className="w-1/4 rounded-md"
+                    style={{ backgroundColor: theme.secondary }}
+                  />
+                  
+                  {/* Main content */}
+                  <div className="flex-1 flex flex-col gap-2">
+                    <div 
+                      className="flex-1 rounded-md p-2"
+                      style={{ backgroundColor: theme.card }}
+                    >
+                      <div 
+                        className="w-3/4 h-1.5 rounded-full mb-1.5"
+                        style={{ backgroundColor: theme.foreground, opacity: 0.3 }}
+                      />
+                      <div 
+                        className="w-1/2 h-1.5 rounded-full"
+                        style={{ backgroundColor: theme.foreground, opacity: 0.2 }}
+                      />
+                    </div>
+                    
+                    {/* Buttons */}
+                    <div className="flex gap-1">
+                      <div 
+                        className="flex-1 h-3 rounded-md"
+                        style={{ backgroundColor: theme.accent }}
+                      />
+                      <div 
+                        className="flex-1 h-3 rounded-md"
+                        style={{ backgroundColor: theme.primary }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Theme name */}
+              <div 
+                className="px-3 py-2 text-center text-xs font-medium"
+                style={{ 
+                  color: theme.foreground,
+                  backgroundColor: theme.card
+                }}
+              >
+                {theme.name}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Features List */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          <h3 className="text-2xl font-bold" style={{ color: 'var(--foreground)' }}>
+            Complete Brand Control
+          </h3>
+          <p className="text-base" style={{ color: 'var(--muted-foreground)' }}>
+            Transform LearnPlay into your branded learning platform. Every touchpoint customizable - from login screens to certificates.
+          </p>
+          
+          <div className="grid grid-cols-2 gap-4">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="flex items-center gap-3 p-3 rounded-lg transition-all hover:scale-105"
+                style={{
+                  backgroundColor: 'var(--glass-card-bg)',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'var(--glass-card-border)',
+                }}
+              >
+                <div className="text-primary">{feature.icon}</div>
+                <span className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
+                  {feature.text}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          <Link href="/org-registration">
+            <button 
+              className="mt-6 px-8 py-4 font-bold rounded-xl transition-all duration-200 hover:scale-105 flex items-center gap-2"
+              style={{ 
+                background: 'linear-gradient(to right, var(--cta-gradient-from), var(--cta-gradient-to))',
+                color: 'var(--cta-fg)'
+              }}
+              data-testid="button-white-label-cta"
+            >
+              <Building2 className="w-5 h-5" />
+              Start Your Branded Platform
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </Link>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+// Bonus Card Game Section (Arcade Style)
+const BonusCardGameSection = () => {
+  const [selectedCollection, setSelectedCollection] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { orgName } = useBrandingLogo();
+
+  const { data: collections, isLoading } = useQuery({
+    queryKey: ["/api/collections"],
+    retry: false,
+  });
+
+  const handleCollectionClick = (collection) => {
+    setSelectedCollection(collection);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedCollection(null);
+  };
+
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4 py-20">
+      {/* Section Header with Arcade Styling */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
+      >
+        {/* Bonus Badge */}
+        <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[hsl(var(--warning)/0.2)] to-[hsl(var(--accent)/0.2)] backdrop-blur-sm border-2 border-[hsl(var(--accent)/0.5)] rounded-full text-accent text-sm font-bold mb-6 shadow-elevated shadow-[hsl(var(--warning)/0.2)]">
+          <Sparkles className="w-5 h-5 animate-pulse" />
+          <span>BONUS FEATURE</span>
+          <Sparkles className="w-5 h-5 animate-pulse" />
+        </div>
+
+        <h2 className="text-4xl md:text-5xl font-black mb-4">
+          <span className="bg-gradient-to-r from-[hsl(var(--accent))] via-[hsl(var(--warning))] to-[hsl(var(--warning))] bg-clip-text text-transparent drop-shadow-elevated">
+            {orgName} Card Battle
+          </span>
+        </h2>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Take a brain break with our bonus card battle game - compare stats and dominate opponents!
+        </p>
+      </motion.div>
+
+      {/* Arcade-Style Container */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="relative p-8 md:p-12 bg-gradient-to-br from-primary/30 to-black/60 backdrop-blur-sm rounded-3xl border-4 border-[hsl(var(--accent)/0.3)] shadow-dialog shadow-[var(--game-glow)]"
+      >
+        {/* Neon Corner Accents */}
+        <div className="absolute top-0 left-0 w-16 h-16 border-l-4 border-t-4 border-[hsl(var(--accent))] rounded-tl-2xl"></div>
+        <div className="absolute top-0 right-0 w-16 h-16 border-r-4 border-t-4 border-[hsl(var(--accent))] rounded-tr-2xl"></div>
+        <div className="absolute bottom-0 left-0 w-16 h-16 border-l-4 border-b-4 border-[hsl(var(--accent))] rounded-bl-2xl"></div>
+        <div className="absolute bottom-0 right-0 w-16 h-16 border-r-4 border-b-4 border-[hsl(var(--accent))] rounded-br-2xl"></div>
+
+        {/* Collections Grid */}
+        {isLoading ? (
+          <div className="text-center py-12">
+            <div className="inline-block w-12 h-12 border-4 border-[hsl(var(--accent))] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+              {collections?.slice(0, 6).map((collection, index) => (
+                <motion.div
+                  key={collection.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="group cursor-pointer"
+                  onClick={() => handleCollectionClick(collection)}
+                >
+                  <div className="relative aspect-[3/4] rounded-xl overflow-hidden border-2 border-[hsl(var(--accent)/0.3)] hover:border-[hsl(var(--accent))] transition-all duration-300 hover:scale-105 hover:shadow-dialog hover:shadow-[hsl(var(--accent)/0.3)]">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ 
+                        backgroundImage: collection?.imageKey 
+                          ? `url(/api/collections/${collection.id}/cover-image)` 
+                          : `url(${trexCardImage})`
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <p className="text-accent font-bold text-sm truncate">{collection.name}</p>
+                      <p className="text-xs text-muted-foreground">{collection.totalCards} Cards</p>
+                    </div>
+                    
+                    {/* Play overlay */}
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="bg-[hsl(var(--accent))] text-accent-foreground px-4 py-2 rounded-lg font-bold">
+                        PLAY NOW
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Play Card Battle CTA */}
+            <div className="text-center">
+              <Link href="/game-lobby">
+                <button className="group px-8 py-4 bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(var(--warning))] hover:from-[hsl(var(--accent)/0.9)] hover:to-[hsl(var(--warning)/0.9)] text-accent-foreground font-black rounded-xl transition-all duration-300 hover:scale-105 shadow-elevated shadow-[hsl(var(--warning)/0.5)] hover:shadow-dialog hover:shadow-[hsl(var(--accent)/0.6)] text-lg" data-testid="button-card-battle">
+                  <div className="flex items-center gap-3">
+                    <Trophy className="w-6 h-6" />
+                    <span>Enter Card Battle Arena</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
+              </Link>
+            </div>
+          </>
+        )}
+      </motion.div>
+
+      {/* Collection Modal */}
+      {selectedCollection && (
+        <CollectionModal
+          collection={selectedCollection}
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+        />
+      )}
+    </div>
+  );
+};
+
+// Cache Clear Button Component
+const CacheClearButton = () => {
+  const [isClearing, setIsClearing] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleClearCache = () => {
+    setIsClearing(true);
+    
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => {
+            caches.delete(name);
+          });
+        });
+      }
+      
+      setTimeout(() => {
+        setIsClearing(false);
+        setShowConfirm(false);
+        window.location.reload(true);
+      }, 500);
+    } catch (error) {
+      console.error('Error clearing cache:', error);
+      setIsClearing(false);
+      setShowConfirm(false);
+    }
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50" data-testid="cache-clear-container">
+      {showConfirm ? (
+        <motion.div 
+          className="bg-card border border-border rounded-lg shadow-dialog p-4 max-w-xs"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+        >
+          <p className="text-sm text-foreground mb-3">Clear all site cache and reload? This will sign you out.</p>
+          <div className="flex gap-2">
+            <button
+              onClick={handleClearCache}
+              disabled={isClearing}
+              className="flex-1 px-3 py-2 bg-destructive hover:bg-destructive/90 text-destructive-foreground text-sm font-medium rounded-lg transition-all disabled:opacity-50"
+              data-testid="button-confirm-clear"
+            >
+              {isClearing ? 'Clearing...' : 'Clear Cache'}
+            </button>
+            <button
+              onClick={() => setShowConfirm(false)}
+              className="flex-1 px-3 py-2 bg-muted hover:bg-muted/80 text-foreground text-sm font-medium rounded-lg transition-all"
+              data-testid="button-cancel-clear"
+            >
+              Cancel
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+        <button
+          onClick={() => setShowConfirm(true)}
+          className="px-3 py-2 bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground text-xs font-medium rounded-lg transition-all border border-border shadow-elevated"
+          data-testid="button-open-clear-cache"
+          title="Clear site cache"
+        >
+          🗑️ Clear Cache
+        </button>
+      )}
+    </div>
+  );
+};
+
+// Feature Card Component (kept for compatibility)
+const FeatureCard = ({ icon, title, description }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="p-6 backdrop-blur-xl rounded-2xl transition-all duration-300 hover:scale-105"
+      style={{
+        backgroundColor: isHovered ? 'var(--feature-card-hover-bg)' : 'var(--feature-card-bg)',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: isHovered ? 'var(--feature-card-hover-border)' : 'var(--feature-card-border)'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div 
+        className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center"
+        style={{
+          backgroundColor: 'var(--feature-card-icon-bg)',
+          color: 'var(--feature-card-icon-fg)'
+        }}
+      >
+        {icon}
+      </div>
+      <h3 
+        className="text-xl font-bold mb-2 text-center"
+        style={{ color: 'var(--feature-card-fg)' }}
+      >
+        {title}
+      </h3>
+      <p 
+        className="text-center text-sm opacity-80"
+        style={{ color: 'var(--feature-card-fg)' }}
+      >
+        {description}
+      </p>
+    </motion.div>
+  );
+};
+
+// Game Rule Step Component (kept for compatibility)
+const GameRuleStep = ({ number, title, description }) => (
+  <div className="text-center">
+    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground font-bold text-2xl">
+      {number}
+    </div>
+    <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
+    <p className="text-muted-foreground text-sm">{description}</p>
+  </div>
+);
+
+// Main Landing Component
+const Landing = () => {
+  const [isRequestModalOpen, setIsRequestModalOpen] = useState(false);
+  const [, setLocation] = useLocation();
+  const { branding } = useBranding();
+  const orgName = branding?.orgName || 'LearnPlay';
+  const logoUrl = branding?.logoUrl;
+  
+  const { data: user, isLoading: userLoading } = useQuery({
+    queryKey: ["/api/auth/user"],
+    retry: false,
+    queryFn: async () => {
+      const res = await fetch('/api/auth/user', { credentials: 'include' });
+      if (res.status === 401) return null;
+      if (!res.ok) throw new Error('Failed to fetch user');
+      return res.json();
+    },
+  });
+
+  const { data: adminCheck, isLoading: adminLoading } = useQuery({
+    queryKey: ["/api/admin/check"],
+    retry: false,
+    enabled: !!user,
+  });
+
+  const isAuthenticated = !!user;
+  const isAdmin = adminCheck?.isAdmin || false;
+  const isSuperAdmin = adminCheck?.isSuperAdmin || false;
+  const isOrgAdmin = adminCheck?.isOrgAdmin || false;
+
+  useEffect(() => {
+    if (!userLoading && isAuthenticated) {
+      setLocation('/home');
+    }
+  }, [userLoading, isAuthenticated, setLocation]);
+
+  if (userLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      <StarfieldBackground />
+      
+      <PremiumHeader isAuthenticated={isAuthenticated} isAdmin={isAdmin} isSuperAdmin={isSuperAdmin} user={user} isAdminLoading={adminLoading} />
+      
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center px-4 py-8 pt-24">
+        <div className="w-full">
+          <LMSHeroSection setIsRequestModalOpen={setIsRequestModalOpen} isAuthenticated={isAuthenticated} user={user} isOrgAdmin={isOrgAdmin} />
+          
+          {/* Browse Courses CTA - Visible for ALL users */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="max-w-4xl mx-auto text-center mt-12"
+          >
+            <Link href="/browse-courses">
+              <button 
+                className="px-10 py-5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] hover:from-[hsl(var(--primary)/0.9)] hover:to-[hsl(var(--accent)/0.9)] text-primary-foreground font-bold rounded-xl transition-all hover:scale-105 shadow-dialog shadow-[hsl(var(--primary)/0.4)] hover:shadow-[hsl(var(--primary)/0.6)]"
+                data-testid="button-browse-courses-hero"
+              >
+                <div className="flex items-center gap-4">
+                  <GraduationCap className="h-7 w-7" />
+                  <div className="text-left">
+                    <div className="text-lg font-bold">Browse Courses</div>
+                    <div className="text-xs opacity-90">Explore our learning catalog</div>
+                  </div>
+                  <ArrowRight className="h-5 w-5" />
+                </div>
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Popular Courses */}
+      <section className="w-full">
+        <PopularCoursesSection />
+      </section>
+
+      {/* AI Creation Suite - Replaces Value Proposition */}
+      <section className="w-full">
+        <AICreationSuiteSection />
+      </section>
+
+      {/* Launch In Minutes - Replaces How Quiz Works */}
+      <section className="w-full">
+        <LaunchInMinutesSection />
+      </section>
+
+      {/* Persona Cards */}
+      <section className="w-full">
+        <PersonaCardsSection />
+      </section>
+
+      {/* Platform Capabilities */}
+      <section className="w-full">
+        <PlatformCapabilitiesSection />
+      </section>
+
+      {/* White-Label Branding */}
+      <section className="w-full">
+        <WhiteLabelSection />
+      </section>
+
+      {/* Lesson Credit Tiers */}
+      <section className="w-full">
+        <LessonCreditTiers />
+      </section>
+
+      {/* Pricing CTA */}
+      <section id="pricing-section" className="w-full">
+        <PricingCTA />
+      </section>
+
+      {/* Footer */}
+      <footer 
+        className="w-full border-t" 
+        style={{ 
+          backgroundColor: 'var(--footer-bg)',
+          borderColor: 'var(--footer-border)'
+        }}
+        data-testid="footer-section"
+      >
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            {/* Brand Section */}
+            <div className="text-center md:text-left" data-testid="footer-brand-section">
+              <div className="flex items-center gap-3 justify-center md:justify-start mb-3">
+                {logoUrl ? (
+                  <img 
+                    src={logoUrl} 
+                    alt={`${orgName} Logo`} 
+                    className="w-10 h-10 rounded-lg object-cover"
+                    data-testid="footer-org-logo"
+                  />
+                ) : (
+                  <div 
+                    className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-yellow-400 flex items-center justify-center text-primary-foreground font-bold text-lg"
+                    data-testid="footer-org-initials"
+                  >
+                    {orgName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase()}
+                  </div>
+                )}
+                <h3 className="text-xl font-bold" style={{ color: 'var(--footer-heading)' }}>
+                  <span className="bg-gradient-to-r from-primary via-primary to-yellow-400 bg-clip-text text-transparent">
+                    {orgName}
+                  </span>
+                </h3>
+              </div>
+              <p className="text-sm" style={{ color: 'var(--footer-fg)' }} data-testid="text-footer-tagline">
+                Smart Learning Management - Create courses, lessons, and quizzes in minutes
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div className="text-center md:text-left" data-testid="footer-quick-links">
+              <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--footer-heading)' }}>Quick Links</h4>
+              <div className="flex flex-col gap-2">
+                <Link href="/browse-courses">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-browse-courses"
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                    Browse Courses
+                  </span>
+                </Link>
+                <Link href="/create-course">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-create-courses"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Create Courses
+                  </span>
+                </Link>
+                <Link href="/register">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-free-trial"
+                  >
+                    <Zap className="w-4 h-4" />
+                    Start Free Trial
+                  </span>
+                </Link>
+                <a 
+                  href="#pricing-section" 
+                  className="text-sm transition-colors flex items-center gap-2 justify-center md:justify-start" 
+                  style={{ color: 'var(--footer-link)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                  data-testid="footer-link-pricing"
+                >
+                  <CreditCard className="w-4 h-4" />
+                  Pricing
+                </a>
+                <Link href="/login">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-login"
+                  >
+                    <User className="w-4 h-4" />
+                    Sign In
+                  </span>
+                </Link>
+                <Link href="/register">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-register"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                    Get Started
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* For Organizations */}
+            <div className="text-center md:text-left" data-testid="footer-organizations">
+              <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--footer-heading)' }}>For Organizations</h4>
+              <div className="flex flex-col gap-2">
+                <Link href="/register?type=school">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-schools"
+                  >
+                    <GraduationCap className="w-4 h-4" />
+                    Schools & Universities
+                  </span>
+                </Link>
+                <Link href="/register?type=business">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-businesses"
+                  >
+                    <Building2 className="w-4 h-4" />
+                    Businesses & Corporates
+                  </span>
+                </Link>
+                <Link href="/register?type=creator">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2 justify-center md:justify-start" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-creators"
+                  >
+                    <PenTool className="w-4 h-4" />
+                    Course Creators
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Mobile App & Share + Tutorials */}
+            <div className="text-center md:text-left" data-testid="footer-mobile-share">
+              <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--footer-heading)' }}>Learn & Create Anywhere</h4>
+              <div className="flex flex-col gap-3 mb-4">
+                <div className="flex items-center gap-2 text-sm justify-center md:justify-start" style={{ color: 'var(--footer-fg)' }} data-testid="footer-pwa-info">
+                  <Smartphone className="w-4 h-4 text-primary" />
+                  <span>Install as app on any device</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm justify-center md:justify-start" style={{ color: 'var(--footer-fg)' }} data-testid="footer-share-info">
+                  <Share2 className="w-4 h-4 text-secondary" />
+                  <span>Share courses with a link</span>
+                </div>
+              </div>
+              
+              <h4 className="text-sm font-semibold mb-3" style={{ color: 'var(--footer-heading)' }}>Resources</h4>
+              <div className="flex justify-center md:justify-start gap-4 mb-3">
+                <a 
+                  href="https://www.youtube.com/@learnplay-coza" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105"
+                  style={{ 
+                    backgroundColor: 'var(--footer-social-bg)', 
+                    color: 'var(--footer-social-fg)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--footer-social-hover-bg)';
+                    e.currentTarget.style.color = 'var(--footer-social-hover-fg)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--footer-social-bg)';
+                    e.currentTarget.style.color = 'var(--footer-social-fg)';
+                  }}
+                  data-testid="footer-youtube-button"
+                >
+                  <Youtube className="w-5 h-5" />
+                  <span className="text-sm font-semibold">Watch Tutorials</span>
+                </a>
+              </div>
+              <p className="text-xs text-center md:text-left" style={{ color: 'var(--footer-fg)' }}>
+                Tutorials, tips, and platform guides
+              </p>
+            </div>
+          </div>
+
+          {/* Support & Legal Links */}
+          <div className="border-t pt-6 mb-6" style={{ borderColor: 'var(--footer-border)' }}>
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+              {branding?.supportUrl && (
+                <a 
+                  href={branding.supportUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm transition-colors flex items-center gap-2"
+                  style={{ color: 'var(--footer-link)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                  data-testid="footer-link-support"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Support
+                </a>
+              )}
+              {branding?.supportEmail && (
+                <a 
+                  href={`mailto:${branding.supportEmail}`}
+                  className="text-sm transition-colors flex items-center gap-2"
+                  style={{ color: 'var(--footer-link)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                  data-testid="footer-link-contact"
+                >
+                  <Mail className="w-4 h-4" />
+                  Contact Us
+                </a>
+              )}
+              {branding?.termsUrl ? (
+                <a 
+                  href={branding.termsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm transition-colors flex items-center gap-2"
+                  style={{ color: 'var(--footer-link)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                  data-testid="footer-link-terms"
+                >
+                  <FileCheck className="w-4 h-4" />
+                  Terms of Service
+                </a>
+              ) : (
+                <Link href="/terms">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-terms"
+                  >
+                    <FileCheck className="w-4 h-4" />
+                    Terms of Service
+                  </span>
+                </Link>
+              )}
+              {branding?.privacyUrl ? (
+                <a 
+                  href={branding.privacyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm transition-colors flex items-center gap-2"
+                  style={{ color: 'var(--footer-link)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                  data-testid="footer-link-privacy"
+                >
+                  <Shield className="w-4 h-4" />
+                  Privacy Policy
+                </a>
+              ) : (
+                <Link href="/privacy">
+                  <span 
+                    className="text-sm transition-colors cursor-pointer flex items-center gap-2" 
+                    style={{ color: 'var(--footer-link)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--footer-link-hover)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--footer-link)'}
+                    data-testid="footer-link-privacy"
+                  >
+                    <Shield className="w-4 h-4" />
+                    Privacy Policy
+                  </span>
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t pt-6" style={{ borderColor: 'var(--footer-border)' }}>
+            <p className="text-sm text-center" style={{ color: 'var(--footer-fg)' }} data-testid="text-footer">
+              © 2025 {orgName} - Smart Learning Platform. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <CacheClearButton />
+      
+      <SalesInquiryModal open={isRequestModalOpen} onOpenChange={setIsRequestModalOpen} />
+    </div>
+  );
+};
+
+export default Landing;

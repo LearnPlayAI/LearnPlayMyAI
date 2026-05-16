@@ -1,0 +1,176 @@
+# ============================================
+# LearnPlay On-Premises Nginx Configuration
+# ============================================
+# HTTP-only configuration for initial deployment.
+# SSL/HTTPS is configured separately via: sudo lpadmin ssl
+#
+# This template is used during fresh installation.
+# The installer replaces __DOMAIN__ and __UPLOAD_DIR__ automatically.
+#
+# To enable HTTPS after installation:
+#   sudo lpadmin ssl
+#   - Choose "HTTPS Only" or "Prefer HTTPS"
+#   - The tool will obtain Let's Encrypt certificates and reconfigure Nginx
+
+# ============================================
+# Rate Limiting Zones
+# ============================================
+limit_req_zone $binary_remote_addr zone=api:10m rate=30r/s;
+limit_req_zone $binary_remote_addr zone=login:10m rate=5r/m;
+
+# Preserve upstream TLS protocol (e.g., from Caddy) with safe fallback.
+map $http_x_forwarded_proto $learnplay_forwarded_proto {
+    default $scheme;
+    "~*^https$" https;
+    "~*^http$"  http;
+}
+
+# ============================================
+# HTTP Server Block (Port 80)
+# ============================================
+server {
+    listen __NGINX_HTTP_PORT__;
+    listen [::]:__NGINX_HTTP_PORT__;
+    server_name __DOMAIN__;
+
+    # Allow Let's Encrypt certificate verification (for future SSL setup)
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    # ============================================
+    # Security Headers
+    # ============================================
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # ============================================
+    # File Upload Configuration
+    # ============================================
+    client_max_body_size 100M;
+    client_body_buffer_size 10M;
+    client_header_buffer_size 1k;
+    large_client_header_buffers 4 16k;
+
+    # ============================================
+    # Course Transfer Uploads: Large Streamed Jobs
+    # ============================================
+    location ~ ^/api/courses/(import-analyze|import-job|import)$ {
+        client_max_body_size 0;
+        proxy_pass http://127.0.0.1:__APP_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $learnplay_forwarded_proto;
+        proxy_connect_timeout 60s;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        proxy_request_buffering off;
+        proxy_buffering off;
+    }
+
+    # ============================================
+    # Static File Serving: /uploads/
+    # ============================================
+    location /uploads/ {
+        alias __UPLOAD_DIR__/public/;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # ============================================
+    # Login Endpoint: Rate-Limited
+    # ============================================
+    location /api/auth/login {
+        limit_req zone=login burst=3 nodelay;
+        proxy_pass http://127.0.0.1:__APP_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $learnplay_forwarded_proto;
+        proxy_buffering off;
+    }
+
+    # ============================================
+    # WebSocket Support: /socket.io/
+    # ============================================
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:__APP_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $learnplay_forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        proxy_buffering off;
+        proxy_connect_timeout 7d;
+    }
+
+    # ============================================
+    # Public Objects: Served directly from filesystem
+    # ============================================
+    # Theme thumbnails, image styles, and other public assets are stored
+    # at /api/public-objects/ URLs in the database. Serve them directly
+    # from the upload directory to bypass Express and API rate limiting.
+    location /api/public-objects/ {
+        alias __UPLOAD_DIR__/public/;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # ============================================
+    # API Endpoints: Rate-Limited
+    # ============================================
+    location /api/ {
+        limit_req zone=api burst=50 nodelay;
+        proxy_pass http://127.0.0.1:__APP_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $learnplay_forwarded_proto;
+        proxy_read_timeout 120s;
+        proxy_send_timeout 120s;
+        proxy_buffering off;
+    }
+
+    # ============================================
+    # All Other Routes (SPA + fallback)
+    # ============================================
+    location / {
+        proxy_pass http://127.0.0.1:__APP_PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $learnplay_forwarded_proto;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+        proxy_buffering off;
+    }
+}
+
+# ============================================
+# SSL/HTTPS
+# ============================================
+# To enable HTTPS, run: sudo lpadmin ssl
+# This will:
+#   1. Obtain a Let's Encrypt certificate for your domain
+#   2. Generate the HTTPS Nginx configuration
+#   3. Reload Nginx automatically
+#
+# Manual SSL setup:
+#   sudo certbot certonly --nginx -d YOUR_DOMAIN
+#   sudo lpadmin ssl https

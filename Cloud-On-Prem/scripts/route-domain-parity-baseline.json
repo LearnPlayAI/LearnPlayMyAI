@@ -1,0 +1,44 @@
+{
+  "auth-home": {
+    "primitive_state_override": 1,
+    "action_btn_raw_tokens": 6,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 51
+  },
+  "browse-courses": {
+    "primitive_state_override": 4,
+    "action_btn_raw_tokens": 10,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 3
+  },
+  "other": {
+    "primitive_state_override": 0,
+    "action_btn_raw_tokens": 116,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 1
+  },
+  "game-quiz": {
+    "primitive_state_override": 0,
+    "action_btn_raw_tokens": 55,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 12
+  },
+  "enterprise": {
+    "primitive_state_override": 0,
+    "action_btn_raw_tokens": 0,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 0
+  },
+  "admin-platform": {
+    "primitive_state_override": 0,
+    "action_btn_raw_tokens": 34,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 4
+  },
+  "course-builder": {
+    "primitive_state_override": 2,
+    "action_btn_raw_tokens": 81,
+    "gradient_utilities": 0,
+    "inline_visual_styles": 20
+  }
+}

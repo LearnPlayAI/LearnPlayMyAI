@@ -1,0 +1,32 @@
+{
+  "name": "LearnPlay - Gamified Quiz Learning Platform",
+  "short_name": "LearnPlay",
+  "description": "Gamified quizzes for test preparation - Learn, compete, and track your progress",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#9333ea",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["education", "entertainment"],
+  "icons": [
+    {
+      "src": "/api/public/branding/platform/favicon-1765016548696.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/api/public/branding/platform/favicon-1765016548696.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/api/public/branding/platform/favicon-1765016548696.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

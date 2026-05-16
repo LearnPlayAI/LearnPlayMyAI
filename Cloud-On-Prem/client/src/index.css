@@ -1,0 +1,2729 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Platform-wide policy: gradients are disabled to preserve deterministic primitive parity. */
+  [class*="bg-gradient-to-"] {
+    background-image: none !important;
+  }
+}
+
+:root {
+  --background: hsl(220, 13%, 9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(220, 13%, 11%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(220, 13%, 9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(270, 65%, 60%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(270, 95%, 40%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(220, 13%, 15%);
+  --muted-foreground: hsl(217.9, 10.6%, 64.9%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(220, 13%, 9%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(220, 13%, 18%);
+  --input: hsl(220, 13%, 18%);
+  --ring: hsl(270, 65%, 60%);
+  --chart-1: hsl(270, 65%, 60%);
+  --chart-2: hsl(280, 70%, 55%);
+  --chart-3: hsl(43, 96%, 56%);
+  --chart-4: hsl(260, 60%, 65%);
+  --chart-5: hsl(45, 90%, 50%);
+  --sidebar: hsl(220, 13%, 11%);
+  --sidebar-background: var(--sidebar);
+  --sidebar-foreground: hsl(210, 40%, 98%);
+  --sidebar-primary: hsl(270, 65%, 60%);
+  --sidebar-primary-foreground: hsl(210, 40%, 98%);
+  --sidebar-accent: hsl(220, 13%, 15%);
+  --sidebar-accent-foreground: hsl(270, 65%, 60%);
+  --sidebar-border: hsl(220, 13%, 18%);
+  --sidebar-ring: hsl(270, 65%, 60%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-dialog: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* ========================================
+     WHITE-LABEL BRANDING TOKENS
+     Complete visual customization per organization
+     All component tokens reference semantic tokens as defaults
+     ======================================== */
+
+  /* ----------------------------------------
+     SEMANTIC ADDITIONS
+     Additional semantic tokens for consistency
+     ---------------------------------------- */
+  --success: hsl(142, 76%, 36%);
+  --success-foreground: hsl(0, 0%, 100%);
+  --warning: hsl(38, 92%, 50%);
+  --warning-foreground: hsl(0, 0%, 10%);
+  --surface-primary: var(--background);
+  --surface-primary-fg: var(--foreground);
+  --surface-raised: var(--card);
+  --surface-muted: var(--muted);
+  --text-primary: var(--foreground);
+  --text-on-surface: var(--card-foreground);
+  --text-muted: var(--muted-foreground);
+  --stroke-default: var(--border);
+  --stroke-subtle: color-mix(in srgb, var(--stroke-default) 65%, transparent);
+  --focus-ring: var(--ring);
+  --action-primary: var(--primary);
+  --action-primary-fg: var(--primary-foreground);
+  --action-secondary: var(--secondary);
+  --action-secondary-fg: var(--secondary-foreground);
+  --action-accent: var(--accent);
+  --action-accent-fg: var(--accent-foreground);
+  --action-danger: var(--destructive);
+  --action-danger-fg: var(--destructive-foreground);
+
+  /* ----------------------------------------
+     GLOBAL FOREGROUND PALETTE
+     Contrast-safe text colors that auto-adjust per theme
+     ---------------------------------------- */
+  --fg-strong: hsl(0, 0%, 100%);
+  --fg-default: hsl(0, 0%, 95%);
+  --fg-muted: hsl(0, 0%, 70%);
+  --fg-subtle: hsl(0, 0%, 55%);
+  --fg-on-card: hsl(0, 0%, 100%);
+  --fg-on-card-muted: hsl(0, 0%, 70%);
+  --fg-on-muted: hsl(0, 0%, 100%);
+  --fg-on-primary: var(--primary-foreground);
+  --fg-on-secondary: var(--secondary-foreground);
+  --fg-on-accent: var(--accent-foreground);
+  --body-strong: hsl(0, 0%, 95%);
+  --body-default: hsl(0, 0%, 85%);
+  --body-muted: hsl(0, 0%, 70%);
+  --body-on-card: hsl(0, 0%, 80%);
+  --body-on-card-muted: hsl(0, 0%, 65%);
+
+  /* ----------------------------------------
+     1. NAVIGATION & SHELL
+     Main app navigation, sidebar, and shell structure
+     ---------------------------------------- */
+  --nav-bg: var(--background);
+  --nav-fg: var(--foreground);
+  --nav-hover: var(--muted);
+  --nav-active: var(--primary);
+  --nav-active-fg: var(--primary-foreground);
+  --nav-item-active-bg: var(--primary);
+  --nav-item-active-fg: var(--primary-foreground);
+  --nav-item-hover-bg: var(--accent);
+  --nav-item-hover-fg: var(--accent-foreground);
+  --nav-item-fg: var(--foreground);
+  --nav-item-disabled-fg: var(--muted-foreground);
+  --nav-border: var(--border);
+  --nav-link: var(--foreground);
+  --nav-link-hover: var(--primary);
+  --nav-link-active: hsl(270, 65%, 50%);
+  --nav-link-focus: var(--primary);
+  --nav-disabled: var(--muted-foreground);
+  --nav-pill-bg: transparent;
+  --nav-pill-fg: var(--foreground);
+  --nav-pill-border: var(--border);
+  --nav-pill-hover-bg: var(--accent);
+  --nav-pill-hover-fg: var(--accent-foreground);
+  --nav-pill-active-bg: var(--primary);
+  --nav-pill-active-fg: var(--primary-foreground);
+  
+  --shell-bg: var(--background);
+  --shell-surface: var(--card);
+  --shell-glass: hsla(220, 13%, 11%, 0.8);
+  --shell-divider: var(--border);
+
+  /* ----------------------------------------
+     2. BUTTONS
+     All button variants across the platform
+     ---------------------------------------- */
+  --btn-primary-bg: var(--primary);
+  --btn-primary-fg: var(--primary-foreground);
+  --btn-primary-hover: hsl(270, 65%, 55%);
+  --btn-primary-active: hsl(270, 65%, 50%);
+  --btn-primary-border: var(--primary);
+  --btn-primary-focus-ring: hsla(270, 65%, 60%, 0.5);
+  --btn-primary-disabled-bg: hsla(270, 65%, 60%, 0.5);
+  --btn-primary-disabled-fg: hsl(220, 13%, 15%);
+  
+  --btn-secondary-bg: var(--secondary);
+  --btn-secondary-fg: var(--secondary-foreground);
+  --btn-secondary-hover: hsl(270, 95%, 35%);
+  --btn-secondary-hover-fg: var(--secondary-foreground);
+  --btn-secondary-active: hsl(270, 95%, 30%);
+  --btn-secondary-active-fg: var(--secondary-foreground);
+  --btn-secondary-focus-ring: hsla(270, 95%, 40%, 0.5);
+  --btn-secondary-disabled-bg: hsla(270, 95%, 40%, 0.5);
+  --btn-secondary-disabled-fg: hsl(220, 13%, 15%);
+  
+  --btn-ghost-bg: transparent;
+  --btn-ghost-fg: var(--foreground);
+  --btn-ghost-hover: var(--muted);
+  --btn-ghost-active: hsl(220, 13%, 20%);
+  --btn-ghost-border: var(--border);
+  --btn-ghost-border-hover: hsl(220, 13%, 25%);
+  --btn-ghost-disabled-fg: var(--muted-foreground);
+  
+  --btn-outline-bg: transparent;
+  --btn-outline-fg: var(--primary);
+  --btn-outline-border: var(--primary);
+  --btn-outline-hover-bg: hsla(270, 65%, 60%, 0.1);
+  --btn-outline-hover-border: hsl(270, 65%, 55%);
+  --btn-outline-active-bg: hsla(270, 65%, 60%, 0.2);
+  
+  --btn-danger-bg: var(--destructive);
+  --btn-danger-fg: var(--destructive-foreground);
+  --btn-danger-hover: hsl(0, 84%, 55%);
+  --btn-danger-active: hsl(0, 84%, 45%);
+  --btn-danger-focus-ring: hsla(0, 84%, 60%, 0.5);
+  --btn-danger-disabled-bg: hsla(0, 84%, 60%, 0.5);
+  
+  --btn-success-bg: hsl(142, 76%, 36%);
+  --btn-success-fg: hsl(0, 0%, 100%);
+  --btn-success-hover: hsl(142, 76%, 31%);
+  --btn-success-active: hsl(142, 76%, 25%);
+  --btn-success-focus-ring: hsla(142, 76%, 36%, 0.5);
+  --btn-success-disabled-bg: hsla(142, 76%, 36%, 0.5);
+  --btn-success-disabled-fg: hsl(0, 0%, 100%);
+  
+  --btn-warning-bg: hsl(38, 92%, 50%);
+  --btn-warning-fg: hsl(0, 0%, 10%);
+  --btn-warning-disabled-fg: hsl(0, 0%, 24%);
+  --btn-warning-hover: hsl(38, 92%, 45%);
+  --btn-warning-active: hsl(38, 92%, 40%);
+  
+  --btn-gradient-from: var(--primary);
+  --btn-gradient-to: var(--primary);
+  --btn-gradient-bg: var(--primary);
+  --btn-gradient-fg: var(--primary-foreground);
+
+  /* ----------------------------------------
+     3. INPUTS & FORMS
+     Form elements, text inputs, selects
+     ---------------------------------------- */
+  --input-bg: var(--background);
+  --input-fg: var(--foreground);
+  --input-placeholder: var(--muted-foreground);
+  --input-border: var(--border);
+  --input-hover-border: hsl(220, 13%, 25%);
+  --input-focus: var(--ring);
+  --input-focus-border: var(--primary);
+  --input-focus-ring: hsla(270, 65%, 60%, 0.3);
+  --input-disabled-bg: var(--muted);
+  --input-disabled-fg: var(--muted-foreground);
+  --input-disabled-border: var(--border);
+  --input-invalid-border: var(--destructive);
+  --input-invalid-bg: hsla(0, 84%, 60%, 0.1);
+  --input-invalid-focus-ring: hsla(0, 84%, 60%, 0.3);
+  --input-success-border: hsl(142, 76%, 36%);
+  --input-success-bg: hsla(142, 76%, 36%, 0.1);
+  
+  --label-fg: var(--foreground);
+  --helper-fg: var(--muted-foreground);
+  
+  --checkbox-bg: var(--card);
+  --checkbox-border: var(--border);
+  --checkbox-hover-border: var(--primary);
+  --checkbox-checked-bg: var(--primary);
+  --checkbox-checked-fg: var(--primary-foreground);
+  --checkbox-disabled-bg: var(--muted);
+  
+  --radio-bg: var(--card);
+  --radio-border: var(--border);
+  --radio-hover-border: var(--primary);
+  --radio-checked-bg: var(--primary);
+  --radio-checked-fg: var(--primary-foreground);
+  
+  --switch-bg: var(--muted);
+  --switch-hover-bg: hsl(220, 13%, 20%);
+  --switch-checked-bg: var(--primary);
+  --switch-checked-hover-bg: hsl(270, 65%, 55%);
+  --switch-thumb: hsl(0, 0%, 100%);
+  
+  --select-bg: var(--card);
+  --select-fg: var(--foreground);
+  --select-border: var(--border);
+  --select-hover-border: hsl(220, 13%, 25%);
+  --select-focus-border: var(--primary);
+  --select-option-hover: var(--muted);
+  --select-option-selected: hsla(270, 65%, 60%, 0.15);
+
+  /* ----------------------------------------
+     4. CARDS & PANELS
+     Content containers, elevated surfaces
+     ---------------------------------------- */
+  --card-bg: var(--card);
+  --card-fg: var(--card-foreground);
+  --card-border: var(--border);
+  --card-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.1);
+  --card-hover: hsl(220, 13%, 13%);
+  --card-hover-bg: hsl(220, 13%, 19%);
+  --card-hover-border: hsl(220, 13%, 25%);
+  --card-hover-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
+  --card-active-bg: hsl(220, 13%, 22%);
+  --card-active-border: var(--primary);
+  --card-selected-bg: hsla(270, 65%, 60%, 0.1);
+  --card-selected-border: var(--primary);
+  --card-disabled-bg: var(--muted);
+  --card-disabled-fg: var(--muted-foreground);
+  
+  --panel-bg: var(--card);
+  --panel-fg: var(--card-foreground);
+  --panel-border: var(--border);
+  --panel-header-bg: var(--muted);
+  --panel-header-fg: var(--foreground);
+  --panel-footer-bg: var(--muted);
+  --panel-hover-bg: hsl(220, 13%, 19%);
+
+  /* ----------------------------------------
+     5. PILLS & TAGS
+     Status indicators, category tags, chips
+     ---------------------------------------- */
+  --pill-bg: hsla(270, 65%, 60%, 0.15);
+  --pill-fg: var(--primary);
+  --pill-border: hsla(270, 65%, 60%, 0.3);
+  --pill-hover-bg: hsla(270, 65%, 60%, 0.25);
+  --pill-hover-border: hsla(270, 65%, 60%, 0.5);
+  --pill-active-bg: var(--primary);
+  --pill-active-fg: var(--primary-foreground);
+  --pill-active-hover-bg: hsl(270, 65%, 55%);
+  --pill-disabled-bg: var(--muted);
+  --pill-disabled-fg: var(--muted-foreground);
+  
+  --tag-bg: var(--muted);
+  --tag-fg: var(--foreground);
+  --tag-hover-bg: hsl(220, 13%, 20%);
+  --tag-border: var(--border);
+  
+  --badge-bg: var(--primary);
+  --badge-fg: var(--primary-foreground);
+  --badge-hover-bg: hsl(270, 65%, 55%);
+  --badge-hover-fg: var(--primary-foreground);
+  --badge-secondary-bg: var(--secondary);
+  --badge-secondary-fg: var(--secondary-foreground);
+  --badge-outline-bg: transparent;
+  --badge-outline-fg: var(--primary);
+  --badge-outline-border: var(--primary);
+  --badge-muted: var(--muted);
+  --badge-muted-foreground: var(--muted-foreground);
+  --badge-warning: var(--warning);
+  --badge-warning-foreground: var(--warning-foreground);
+  --lesson-artifact-source-db-bg: var(--badge-info-bg);
+  --lesson-artifact-source-db-fg: var(--badge-info-fg);
+  --lesson-artifact-source-db-border: var(--badge-info-bg);
+  --lesson-artifact-objectives-bg: var(--badge-success-bg);
+  --lesson-artifact-objectives-fg: var(--badge-success-fg);
+  --lesson-artifact-objectives-border: var(--badge-success-bg);
+  --lesson-artifact-digest-bg: var(--badge-warning-bg);
+  --lesson-artifact-digest-fg: var(--badge-warning-fg);
+  --lesson-artifact-digest-border: var(--badge-warning-bg);
+
+  /* ----------------------------------------
+     6. TABS
+     Tab navigation components
+     ---------------------------------------- */
+  --tab-bg: transparent;
+  --tab-fg: var(--muted-foreground);
+  --tab-hover-bg: var(--muted);
+  --tab-hover-fg: var(--foreground);
+  --tab-active-bg: color-mix(in srgb, var(--primary) 14%, var(--background));
+  --tab-active-fg: var(--foreground);
+  --tab-active-hover-bg: color-mix(in srgb, var(--primary) 20%, var(--background));
+  --tab-hover: var(--muted);
+  --tab-focus-ring: hsla(270, 65%, 60%, 0.5);
+  --tab-disabled-fg: var(--muted-foreground);
+  --tab-border: var(--border);
+  --tab-indicator: var(--primary);
+  --tab: var(--muted);
+  --tab-foreground: var(--muted-foreground);
+  --tab-active: color-mix(in srgb, var(--primary) 14%, var(--background));
+  --tab-active-foreground: var(--foreground);
+
+  /* ----------------------------------------
+     7. TABLES
+     Data tables, list views
+     ---------------------------------------- */
+  --table-header-bg: var(--muted);
+  --table-header-fg: var(--foreground);
+  --table-header-border: var(--border);
+  --table-header-hover-bg: hsl(220, 13%, 20%);
+  --table-row-bg: var(--card);
+  --table-row-fg: var(--card-foreground);
+  --table-row-alt-bg: var(--muted);
+  --table-row-hover: var(--muted);
+  --table-row-hover-bg: hsl(220, 13%, 19%);
+  --table-row-hover-border: hsl(220, 13%, 25%);
+  --table-row-selected-bg: hsla(270, 65%, 60%, 0.15);
+  --table-row-selected-fg: var(--foreground);
+  --table-row-active-bg: hsla(270, 65%, 60%, 0.2);
+  --table-cell-border: var(--border);
+  --table-sort-icon: var(--muted-foreground);
+  --table-sort-icon-active: var(--primary);
+
+  /* ----------------------------------------
+     8. CHARTS & METRICS
+     Data visualization, statistics display
+     ---------------------------------------- */
+  --metric-number: var(--foreground);
+  --metric-label: var(--muted-foreground);
+  --chart-grid: var(--border);
+  --chart-axis: var(--muted-foreground);
+
+  /* ----------------------------------------
+     9. MODALS & DIALOGS
+     Overlays, toasts, notifications
+     ---------------------------------------- */
+  --modal-overlay: hsla(0, 0%, 0%, 0.8);
+  --modal-bg: var(--card);
+  --modal-foreground: var(--card-foreground);
+  --modal-border: var(--border);
+  --modal-footer-bg: var(--muted);
+  
+  --toast-bg: var(--card);
+  --toast-fg: var(--card-foreground);
+  --toast-border: var(--border);
+
+  /* Low balance warning */
+  --low-balance-bg: var(--warning);
+  --low-balance-foreground: var(--warning-foreground);
+
+  /* ----------------------------------------
+     10. HERO SECTION
+     Homepage hero, landing page headers
+     ---------------------------------------- */
+  --hero-bg: var(--background);
+  --hero-bg-gradient-from: hsl(0, 0%, 0%);
+  --hero-bg-gradient-via: var(--background);
+  --hero-bg-gradient-to: hsl(0, 0%, 0%);
+  
+  --hero-headline-from: var(--primary);
+  --hero-headline-via: var(--primary);
+  --hero-headline-to: var(--primary);
+  
+  --hero-badge-bg: hsla(270, 65%, 60%, 0.2);
+  --hero-badge-fg: var(--primary);
+  --hero-badge-border: hsla(270, 65%, 60%, 0.4);
+  --hero-badge-hover-bg: hsla(270, 65%, 60%, 0.3);
+  
+  --hero-cta-primary-bg: var(--primary);
+  --hero-cta-primary-fg: var(--primary-foreground);
+  --hero-cta-primary-hover: var(--secondary);
+  --hero-cta-primary-active: hsl(270, 65%, 50%);
+  --hero-cta-primary-focus-ring: hsla(270, 65%, 60%, 0.5);
+  
+  --hero-cta-secondary-bg: var(--accent);
+  --hero-cta-secondary-fg: var(--accent-foreground);
+  --hero-cta-secondary-hover: hsl(43, 96%, 50%);
+  --hero-cta-secondary-active: hsl(43, 96%, 45%);
+  --hero-cta-secondary-focus-ring: hsla(43, 96%, 56%, 0.5);
+  
+  --hero-cta-outline-bg: transparent;
+  --hero-cta-outline-fg: var(--primary);
+  --hero-cta-outline-border: var(--primary);
+  --hero-cta-outline-hover-bg: hsla(270, 65%, 60%, 0.1);
+  --hero-cta-outline-hover-border: hsl(270, 65%, 55%);
+  
+  --hero-indicator-active-bg: var(--primary);
+  --hero-indicator-rest-bg: hsla(0, 0%, 100%, 0.3);
+  --hero-indicator-hover-bg: hsla(0, 0%, 100%, 0.5);
+  
+  --hero-glow: hsla(270, 65%, 60%, 0.5);
+  --hero-glow-secondary: hsla(270, 65%, 60%, 0.3);
+
+  /* ----------------------------------------
+     11. SECTIONS & FEATURES
+     Page sections, feature cards, testimonials
+     ---------------------------------------- */
+  --section-bg: var(--background);
+  --section-alt-bg: var(--muted);
+  --section-heading: var(--foreground);
+  --section-subheading: var(--muted-foreground);
+  
+  --feature-card-bg: var(--card);
+  --feature-card-fg: var(--card-foreground);
+  --feature-card-border: var(--border);
+  --feature-card-hover-bg: hsl(220, 13%, 19%);
+  --feature-card-hover-border: hsl(220, 13%, 25%);
+  --feature-card-icon-bg: var(--primary);
+  --feature-card-icon-fg: var(--primary-foreground);
+  --feature-card-icon-hover-bg: hsl(270, 65%, 55%);
+  
+  --cta-bg: var(--primary);
+  --cta-fg: var(--primary-foreground);
+  --cta-hover: var(--secondary);
+  --cta-active: hsl(270, 65%, 50%);
+  --cta-focus-ring: hsla(270, 65%, 60%, 0.5);
+  --cta-gradient-from: var(--primary);
+  --cta-gradient-to: var(--primary);
+  --cta-gradient-from-hover: hsl(270, 65%, 55%);
+  --cta-gradient-to-hover: hsl(270, 65%, 55%);
+  
+  --testimonial-bg: var(--card);
+  --testimonial-fg: var(--card-foreground);
+  --testimonial-quote: var(--primary);
+  --testimonial-hover-bg: hsl(220, 13%, 19%);
+  
+  --pricing-card-bg: var(--card);
+  --pricing-card-fg: var(--card-foreground);
+  --pricing-card-border: var(--border);
+  --pricing-card-hover-bg: hsl(220, 13%, 19%);
+  --pricing-card-hover-border: hsl(220, 13%, 25%);
+  --pricing-card-featured-bg: hsla(270, 65%, 60%, 0.1);
+  --pricing-card-featured-border: var(--primary);
+  --pricing-card-featured-hover-bg: hsla(270, 65%, 60%, 0.15);
+
+  /* ----------------------------------------
+     12. AUTH PAGES
+     Login, register, password reset
+     ---------------------------------------- */
+  --auth-bg: var(--background);
+  --auth-fg: var(--foreground);
+  --auth-form-bg: var(--card);
+  --auth-form-border: var(--border);
+  --auth-form-shadow: 0 4px 20px hsla(0, 0%, 0%, 0.2);
+  --auth-cta-bg: var(--primary);
+  --auth-cta-fg: var(--primary-foreground);
+  --auth-cta-hover: var(--secondary);
+
+  /* ----------------------------------------
+     13. DASHBOARD
+     User dashboards, stat widgets
+     ---------------------------------------- */
+  --stat-card-bg: var(--card);
+  --stat-card-fg: var(--card-foreground);
+  --stat-card-border: var(--border);
+  --stat-card-accent: var(--primary);
+  
+  --activity-item-bg: var(--card);
+  --activity-item-fg: var(--card-foreground);
+  
+  --quick-action-bg: var(--muted);
+  --quick-action-fg: var(--foreground);
+  --quick-action-hover: hsla(270, 65%, 60%, 0.15);
+
+  /* ----------------------------------------
+     14. COURSE BROWSER
+     Course catalog, search, filters
+     ---------------------------------------- */
+  --course-card-bg: var(--card);
+  --course-card-fg: var(--card-foreground);
+  --course-card-border: var(--border);
+  --course-card-hover-bg: hsl(220, 13%, 19%);
+  --course-card-hover-border: hsl(220, 13%, 25%);
+  --course-card-hover-shadow: 0 2px 6px hsla(0, 0%, 0%, 0.2);
+  --course-card-badge-bg: var(--primary);
+  --course-card-badge-fg: var(--primary-foreground);
+  --course-card-badge-hover-bg: hsl(270, 65%, 55%);
+  
+  --filter-pill-bg: var(--muted);
+  --filter-pill-fg: var(--foreground);
+  --filter-pill-hover-bg: hsl(220, 13%, 20%);
+  --filter-pill-active-bg: var(--primary);
+  --filter-pill-active-fg: var(--primary-foreground);
+  --filter-pill-active-hover-bg: hsl(270, 65%, 55%);
+  
+  --search-bg: var(--card);
+  --search-fg: var(--foreground);
+  --search-border: var(--border);
+  --search-hover-border: hsl(220, 13%, 25%);
+  --search-focus-border: var(--primary);
+  --search-focus-ring: hsla(270, 65%, 60%, 0.3);
+  
+  --pagination-bg: var(--muted);
+  --pagination-fg: var(--foreground);
+  --pagination-hover-bg: hsl(220, 13%, 20%);
+  --pagination-active-bg: var(--primary);
+  --pagination-active-fg: var(--primary-foreground);
+  --pagination-active-hover-bg: hsl(270, 65%, 55%);
+  --pagination-disabled-bg: var(--muted);
+  --pagination-disabled-fg: var(--muted-foreground);
+
+  /* ----------------------------------------
+     15. LESSON VIEWER
+     Course content, lesson navigation
+     ---------------------------------------- */
+  --lesson-surface: var(--background);
+  --lesson-nav-bg: var(--card);
+  --lesson-nav-fg: var(--foreground);
+  --lesson-nav-active: var(--primary);
+  
+  --progress-bar-bg: var(--muted);
+  --progress-bar-fill: var(--primary);
+  
+  --code-block-bg: hsl(220, 13%, 8%);
+  --code-block-fg: hsl(210, 40%, 95%);
+
+  /* ----------------------------------------
+     16. QUIZ SYSTEM
+     Quiz lobby, questions, answers
+     ---------------------------------------- */
+  --quiz-lobby-bg: var(--background);
+  --quiz-lobby-fg: var(--foreground);
+  
+  --question-card-bg: var(--card);
+  --question-card-fg: var(--card-foreground);
+  --question-card-border: var(--border);
+  
+  --answer-option-bg: var(--card);
+  --answer-option-fg: var(--foreground);
+  --answer-option-border: var(--border);
+  --answer-option-hover: hsla(270, 65%, 60%, 0.2);
+  --answer-option-hover-bg: hsl(220, 13%, 19%);
+  --answer-option-hover-border: hsl(220, 13%, 25%);
+  --answer-option-selected-bg: hsla(270, 65%, 60%, 0.2);
+  --answer-option-selected-fg: var(--primary);
+  --answer-option-selected-border: var(--primary);
+  --answer-option-correct-bg: hsla(142, 76%, 36%, 0.2);
+  --answer-option-correct-fg: hsl(142, 76%, 36%);
+  --answer-option-correct-border: hsl(142, 76%, 36%);
+  --answer-option-incorrect-bg: hsla(0, 84%, 60%, 0.2);
+  --answer-option-incorrect-fg: hsl(0, 84%, 60%);
+  --answer-option-incorrect-border: hsl(0, 84%, 60%);
+  --answer-option-disabled-bg: var(--muted);
+  --answer-option-disabled-fg: var(--muted-foreground);
+  
+  --timer-bg: var(--muted);
+  --timer-fg: var(--foreground);
+  --timer-warning: hsl(38, 92%, 50%);
+  --timer-critical: hsl(0, 84%, 60%);
+  --timer-critical-foreground: hsl(0, 0%, 100%);
+  
+  --leaderboard-row-bg: var(--card);
+  --leaderboard-row-alt-bg: var(--muted);
+  --leaderboard-row-hover-bg: hsl(220, 13%, 19%);
+  --leaderboard-row-highlight-bg: hsla(270, 65%, 60%, 0.15);
+
+  /* ----------------------------------------
+     17. BATTLE ARENA
+     Game modes, competitive features
+     ---------------------------------------- */
+  --arena-bg: hsl(230, 50%, 8%);
+  --arena-surface: var(--card);
+  
+  --game-card-face-bg: var(--card);
+  --game-card-face-fg: var(--card-foreground);
+  --game-card-face-border: var(--border);
+  
+  --energy-bar-bg: var(--muted);
+  --energy-bar-fill: var(--accent);
+  
+  --score-badge-bg: var(--accent);
+  --score-badge-fg: var(--accent-foreground);
+  
+  --effect-glow: hsla(270, 65%, 60%, 0.5);
+  
+  /* Game Effect Tokens */
+  --game-primary: var(--primary);
+  --game-gold: var(--accent);
+  --game-gold-light: hsl(50, 100%, 65%);
+  --game-glow: hsla(270, 65%, 60%, 0.5);
+  --game-success: hsl(142, 76%, 36%);
+  --game-xp: var(--primary);
+  --game-particle: var(--accent);
+  --celebration-from: var(--chart-3);
+  --celebration-to: var(--chart-5);
+  --celebration-glow: hsla(38, 92%, 50%, 0.6);
+
+  /* ----------------------------------------
+     18. ADMIN
+     Admin panels, management interfaces
+     ---------------------------------------- */
+  --admin-sidebar-bg: var(--card);
+  --admin-sidebar-fg: var(--foreground);
+  --admin-sidebar-item-hover-bg: hsl(220, 13%, 19%);
+  --admin-sidebar-active-bg: var(--primary);
+  --admin-sidebar-active-fg: var(--primary-foreground);
+  --admin-sidebar-active-hover-bg: hsl(270, 65%, 55%);
+  
+  --admin-header-bg: var(--card);
+  --admin-header-fg: var(--foreground);
+  
+  --admin-table-header-bg: var(--muted);
+  --admin-table-header-hover-bg: hsl(220, 13%, 20%);
+  --admin-table-row-bg: var(--card);
+  --admin-table-row-hover-bg: hsl(220, 13%, 19%);
+  --admin-table-row-selected-bg: hsla(270, 65%, 60%, 0.15);
+  
+  --breadcrumb-fg: var(--muted-foreground);
+  --breadcrumb-active-fg: var(--foreground);
+  --breadcrumb-hover-fg: var(--primary);
+  --breadcrumb-separator-fg: var(--muted-foreground);
+
+  /* ----------------------------------------
+     19. PROFILE & SETTINGS
+     User profile, preferences
+     ---------------------------------------- */
+  --profile-card-bg: var(--card);
+  --profile-card-fg: var(--card-foreground);
+  --profile-card-border: var(--border);
+  
+  --avatar-ring: var(--primary);
+  
+  --pref-toggle-on: var(--primary);
+  --pref-toggle-off: var(--muted);
+
+  /* ----------------------------------------
+     20. CERTIFICATES
+     Achievement certificates, awards
+     ---------------------------------------- */
+  --cert-bg: hsl(0, 0%, 100%);
+  --cert-border: var(--accent);
+  --cert-title: hsl(220, 13%, 9%);
+  --cert-body: hsl(220, 13%, 20%);
+  --cert-accent: var(--accent);
+
+  /* ----------------------------------------
+     21. FOOTER
+     Site footer, legal links
+     ---------------------------------------- */
+  --footer-bg: hsl(0, 0%, 0%);
+  --footer-fg: var(--foreground);
+  --footer-heading: var(--foreground);
+  --footer-link: var(--muted-foreground);
+  --footer-link-hover: var(--primary);
+  --footer-link-active: hsl(270, 65%, 50%);
+  --footer-border: var(--border);
+  --footer-social-bg: transparent;
+  --footer-social-fg: var(--muted-foreground);
+  --footer-social-hover-bg: hsla(270, 65%, 60%, 0.15);
+  --footer-social-hover-fg: var(--primary);
+
+  /* ----------------------------------------
+     22. EMAIL TEMPLATES
+     Email template styling for branded communications
+     ---------------------------------------- */
+  --email-bg: hsl(0, 0%, 96%);
+  --email-fg: hsl(220, 13%, 20%);
+  --email-header-bg: var(--primary);
+  --email-header-fg: var(--primary-foreground);
+  --email-content-bg: hsl(0, 0%, 100%);
+  --email-content-fg: hsl(220, 13%, 20%);
+  --email-cta-bg: var(--primary);
+  --email-cta-fg: var(--primary-foreground);
+  --email-cta-hover: hsl(270, 65%, 55%);
+  --email-footer-bg: hsl(220, 13%, 15%);
+  --email-footer-fg: hsl(0, 0%, 70%);
+  --email-link: var(--primary);
+  --email-border: hsl(220, 13%, 90%);
+  --email-muted: hsl(220, 13%, 55%);
+  --email-success: hsl(142, 76%, 36%);
+  --email-warning: hsl(38, 92%, 50%);
+  --email-accent: var(--accent);
+
+  /* ----------------------------------------
+     GRADIENT TOKENS
+     Reusable gradient definitions
+     ---------------------------------------- */
+  --gradient-primary-from: var(--primary);
+  --gradient-primary-to: var(--primary);
+  --gradient-primary-direction: 135deg;
+  --gradient-accent-from: var(--accent);
+  --gradient-accent-to: var(--accent);
+  
+  /* ----------------------------------------
+     CONFIGURABLE PAGE GRADIENT
+     Organization-customizable background gradient
+     ---------------------------------------- */
+  --gradient-enabled: 0;
+  --gradient-from: var(--primary);
+  --gradient-to: var(--primary);
+  --gradient-angle: 135deg;
+
+  /* ----------------------------------------
+     INFO STATE TOKENS
+     Information/neutral status indicators
+     ---------------------------------------- */
+  --info: hsl(200, 100%, 50%);
+  --info-foreground: hsl(0, 0%, 100%);
+
+  /* ----------------------------------------
+     22. SIDEBAR
+     Sidebar navigation states
+     ---------------------------------------- */
+  --sidebar-item-hover-bg: hsl(220, 13%, 19%);
+  --sidebar-item-hover-fg: var(--foreground);
+  --sidebar-item-active-bg: var(--primary);
+  --sidebar-item-active-fg: var(--primary-foreground);
+  --sidebar-item-fg: var(--foreground);
+  --sidebar-item-disabled-fg: var(--muted-foreground);
+  --sidebar-bg: var(--card);
+  --sidebar-fg: var(--foreground);
+
+  /* ----------------------------------------
+     23. LINKS & TEXT INTERACTIONS
+     Link styles, text selection
+     ---------------------------------------- */
+  --link-fg: var(--primary);
+  --link-hover-fg: hsl(270, 65%, 55%);
+  --link-active-fg: hsl(270, 65%, 50%);
+  --link-visited-fg: hsl(270, 65%, 45%);
+  --link-muted-fg: var(--muted-foreground);
+  --link-focus-ring: var(--focus-ring);
+  --link-underline: hsla(270, 65%, 60%, 0.5);
+  --link-hover-underline: var(--primary);
+  --text-selection-bg: hsla(270, 65%, 60%, 0.3);
+  --text-selection-fg: var(--foreground);
+  --text-highlight-bg: hsla(43, 96%, 56%, 0.3);
+  --text-highlight-fg: var(--foreground);
+
+  /* ----------------------------------------
+     24. TOOLTIPS & POPOVERS
+     Tooltip, popover, dropdown styles
+     ---------------------------------------- */
+  --tooltip-bg: hsl(0, 0%, 95%);
+  --tooltip-fg: hsl(0, 0%, 10%);
+  --tooltip-border: hsl(0, 0%, 85%);
+  --popover-hover-bg: hsl(220, 13%, 19%);
+  --dropdown-bg: var(--card);
+  --dropdown-fg: var(--card-foreground);
+  --dropdown-border: var(--border);
+  --dropdown-item-hover-bg: var(--muted);
+  --dropdown-item-hover-fg: var(--foreground);
+  --dropdown-item-active-bg: hsla(270, 65%, 60%, 0.15);
+  --dropdown-item-active-fg: var(--primary);
+  --dropdown-separator: var(--border);
+
+  /* ----------------------------------------
+     25. LOADING & SKELETON STATES
+     Loading indicators, skeleton UI
+     ---------------------------------------- */
+  --skeleton-bg: var(--muted);
+  --skeleton-highlight: hsl(220, 13%, 20%);
+  --spinner-track: var(--muted);
+  --spinner-fill: var(--primary);
+  --loading-overlay: hsla(220, 13%, 9%, 0.8);
+
+  /* ----------------------------------------
+     26. CONTRAST-SAFE FOREGROUNDS
+     Guaranteed readable text on color backgrounds
+     ---------------------------------------- */
+  --on-primary: var(--primary-foreground);
+  --on-secondary: var(--secondary-foreground);
+  --on-accent: var(--accent-foreground);
+  --on-muted: hsl(0, 0%, 95%);
+  --on-card: hsl(0, 0%, 95%);
+  --on-background: hsl(0, 0%, 95%);
+  --on-success: hsl(0, 0%, 100%);
+  --on-warning: hsl(0, 0%, 10%);
+  --on-danger: hsl(0, 0%, 100%);
+
+  /* ----------------------------------------
+     27. SCROLLBAR
+     Custom scrollbar styling
+     ---------------------------------------- */
+  --scrollbar-track: var(--muted);
+  --scrollbar-thumb: var(--muted-foreground);
+  --scrollbar-thumb-hover: hsl(217.9, 10.6%, 55%);
+
+  /* ----------------------------------------
+     28. ACCORDION & COLLAPSIBLE
+     Expandable content sections
+     ---------------------------------------- */
+  --accordion-bg: var(--card);
+  --accordion-fg: var(--card-foreground);
+  --accordion-border: var(--border);
+  --accordion-trigger-hover-bg: hsl(220, 13%, 19%);
+  --accordion-content-bg: var(--card);
+  --accordion-icon: var(--muted-foreground);
+  --accordion-icon-hover: var(--foreground);
+
+  /* ----------------------------------------
+     29. SLIDER
+     Range sliders and track controls
+     ---------------------------------------- */
+  --slider-track: var(--muted);
+  --slider-range: var(--primary);
+  --slider-thumb: var(--primary);
+  --slider-thumb-border: var(--primary-foreground);
+  --slider-thumb-hover: hsl(270, 65%, 55%);
+  --slider-focus-ring: hsla(270, 65%, 60%, 0.5);
+
+  /* ----------------------------------------
+     30. ALERTS & NOTIFICATIONS
+     Alert banners and inline notifications
+     ---------------------------------------- */
+  --alert-info-bg: hsla(200, 100%, 50%, 0.15);
+  --alert-info-fg: hsl(200, 100%, 70%);
+  --alert-info-border: hsl(200, 100%, 40%);
+  --alert-info-icon: hsl(200, 100%, 60%);
+  --alert-success-bg: hsla(142, 76%, 36%, 0.15);
+  --alert-success-fg: hsl(142, 70%, 65%);
+  --alert-success-border: hsl(142, 70%, 35%);
+  --alert-success-icon: hsl(142, 70%, 55%);
+  --alert-warning-bg: hsla(38, 92%, 50%, 0.15);
+  --alert-warning-fg: hsl(38, 90%, 65%);
+  --alert-warning-border: hsl(38, 90%, 40%);
+  --alert-warning-icon: hsl(38, 90%, 55%);
+  --alert-error-bg: hsla(0, 84%, 60%, 0.15);
+  --alert-error-fg: hsl(0, 80%, 70%);
+  --alert-error-border: hsl(0, 80%, 45%);
+  --alert-error-icon: hsl(0, 80%, 60%);
+
+  /* ----------------------------------------
+     31. TOAST NOTIFICATIONS
+     Transient toast messages
+     ---------------------------------------- */
+  --toast-default-bg: var(--card);
+  --toast-default-fg: var(--card-foreground);
+  --toast-default-border: var(--border);
+  --toast-success-bg: hsl(142, 50%, 15%);
+  --toast-success-fg: hsl(142, 70%, 70%);
+  --toast-success-border: hsl(142, 60%, 30%);
+  --toast-error-bg: hsl(0, 50%, 15%);
+  --toast-error-fg: hsl(0, 70%, 70%);
+  --toast-error-border: hsl(0, 60%, 35%);
+
+  /* ----------------------------------------
+     32. PROGRESS BARS
+     Linear and circular progress indicators
+     ---------------------------------------- */
+  --progress-bg: var(--muted);
+  --progress-fill: var(--primary);
+  --progress-success-fill: hsl(142, 76%, 36%);
+  --progress-warning-fill: hsl(38, 92%, 50%);
+  --progress-error-fill: hsl(0, 84%, 60%);
+  --progress-label: var(--foreground);
+
+  /* ----------------------------------------
+     33. CHIPS & REMOVABLE TAGS
+     Filter chips and removable tags
+     ---------------------------------------- */
+  --chip-bg: var(--muted);
+  --chip-fg: var(--foreground);
+  --chip-border: var(--border);
+  --chip-hover-bg: hsl(220, 13%, 20%);
+  --chip-remove-hover: hsl(0, 84%, 60%);
+  --chip-primary-bg: hsla(270, 65%, 60%, 0.15);
+  --chip-primary-fg: var(--primary);
+  --chip-primary-border: hsla(270, 65%, 60%, 0.3);
+
+  /* ----------------------------------------
+     34. STEPPER & WIZARD
+     Multi-step form progress indicators
+     ---------------------------------------- */
+  --stepper-line: var(--border);
+  --stepper-line-active: var(--primary);
+  --stepper-circle-bg: var(--muted);
+  --stepper-circle-fg: var(--muted-foreground);
+  --stepper-circle-active-bg: var(--primary);
+  --stepper-circle-active-fg: var(--primary-foreground);
+  --stepper-circle-complete-bg: hsl(142, 76%, 36%);
+  --stepper-circle-complete-fg: hsl(0, 0%, 100%);
+  --stepper-label: var(--muted-foreground);
+  --stepper-label-active: var(--foreground);
+
+  /* ----------------------------------------
+     35. EMPTY STATES
+     Placeholder content for empty data
+     ---------------------------------------- */
+  --empty-state-bg: var(--muted);
+  --empty-state-fg: var(--muted-foreground);
+  --empty-state-icon: var(--muted-foreground);
+  --empty-state-heading: var(--foreground);
+  --empty-state-body: var(--muted-foreground);
+
+  /* ----------------------------------------
+     36. AVATAR
+     User avatars and status indicators
+     ---------------------------------------- */
+  --avatar-bg: var(--muted);
+  --avatar-fg: var(--foreground);
+  --avatar-border: var(--border);
+  --avatar-ring: var(--primary);
+  --avatar-status-online: hsl(142, 76%, 36%);
+  --avatar-status-offline: var(--muted-foreground);
+  --avatar-status-busy: hsl(0, 84%, 60%);
+  --avatar-status-away: hsl(38, 92%, 50%);
+
+  /* ----------------------------------------
+     TYPOGRAPHY TOKENS
+     Font families for headings and body
+     ---------------------------------------- */
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* ========================================
+     RESPONSIVE DESIGN SYSTEM TOKENS
+     Breakpoints: sm(640px) md(768px) lg(1024px) xl(1280px) 2xl(1536px)
+     ======================================== */
+  
+  /* Responsive Typography Scale - using clamp() for fluid sizing */
+  --text-xs: clamp(0.6875rem, 0.65rem + 0.1vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.775rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.875rem, 0.85rem + 0.2vw, 1rem);
+  --text-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-xl: clamp(1.125rem, 1.05rem + 0.35vw, 1.25rem);
+  --text-2xl: clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem);
+  --text-3xl: clamp(1.625rem, 1.4rem + 0.8vw, 1.875rem);
+  --text-4xl: clamp(1.875rem, 1.5rem + 1.2vw, 2.25rem);
+  --text-5xl: clamp(2.25rem, 1.75rem + 1.5vw, 3rem);
+  
+  /* Responsive Spacing Scale - clamp() based */
+  --space-xs: clamp(0.25rem, 0.2rem + 0.1vw, 0.375rem);
+  --space-sm: clamp(0.5rem, 0.4rem + 0.2vw, 0.75rem);
+  --space-md: clamp(0.75rem, 0.6rem + 0.3vw, 1rem);
+  --space-lg: clamp(1rem, 0.8rem + 0.5vw, 1.5rem);
+  --space-xl: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+  --space-2xl: clamp(2rem, 1.5rem + 1.2vw, 3rem);
+  --space-3xl: clamp(3rem, 2rem + 2vw, 4rem);
+  
+  /* Touch Target Minimums - WCAG 2.5.5 AAA standard */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+  
+  /* ----------------------------------------
+     MOBILE-SPECIFIC THEMING TOKENS
+     Themeable sizing for mobile UI components
+     ---------------------------------------- */
+  --mobile-nav-height: 56px;
+  --mobile-bottom-bar-height: 64px;
+  --mobile-floating-btn-size: 48px;
+  --mobile-header-padding-x: 0.75rem;
+  --mobile-content-padding: 0.75rem;
+  
+  /* Container & Layout */
+  --container-padding: clamp(1rem, 0.5rem + 2vw, 2rem);
+  --header-height: 64px;
+  --header-height-mobile: var(--mobile-nav-height);
+  --sidebar-width: 320px;
+  --sidebar-width-collapsed: 72px;
+  
+  /* Card Responsive Sizing */
+  --card-padding: clamp(1rem, 0.75rem + 0.5vw, 1.5rem);
+  --card-gap: clamp(0.75rem, 0.5rem + 0.5vw, 1rem);
+  
+  /* Dialog/Modal Sizing */
+  --dialog-max-height: 90vh;
+  --dialog-padding: clamp(1rem, 0.75rem + 0.5vw, 1.5rem);
+  
+  /* Safe Area Insets for iOS notch/home indicator */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  
+  /* Modal Body/Footer Heights */
+  --modal-header-height: 60px;
+  --modal-footer-height: 80px;
+  --modal-body-max-height: calc(100vh - var(--modal-header-height) - var(--modal-footer-height) - var(--safe-area-bottom) - 2rem);
+}
+
+:root[data-theme-intent="dark"],
+.dark {
+  --background: hsl(220, 13%, 9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(220, 13%, 11%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(220, 13%, 9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(270, 65%, 60%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(270, 95%, 40%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(220, 13%, 15%);
+  --muted-foreground: hsl(217.9, 10.6%, 64.9%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(220, 13%, 9%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(220, 13%, 18%);
+  --input: hsl(220, 13%, 18%);
+  --ring: hsl(270, 65%, 60%);
+  --chart-1: hsl(270, 65%, 60%);
+  --chart-2: hsl(280, 70%, 55%);
+  --chart-3: hsl(43, 96%, 56%);
+  --chart-4: hsl(260, 60%, 65%);
+  --chart-5: hsl(45, 90%, 50%);
+  --sidebar: hsl(220, 13%, 11%);
+  --sidebar-background: var(--sidebar);
+  --sidebar-foreground: hsl(210, 40%, 98%);
+  --sidebar-primary: hsl(270, 65%, 60%);
+  --sidebar-primary-foreground: hsl(210, 40%, 98%);
+  --sidebar-accent: hsl(220, 13%, 15%);
+  --sidebar-accent-foreground: hsl(270, 65%, 60%);
+  --sidebar-border: hsl(220, 13%, 18%);
+  --sidebar-ring: hsl(270, 65%, 60%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+
+  /* Tab styling */
+  --tab-bg: transparent;
+  --tab-fg: var(--muted-foreground);
+  --tab-hover-bg: var(--muted);
+  --tab-hover-fg: var(--foreground);
+  --tab-active-bg: color-mix(in srgb, var(--primary) 16%, var(--background));
+  --tab-active-fg: var(--foreground);
+  --tab-active-hover-bg: color-mix(in srgb, var(--primary) 24%, var(--background));
+  --tab-hover: var(--muted);
+  --tab-focus-ring: hsla(270, 65%, 60%, 0.5);
+  --tab-disabled-fg: var(--muted-foreground);
+  --tab-border: var(--border);
+  --tab-indicator: var(--primary);
+  --tab: var(--muted);
+  --tab-foreground: var(--muted-foreground);
+  --tab-active: color-mix(in srgb, var(--primary) 16%, var(--background));
+  --tab-active-foreground: var(--foreground);
+
+  /* Badge tokens */
+  --badge-muted: var(--muted);
+  --badge-muted-foreground: var(--muted-foreground);
+  --badge-warning: var(--warning);
+  --badge-warning-foreground: var(--warning-foreground);
+  --lesson-artifact-source-db-bg: var(--badge-info-bg);
+  --lesson-artifact-source-db-fg: var(--badge-info-fg);
+  --lesson-artifact-source-db-border: var(--badge-info-bg);
+  --lesson-artifact-objectives-bg: var(--badge-success-bg);
+  --lesson-artifact-objectives-fg: var(--badge-success-fg);
+  --lesson-artifact-objectives-border: var(--badge-success-bg);
+  --lesson-artifact-digest-bg: var(--badge-warning-bg);
+  --lesson-artifact-digest-fg: var(--badge-warning-fg);
+  --lesson-artifact-digest-border: var(--badge-warning-bg);
+
+  /* Modal tokens */
+  --modal-bg: var(--card);
+  --modal-foreground: var(--card-foreground);
+  --modal-footer-bg: var(--muted);
+
+  /* Low balance tokens */
+  --low-balance-bg: var(--warning);
+  --low-balance-foreground: var(--warning-foreground);
+}
+
+/* ========================================
+   MODAL RESPONSIVE UTILITIES
+   Shared patterns for dialogs, sheets, drawers
+   ======================================== */
+
+/* Modal Body - scrollable content area with proper max-height */
+.modal-body {
+  max-height: var(--modal-body-max-height, calc(100vh - 200px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .modal-body {
+    max-height: calc(100vh - 180px - var(--safe-area-bottom, 0px));
+  }
+}
+
+/* Modal Footer - sticky at bottom with safe area padding */
+.modal-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: calc(1rem + var(--safe-area-bottom, 0px));
+  background: inherit;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .modal-footer {
+    padding: 1rem;
+    padding-bottom: calc(1rem + var(--safe-area-bottom, 0px));
+  }
+  
+  .modal-footer > * {
+    width: 100%;
+  }
+}
+
+/* Modal CTA Button - full-width on mobile with proper touch target */
+.modal-cta {
+  min-height: var(--touch-target-min, 44px);
+}
+
+@media (max-width: 640px) {
+  .modal-cta {
+    width: 100%;
+    min-height: var(--touch-target-comfortable, 48px);
+  }
+}
+
+/* Reduced Motion - respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  .modal-animate,
+  [data-state="open"],
+  [data-state="closed"] {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Safe Area Aware Container */
+.safe-area-bottom {
+  padding-bottom: calc(1rem + var(--safe-area-bottom, 0px));
+}
+
+.safe-area-top {
+  padding-top: calc(0.5rem + var(--safe-area-top, 0px));
+}
+
+/* Touch Target Sizing */
+.touch-target {
+  min-height: var(--touch-target-min, 44px);
+  min-width: var(--touch-target-min, 44px);
+}
+
+.touch-target-comfortable {
+  min-height: var(--touch-target-comfortable, 48px);
+  min-width: var(--touch-target-comfortable, 48px);
+}
+
+/* Mobile Stack Layout */
+@media (max-width: 640px) {
+  .mobile-stack {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .mobile-stack-reverse {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+  
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  
+  .mobile-gap-2 {
+    gap: 0.5rem !important;
+  }
+  
+  .mobile-gap-3 {
+    gap: 0.75rem !important;
+  }
+  
+  .mobile-gap-4 {
+    gap: 1rem !important;
+  }
+}
+
+/* Clean Theme-Aware Background - Simple solid with subtle gradient */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Subtle top-to-bottom gradient for visual interest */
+.starfield::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, hsl(from var(--primary) h s l / 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-top {
+  animation: slideInTop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes coinDrop {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(20%) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.animate-coin-drop {
+  animation: coinDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes victoryPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+.animate-victory {
+  animation: victoryPulse 1s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+  }
+}
+
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1000px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.animate-confetti {
+  animation: confetti 3s ease-out forwards;
+}
+
+/* Fade in animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.fade-in-up-delay {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out 0.5s forwards;
+}
+
+.fade-in-up-delay-2 {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.5s ease-out 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium glassmorphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-effect-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Premium gradient text effect - uses theme colors */
+.gradient-text {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: var(--foreground);
+  filter: none;
+}
+
+/* Feature icons glow */
+.feature-icon {
+  background: linear-gradient(135deg, hsl(from var(--primary) h s l / 0.2), hsl(from var(--secondary) h s l / 0.2));
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(from var(--primary) h s l / 0.3);
+  transition: all 0.3s ease;
+}
+
+.feature-icon:hover {
+  background: linear-gradient(135deg, hsl(from var(--primary) h s l / 0.3), hsl(from var(--secondary) h s l / 0.3));
+  box-shadow: 0 0 20px hsl(from var(--primary) h s l / 0.4);
+  transform: translateY(-2px);
+}
+
+/* Smooth hover scale effect */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(147, 51, 234, 0.6);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Fade in animation for elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* LP Credit Badge animations */
+@keyframes credit-pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    transform: scale(1);
+  }
+  40% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes credit-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(147, 51, 234, 0.4), 0 0 16px rgba(147, 51, 234, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(147, 51, 234, 0.6), 0 0 32px rgba(147, 51, 234, 0.3);
+  }
+}
+
+@keyframes balance-highlight {
+  0% {
+    background-color: rgba(34, 197, 94, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-credit-pulse-green {
+  animation: credit-pulse-green 0.6s ease-out;
+}
+
+.animate-credit-glow {
+  animation: credit-glow 2s ease-in-out infinite;
+}
+
+.animate-balance-highlight {
+  animation: balance-highlight 1s ease-out;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 30%, transparent) transparent;
+}
+
+/* Hide scrollbar for carousel/swipe areas */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 50%, transparent),
+    color-mix(in srgb, var(--primary) 30%, transparent)
+  );
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 70%, transparent),
+    color-mix(in srgb, var(--primary) 50%, transparent)
+  );
+}
+
+/* Dynamic stat box text sizing */
+.stat-box {
+  container-type: size;
+  min-height: 48px;
+}
+
+.stat-name {
+  font-size: clamp(9px, 3.8cqw, 14px);
+  line-height: 1.1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.stat-value {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  font-size: clamp(12px, 5cqw, 22px);
+  letter-spacing: -0.01em;
+}
+
+/* Responsive card aspect ratio */
+@media (max-width: 400px) {
+  .aspect-\[5\/7\] {
+    aspect-ratio: 5 / 8.4;
+  }
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Premium shadow utilities */
+.shadow-premium {
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-premium-lg {
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 16px 32px rgba(0, 0, 0, 0.2),
+    0 32px 64px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.5),
+    rgba(147, 51, 234, 0.5),
+    rgba(236, 72, 153, 0.5)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Text selection styling */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* ========================================
+   RESPONSIVE UTILITY CLASSES
+   ======================================== */
+
+/* Touch-friendly minimum sizing */
+.touch-target {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+
+.touch-target-comfortable {
+  min-height: var(--touch-target-comfortable);
+  min-width: var(--touch-target-comfortable);
+}
+
+/* Responsive text utilities using CSS variables */
+.text-responsive-xs { font-size: var(--text-xs); }
+.text-responsive-sm { font-size: var(--text-sm); }
+.text-responsive-base { font-size: var(--text-base); }
+.text-responsive-lg { font-size: var(--text-lg); }
+.text-responsive-xl { font-size: var(--text-xl); }
+.text-responsive-2xl { font-size: var(--text-2xl); }
+.text-responsive-3xl { font-size: var(--text-3xl); }
+.text-responsive-4xl { font-size: var(--text-4xl); }
+.text-responsive-5xl { font-size: var(--text-5xl); }
+
+/* Responsive spacing utilities */
+.p-responsive { padding: var(--container-padding); }
+.px-responsive { padding-left: var(--container-padding); padding-right: var(--container-padding); }
+.py-responsive { padding-top: var(--container-padding); padding-bottom: var(--container-padding); }
+.gap-responsive { gap: var(--card-gap); }
+
+/* Auto-fit grid for responsive cards */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--card-gap);
+}
+
+.grid-auto-fit-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--card-gap);
+}
+
+.grid-auto-fit-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--card-gap);
+}
+
+/* Horizontal scroll container for chips/filters */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container > * {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* Responsive dialog/modal overlay */
+.dialog-responsive {
+  max-height: var(--dialog-max-height);
+  overflow-y: auto;
+  padding: var(--dialog-padding);
+}
+
+/* Stats grid with auto-fit */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: var(--card-gap);
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+/* Table responsive wrapper - scrolls horizontally on mobile */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Stack on mobile, row on desktop */
+.stack-to-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .stack-to-row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Hide on mobile, show on desktop */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+/* Show on mobile, hide on desktop */
+.show-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+/* Focus visible ring for accessibility */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Safe area padding for mobile devices with notches */
+.safe-area-inset {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Remove hover:scale on touch devices to prevent sticky hover states */
+@media (hover: none) and (pointer: coarse) {
+  .hover-scale:hover {
+    transform: none;
+  }
+  
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   WHITE-LABEL BRANDING UTILITY CLASSES
+   Semantic classes for consistent theming
+   ======================================== */
+
+/* Surface Utilities */
+.bg-surface {
+  background-color: var(--background);
+}
+
+.bg-surface-elevated {
+  background-color: var(--card);
+}
+
+.bg-surface-muted {
+  background-color: var(--muted);
+}
+
+/* Text Utilities */
+.text-heading {
+  color: var(--foreground);
+  font-family: var(--font-heading);
+}
+
+.text-body {
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+.text-subtle {
+  color: var(--muted-foreground);
+}
+
+.text-inverse {
+  color: var(--background);
+}
+
+/* Border Utilities */
+.border-subtle {
+  border-color: var(--border);
+}
+
+.border-strong {
+  border-color: var(--foreground);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+/* Gradient Utilities */
+.bg-gradient-primary {
+  background-color: var(--gradient-primary-from);
+}
+
+.bg-gradient-accent {
+  background-color: var(--gradient-accent-from);
+}
+
+.bg-gradient-hero {
+  background-color: var(--hero-bg);
+}
+
+/* Platform-wide no-gradient policy: flatten all UI gradients to solid surfaces */
+[class*="bg-gradient"],
+[class*="bg-gradient-to-"],
+[class*="from-"][class*="to-"] {
+  background-image: none !important;
+}
+
+/* Interactive Utilities */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px var(--game-glow);
+}
+
+/* Navigation Utilities */
+.nav-item {
+  background-color: var(--nav-bg);
+  color: var(--nav-fg);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: var(--nav-hover);
+}
+
+.nav-item-active {
+  background-color: var(--nav-active);
+  color: var(--nav-active-fg);
+}
+
+/* Header Utilities */
+.header-bg {
+  background-color: var(--header-bg);
+  color: var(--header-fg);
+  border-color: var(--header-border);
+}
+
+/* Game Effect Utilities */
+.game-glow {
+  box-shadow: 0 0 20px var(--game-glow);
+}
+
+.game-gold {
+  color: var(--game-gold);
+}
+
+.game-success {
+  color: var(--game-success);
+}
+
+/* White-label specific text replacement helper */
+.org-brand-text::before {
+  content: var(--org-name, 'LearnPlay');
+}
+
+/* ========================================
+   SEMANTIC UTILITY CLASSES
+   For white-label theming consistency
+   ======================================== */
+
+/* Surface Utilities */
+.bg-surface {
+  background-color: var(--card);
+}
+
+.bg-surface-elevated {
+  background-color: var(--card);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography Utilities */
+.text-heading {
+  font-family: var(--font-heading);
+  color: var(--foreground);
+}
+
+.text-subtle {
+  color: var(--muted-foreground);
+}
+
+.text-brand {
+  color: var(--primary);
+}
+
+/* Border Utilities */
+.border-subtle {
+  border-color: var(--border);
+}
+
+/* Button Utilities */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-fg);
+}
+
+/* Card Utilities */
+.card-hover:hover {
+  background-color: var(--card-hover);
+}
+
+/* Input Utilities */
+.input-focus:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+/* NOTE:
+   We intentionally avoid global Tailwind utility remapping (e.g. .text-gray-*, .text-white*)
+   because it causes theme/editor preview divergence and unexpected contrast regressions.
+   Use semantic token utilities/components for white-label-safe styling. */
+
+/* ========================================
+   MOBILE-SPECIFIC THEME ADJUSTMENTS
+   Responsive theme overrides for small screens
+   ======================================== */
+
+/* Mobile Navigation & Bottom Bar */
+.mobile-nav {
+  height: var(--mobile-nav-height);
+  min-height: var(--mobile-nav-height);
+}
+
+.mobile-bottom-bar {
+  height: var(--mobile-bottom-bar-height);
+  min-height: var(--mobile-bottom-bar-height);
+  padding-bottom: calc(var(--safe-area-bottom, 0px) + 0.5rem);
+}
+
+/* Floating Action Button - Themeable */
+.floating-action-btn {
+  width: var(--mobile-floating-btn-size);
+  height: var(--mobile-floating-btn-size);
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  background: linear-gradient(135deg, var(--accent), hsl(43, 96%, 48%));
+  color: var(--accent-foreground);
+  border-color: hsla(43, 96%, 56%, 0.5);
+}
+
+.floating-action-btn:hover {
+  background: linear-gradient(135deg, hsl(43, 96%, 60%), var(--accent));
+  border-color: hsla(43, 96%, 56%, 0.7);
+}
+
+/* Mobile Touch Target Enforcement */
+@media (max-width: 640px) {
+  .touch-target,
+  .btn-touch {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+  
+  .touch-target-comfortable,
+  .btn-touch-comfortable {
+    min-height: var(--touch-target-comfortable);
+    min-width: var(--touch-target-comfortable);
+  }
+}
+
+/* Mobile-specific spacing adjustments */
+@media (max-width: 640px) {
+  .mobile-compact-padding {
+    padding: var(--mobile-content-padding);
+  }
+  
+  .mobile-header-padding {
+    padding-left: var(--mobile-header-padding-x);
+    padding-right: var(--mobile-header-padding-x);
+  }
+}
+
+/* Enhanced contrast for mobile viewing in various lighting conditions */
+@media (max-width: 640px) {
+  :root {
+    --fg-muted: hsl(0, 0%, 75%);
+    --fg-subtle: hsl(0, 0%, 60%);
+    --body-muted: hsl(0, 0%, 75%);
+  }
+}
+
+/* Bottom sheet / drawer adjustments for mobile */
+@media (max-width: 640px) {
+  .drawer-content {
+    max-height: calc(100vh - var(--mobile-nav-height) - var(--safe-area-bottom, 0px));
+    padding-bottom: calc(var(--safe-area-bottom, 0px) + 1rem);
+  }
+}
+
+/* Mobile card touch feedback */
+@media (hover: none) and (pointer: coarse) {
+  .card-interactive {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  
+  .card-interactive:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 3px var(--primary);
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   Professional print output that respects branding
+   ======================================== */
+
+@media print {
+  /* ----------------------------------------
+     PRINT-SPECIFIC CSS VARIABLES
+     Light-friendly colors for printed documents
+     ---------------------------------------- */
+  :root {
+    --print-primary: hsl(270, 75%, 35%);
+    --print-primary-light: hsl(270, 65%, 50%);
+    --print-background: hsl(0, 0%, 100%);
+    --print-foreground: hsl(0, 0%, 5%);
+    --print-muted: hsl(0, 0%, 40%);
+    --print-border: hsl(0, 0%, 80%);
+    --print-accent: hsl(43, 96%, 40%);
+    --print-success: hsl(142, 76%, 30%);
+    --print-warning: hsl(38, 92%, 40%);
+    --print-destructive: hsl(0, 84%, 40%);
+    
+    --background: var(--print-background) !important;
+    --foreground: var(--print-foreground) !important;
+    --card: var(--print-background) !important;
+    --card-foreground: var(--print-foreground) !important;
+    --muted: hsl(0, 0%, 95%) !important;
+    --muted-foreground: var(--print-muted) !important;
+    --primary: var(--print-primary) !important;
+    --primary-foreground: var(--print-background) !important;
+    --secondary: hsl(270, 70%, 45%) !important;
+    --accent: var(--print-accent) !important;
+    --accent-foreground: var(--print-foreground) !important;
+    --border: var(--print-border) !important;
+    --ring: var(--print-primary) !important;
+  }
+
+  /* ----------------------------------------
+     PAGE SETUP
+     Configure print page layout
+     ---------------------------------------- */
+  @page {
+    margin: 0.75in;
+    size: auto;
+  }
+
+  /* ----------------------------------------
+     GLOBAL PRINT OVERRIDES
+     Base styles for printed documents
+     ---------------------------------------- */
+  html, body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* ----------------------------------------
+     HIDE NON-ESSENTIAL ELEMENTS
+     Navigation, buttons, and interactive elements
+     ---------------------------------------- */
+  .print\:hidden,
+  nav,
+  .nav-item,
+  header:not(.print-header),
+  footer:not(.print-footer),
+  .sidebar,
+  .mobile-nav,
+  .mobile-bottom-bar,
+  .floating-action-btn,
+  .starfield,
+  .starfield::before,
+  .starfield::after,
+  button:not(.print-button),
+  .toast,
+  .toaster,
+  .modal-overlay,
+  [data-radix-popper-content-wrapper],
+  [role="dialog"],
+  .scroll-container::-webkit-scrollbar,
+  .command-dialog,
+  .impersonation-banner,
+  .tabs-trigger,
+  .filter-chips,
+  .search-input,
+  [data-testid*="button-"],
+  [data-testid*="filter-"],
+  .dropdown-menu,
+  .popover,
+  .tooltip,
+  .sheet,
+  .drawer {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ----------------------------------------
+     TYPOGRAPHY FOR PRINT
+     High-contrast, readable text
+     ---------------------------------------- */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--print-primary) !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    font-weight: 700 !important;
+  }
+
+  h1 {
+    font-size: 24pt !important;
+    margin-bottom: 12pt !important;
+    border-bottom: 2pt solid var(--print-primary) !important;
+    padding-bottom: 6pt !important;
+  }
+
+  h2 {
+    font-size: 18pt !important;
+    margin-bottom: 8pt !important;
+    margin-top: 16pt !important;
+  }
+
+  h3 {
+    font-size: 14pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  p, li, td, th {
+    color: var(--print-foreground) !important;
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  a {
+    color: var(--print-primary) !important;
+    text-decoration: underline !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: var(--print-muted);
+  }
+
+  /* ----------------------------------------
+     CARDS & CONTAINERS FOR PRINT
+     Clean borders, no backgrounds
+     ---------------------------------------- */
+  .card,
+  [class*="Card"],
+  .panel,
+  .bg-slate-800,
+  .bg-slate-800\/50,
+  .bg-card {
+    background: white !important;
+    border: 1pt solid var(--print-border) !important;
+    border-radius: 4pt !important;
+    padding: 12pt !important;
+    margin-bottom: 12pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  .card-header,
+  [class*="CardHeader"] {
+    border-bottom: 1pt solid var(--print-border) !important;
+    padding-bottom: 8pt !important;
+    margin-bottom: 8pt !important;
+    background: transparent !important;
+  }
+
+  .card-title,
+  [class*="CardTitle"] {
+    color: var(--print-primary) !important;
+    font-size: 14pt !important;
+    font-weight: 700 !important;
+  }
+
+  .card-description,
+  [class*="CardDescription"] {
+    color: var(--print-muted) !important;
+    font-size: 10pt !important;
+  }
+
+  /* ----------------------------------------
+     TABLES FOR PRINT
+     Clean, bordered tables
+     ---------------------------------------- */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    page-break-inside: auto !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  th, td {
+    border: 1pt solid var(--print-border) !important;
+    padding: 6pt 8pt !important;
+    text-align: left !important;
+    background: white !important;
+  }
+
+  th {
+    background: hsl(0, 0%, 95%) !important;
+    font-weight: 700 !important;
+    color: var(--print-foreground) !important;
+  }
+
+  /* Zebra striping for readability */
+  tbody tr:nth-child(even) td {
+    background: hsl(0, 0%, 98%) !important;
+  }
+
+  /* ----------------------------------------
+     BADGES & STATUS INDICATORS
+     Print-friendly status colors
+     ---------------------------------------- */
+  .badge,
+  [class*="Badge"] {
+    background: transparent !important;
+    border: 1pt solid var(--print-border) !important;
+    color: var(--print-foreground) !important;
+    padding: 2pt 6pt !important;
+    font-size: 9pt !important;
+    font-weight: 600 !important;
+  }
+
+  .badge[class*="success"],
+  .badge[class*="green"],
+  [class*="bg-green"],
+  [class*="text-green"] {
+    border-color: var(--print-success) !important;
+    color: var(--print-success) !important;
+  }
+
+  .badge[class*="warning"],
+  .badge[class*="amber"],
+  .badge[class*="yellow"],
+  [class*="bg-amber"],
+  [class*="text-amber"] {
+    border-color: var(--print-warning) !important;
+    color: var(--print-warning) !important;
+  }
+
+  .badge[class*="destructive"],
+  .badge[class*="red"],
+  [class*="bg-red"],
+  [class*="text-red"] {
+    border-color: var(--print-destructive) !important;
+    color: var(--print-destructive) !important;
+  }
+
+  /* ----------------------------------------
+     CERTIFICATE GALLERY PRINT STYLES
+     Professional certificate output
+     ---------------------------------------- */
+  [data-testid*="certificate-card"] {
+    page-break-inside: avoid !important;
+    border: 2pt solid var(--print-accent) !important;
+    background: white !important;
+    padding: 16pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  [data-testid*="certificate-card"] .award-icon,
+  [data-testid*="certificate-card"] svg.lucide-award,
+  [data-testid*="certificate-card"] svg.lucide-crown {
+    color: var(--print-accent) !important;
+  }
+
+  [data-testid*="cert-title"] {
+    color: var(--print-primary) !important;
+    font-size: 16pt !important;
+    font-weight: 700 !important;
+  }
+
+  [data-testid*="cert-org"] {
+    color: var(--print-muted) !important;
+    font-size: 10pt !important;
+  }
+
+  [data-testid*="xp-badge"] {
+    background: var(--print-primary) !important;
+    color: white !important;
+    border: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Course mastery certificates - gold accent */
+  [data-testid*="certificate-card"][class*="amber"],
+  [data-testid*="certificate-card"][class*="gold"] {
+    border-color: var(--print-accent) !important;
+    background: linear-gradient(to bottom right, hsl(48, 100%, 98%), white) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* ----------------------------------------
+     INVOICE HISTORY PRINT STYLES
+     Clean, professional invoice list
+     ---------------------------------------- */
+  [data-testid*="invoice-"] {
+    page-break-inside: avoid !important;
+    border: 1pt solid var(--print-border) !important;
+    padding: 12pt !important;
+    margin-bottom: 8pt !important;
+    background: white !important;
+  }
+
+  [data-testid="card-invoice-list"] {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* Invoice number styling */
+  [data-testid*="invoice-"] .font-semibold {
+    color: var(--print-primary) !important;
+    font-weight: 700 !important;
+  }
+
+  /* Invoice amount styling */
+  [data-testid*="invoice-"] .font-bold {
+    color: var(--print-foreground) !important;
+    font-size: 14pt !important;
+  }
+
+  /* Status badges in invoices */
+  [data-testid*="invoice-"] .badge[class*="paid"],
+  [data-testid*="invoice-"] [class*="bg-success"],
+  [data-testid*="invoice-"] [class*="text-success"] {
+    background: transparent !important;
+    border: 1pt solid var(--print-success) !important;
+    color: var(--print-success) !important;
+  }
+
+  [data-testid*="invoice-"] .badge[class*="pending"],
+  [data-testid*="invoice-"] [class*="bg-warning"],
+  [data-testid*="invoice-"] [class*="text-warning"] {
+    background: transparent !important;
+    border: 1pt solid var(--print-warning) !important;
+    color: var(--print-warning) !important;
+  }
+
+  [data-testid*="invoice-"] .badge[class*="overdue"],
+  [data-testid*="invoice-"] [class*="bg-destructive"],
+  [data-testid*="invoice-"] [class*="text-destructive"] {
+    background: transparent !important;
+    border: 1pt solid var(--print-destructive) !important;
+    color: var(--print-destructive) !important;
+  }
+
+  /* ----------------------------------------
+     REPORTS PAGE PRINT STYLES
+     Data-focused, clean report output
+     ---------------------------------------- */
+  /* Stats grid for reports */
+  .stats-grid,
+  [class*="StatsGrid"] {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120pt, 1fr)) !important;
+    gap: 8pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .stats-grid > *,
+  [class*="stat-card"],
+  [class*="StatCard"] {
+    background: hsl(0, 0%, 98%) !important;
+    border: 1pt solid var(--print-border) !important;
+    padding: 8pt !important;
+    text-align: center !important;
+  }
+
+  .stat-value,
+  [class*="stat-value"] {
+    font-size: 18pt !important;
+    font-weight: 700 !important;
+    color: var(--print-primary) !important;
+  }
+
+  .stat-label,
+  [class*="stat-label"] {
+    font-size: 9pt !important;
+    color: var(--print-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5pt !important;
+  }
+
+  /* Leaderboard / Top performers table */
+  [data-testid*="leaderboard"],
+  [class*="leaderboard"] {
+    page-break-inside: avoid !important;
+  }
+
+  /* Performance insights */
+  [class*="insights"],
+  [class*="Insights"] {
+    background: hsl(270, 50%, 98%) !important;
+    border-left: 3pt solid var(--print-primary) !important;
+    padding: 12pt !important;
+    margin: 12pt 0 !important;
+  }
+
+  /* Charts placeholder - hide or show message */
+  [class*="recharts"],
+  [class*="chart"],
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* ----------------------------------------
+     GRADIENTS & BACKGROUNDS FOR PRINT
+     Convert to solid colors
+     ---------------------------------------- */
+  [class*="bg-gradient"],
+  [class*="gradient-"] {
+    background: white !important;
+  }
+
+  .gradient-text,
+  [class*="gradient-text"] {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: var(--print-primary) !important;
+    color: var(--print-primary) !important;
+  }
+
+  /* ----------------------------------------
+     IMAGES & MEDIA
+     Ensure images print correctly
+     ---------------------------------------- */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  svg {
+    color: currentColor !important;
+    fill: currentColor !important;
+  }
+
+  /* Organization logo - keep visible */
+  .org-logo,
+  [class*="org-logo"],
+  img[alt*="logo"] {
+    display: block !important;
+    max-height: 48pt !important;
+    margin-bottom: 12pt !important;
+  }
+
+  /* ----------------------------------------
+     LAYOUT ADJUSTMENTS
+     Full-width content, remove sidebars
+     ---------------------------------------- */
+  .container,
+  main,
+  [role="main"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Remove flex layouts that might cause issues */
+  .flex-col,
+  .flex-row {
+    display: block !important;
+  }
+
+  /* Grid layouts - simplify for print */
+  .grid {
+    display: block !important;
+  }
+
+  .grid > * {
+    margin-bottom: 12pt !important;
+  }
+
+  /* ----------------------------------------
+     UTILITY CLASSES FOR PRINT
+     ---------------------------------------- */
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:inline {
+    display: inline !important;
+  }
+
+  .print\:flex {
+    display: flex !important;
+  }
+
+  .print\:grid {
+    display: grid !important;
+  }
+
+  .print\:visible {
+    visibility: visible !important;
+  }
+
+  .print\:text-black {
+    color: black !important;
+  }
+
+  .print\:bg-white {
+    background: white !important;
+  }
+
+  .print\:border {
+    border: 1pt solid var(--print-border) !important;
+  }
+
+  .print\:no-break {
+    page-break-inside: avoid !important;
+  }
+
+  .print\:break-before {
+    page-break-before: always !important;
+  }
+
+  .print\:break-after {
+    page-break-after: always !important;
+  }
+
+  /* ----------------------------------------
+     PRINT HEADER & FOOTER
+     For branding on printed pages
+     ---------------------------------------- */
+  .print-header {
+    display: block !important;
+    visibility: visible !important;
+    border-bottom: 2pt solid var(--print-primary) !important;
+    padding-bottom: 12pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .print-header h1 {
+    color: var(--print-primary) !important;
+    font-size: 18pt !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: none !important;
+  }
+
+  .print-footer {
+    display: block !important;
+    visibility: visible !important;
+    border-top: 1pt solid var(--print-border) !important;
+    padding-top: 8pt !important;
+    margin-top: 16pt !important;
+    font-size: 9pt !important;
+    color: var(--print-muted) !important;
+    text-align: center !important;
+  }
+
+  /* ----------------------------------------
+     DATE & TIME STAMPS
+     For printed documents
+     ---------------------------------------- */
+  .print-date::before {
+    content: "Printed: ";
+  }
+
+  .text-muted-foreground,
+  .text-gray-400,
+  .text-gray-500,
+  .text-slate-400,
+  .text-slate-500 {
+    color: var(--print-muted) !important;
+  }
+
+  /* ----------------------------------------
+     SKELETON & LOADING STATES
+     Hide loading placeholders
+     ---------------------------------------- */
+  .skeleton,
+  [class*="Skeleton"],
+  .animate-pulse,
+  .loading {
+    display: none !important;
+  }
+}

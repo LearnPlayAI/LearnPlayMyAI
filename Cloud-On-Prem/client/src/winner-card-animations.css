@@ -1,0 +1,349 @@
+/* Winner Card Animations and Golden Glow */
+/* White-label theming: Override --game-gold, --game-gold-light, --game-glow */
+
+@keyframes goldenPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px var(--game-glow, rgba(255, 215, 0, 0.8)),
+      0 0 40px var(--game-glow, rgba(255, 215, 0, 0.6)),
+      0 0 60px var(--game-glow, rgba(255, 215, 0, 0.4)),
+      inset 0 0 20px var(--game-glow, rgba(255, 215, 0, 0.2));
+    border-color: var(--game-gold, #ffd700);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px var(--game-glow, rgba(255, 215, 0, 1)),
+      0 0 60px var(--game-glow, rgba(255, 215, 0, 0.8)),
+      0 0 90px var(--game-glow, rgba(255, 215, 0, 0.6)),
+      inset 0 0 30px var(--game-glow, rgba(255, 215, 0, 0.3));
+    border-color: var(--game-gold-light, #ffed4e);
+  }
+}
+
+@keyframes winnerFloat {
+  0%, 100% {
+    transform: scale(1.1) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.12) translateY(-3px) rotate(0.5deg);
+  }
+  50% {
+    transform: scale(1.15) translateY(-6px) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.12) translateY(-3px) rotate(-0.5deg);
+  }
+}
+
+@keyframes goldenShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes victoryBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: scale(1.1) translateY(0);
+  }
+  40% {
+    transform: scale(1.15) translateY(-10px);
+  }
+  60% {
+    transform: scale(1.13) translateY(-5px);
+  }
+}
+
+/* Winner Card Styles */
+.winner-card {
+  animation: 
+    goldenPulse 2s ease-in-out infinite,
+    winnerFloat 3s ease-in-out infinite,
+    victoryBounce 1s ease-out;
+  
+  border: 3px solid var(--game-gold, #ffd700) !important;
+  position: relative;
+  z-index: 10;
+}
+
+.winner-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    var(--game-gold, #ffd700), var(--game-gold-light, #ffed4e), var(--game-gold, #ffd700), var(--game-gold-light, #ffed4e), var(--game-gold, #ffd700));
+  background-size: 200% 200%;
+  animation: goldenShimmer 2s linear infinite;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.winner-card::after {
+  content: '👑';
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 24px;
+  background: radial-gradient(circle, var(--game-gold, #ffd700) 0%, var(--game-gold-light, #ffed4e) 100%);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px var(--game-glow, rgba(255, 215, 0, 0.6));
+  animation: victoryBounce 1s ease-out infinite;
+  z-index: 15;
+}
+
+/* Enhance the winning stat button */
+.winner-card .bg-accent {
+  background: linear-gradient(135deg, var(--game-gold, #ffd700), var(--game-gold-light, #ffed4e)) !important;
+  color: #000 !important;
+  font-weight: bold;
+  box-shadow: 0 4px 15px var(--game-glow, rgba(255, 215, 0, 0.4));
+  animation: goldenPulse 1.5s ease-in-out infinite;
+}
+
+/* Add sparkle effect */
+.winner-card .sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--game-gold, #ffd700);
+  border-radius: 50%;
+  animation: sparkleFloat 2s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0px) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+}
+
+/* Position sparkles around the card */
+.winner-card .sparkle:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.winner-card .sparkle:nth-child(2) {
+  top: 20%;
+  right: 15%;
+  animation-delay: 0.5s;
+}
+
+.winner-card .sparkle:nth-child(3) {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 1s;
+}
+
+.winner-card .sparkle:nth-child(4) {
+  bottom: 15%;
+  right: 10%;
+  animation-delay: 1.5s;
+}
+
+/* Realistic 3D Card Flip Animation */
+@keyframes cardFlip {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(180deg);
+  }
+}
+
+.card-flip-container {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card-flip-container.flipping {
+  animation: cardFlip 0.6s ease-in-out forwards;
+}
+
+/* Keep the flipped state after animation completes */
+.card-flip-container.flipped {
+  transform: perspective(1000px) rotateY(180deg);
+}
+
+/* Card faces for 3D flip effect */
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: inherit;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-back {
+  transform: rotateY(0deg);
+}
+
+/* Fast-paced game overlay animations */
+.fast-overlay {
+  animation: fastSlideIn 0.3s ease-out;
+}
+
+@keyframes fastSlideIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Premium Active Player Animated Gold Fire Border */
+.active-player-glow {
+  position: relative;
+  border: 3px solid transparent;
+  border-radius: 12px;
+}
+
+.active-player-glow::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  padding: 8px;
+  background: linear-gradient(45deg, 
+    var(--game-gold-fire, #ff6b00) 0%, var(--game-gold, #ffd700) 10%, var(--game-gold-fire, #ff8c00) 20%, var(--game-gold-warm, #ffab00) 30%, 
+    var(--game-gold, #ffd700) 40%, var(--game-gold-fire, #ff6b00) 50%, var(--game-gold-warm, #ffab00) 60%, var(--game-gold, #ffd700) 70%, 
+    var(--game-gold-fire, #ff8c00) 80%, var(--game-gold-fire, #ff6b00) 90%, var(--game-gold, #ffd700) 100%
+  );
+  background-size: 400% 400%;
+  border-radius: 18px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  animation: goldFireFlicker 1.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+.active-player-glow::after {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  background: 
+    radial-gradient(ellipse at 20% 30%, var(--game-glow, rgba(255, 107, 0, 0.6)) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 20%, var(--game-glow, rgba(255, 215, 0, 0.5)) 0%, transparent 35%),
+    radial-gradient(ellipse at 40% 80%, var(--game-glow, rgba(255, 140, 0, 0.4)) 0%, transparent 30%),
+    radial-gradient(ellipse at 70% 70%, var(--game-glow, rgba(255, 171, 0, 0.3)) 0%, transparent 45%),
+    radial-gradient(circle, var(--game-glow, rgba(255, 215, 0, 0.2)) 0%, transparent 60%);
+  border-radius: 24px;
+  filter: blur(6px);
+  animation: goldFireDance 2s ease-in-out infinite;
+  z-index: -2;
+}
+
+/* Additional fire particles for more realism */
+.active-player-glow .fire-particle {
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  background: linear-gradient(to top, var(--game-gold-fire, #ff6b00), var(--game-gold, #ffd700));
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: fireParticle 0.8s ease-in-out infinite alternate;
+}
+
+.active-player-glow .fire-particle:nth-child(1) {
+  top: -12px;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.active-player-glow .fire-particle:nth-child(2) {
+  top: -10px;
+  right: 25%;
+  animation-delay: 0.2s;
+}
+
+.active-player-glow .fire-particle:nth-child(3) {
+  bottom: -12px;
+  left: 30%;
+  animation-delay: 0.4s;
+}
+
+.active-player-glow .fire-particle:nth-child(4) {
+  bottom: -10px;
+  right: 20%;
+  animation-delay: 0.6s;
+}
+
+@keyframes goldFireFlicker {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.9;
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    opacity: 1;
+    transform: scale(1.02) rotate(1deg);
+  }
+  50% {
+    background-position: 200% 100%;
+    opacity: 0.95;
+    transform: scale(0.98) rotate(-0.5deg);
+  }
+  75% {
+    background-position: 300% 25%;
+    opacity: 1;
+    transform: scale(1.01) rotate(0.8deg);
+  }
+  100% {
+    background-position: 400% 0%;
+    opacity: 0.9;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes goldFireDance {
+  0% {
+    transform: scale(0.95) rotate(-1deg);
+    opacity: 0.7;
+  }
+  33% {
+    transform: scale(1.05) rotate(0.5deg);
+    opacity: 0.9;
+  }
+  66% {
+    transform: scale(0.98) rotate(-0.8deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95) rotate(-1deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes fireParticle {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-4px) scale(1.2);
+    opacity: 0.4;
+  }
+}

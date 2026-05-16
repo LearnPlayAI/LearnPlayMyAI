@@ -1,0 +1,58 @@
+# Logs
+*.log
+logs/
+var/log/
+**/logs/
+
+# Build/dist/output
+dist/
+dist-*/
+build/
+out/
+coverage/
+tmp/
+temp/
+.cache/
+
+# Packages and archives
+*.tar
+*.tar.gz
+*.sha256
+*.zip
+packages/
+Cloud-On-Prem/dist-*/
+Cloud-On-Prem/cloud/learnplay-export-*/
+Cloud-On-Prem/runtime-metadata/
+Cloud-On-Prem/uploads/
+Cloud-On-Prem/artifacts/
+Cloud-On-Prem/.playwright-cli/
+
+# Node deps
+node_modules/
+**/node_modules/
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.secrets*
+*.enc
+docs/handoverdocs/TECHNICAL_SECRETS.local.md
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local browser profile/runtime artifacts (not application source)
+.cdp-profile/
+
+# Local browser-agent/test runner artifacts (not application source)
+**/.playwright-cli/page-*.yml
+ui-theme-*.mjs
+theme_gate_check.js
+/artifacts/

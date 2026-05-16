@@ -1,0 +1,50 @@
+[
+  {
+    "packageId": "bpkg-starter-00000000-0000-0000-000000000001",
+    "currency": "ZAR",
+    "pricePerLearner": "79.00",
+    "pricePerTeacher": "149.00",
+    "pricePerOrgAdmin": "199.00",
+    "isActive": true
+  },
+  {
+    "packageId": "bpkg-starter-00000000-0000-0000-000000000001",
+    "currency": "EUR",
+    "pricePerLearner": "4.50",
+    "pricePerTeacher": "8.50",
+    "pricePerOrgAdmin": "12.00",
+    "isActive": true
+  },
+  {
+    "packageId": "bpkg-professional-000000-0000-0000-000000000002",
+    "currency": "ZAR",
+    "pricePerLearner": "69.00",
+    "pricePerTeacher": "129.00",
+    "pricePerOrgAdmin": "179.00",
+    "isActive": true
+  },
+  {
+    "packageId": "bpkg-professional-000000-0000-0000-000000000002",
+    "currency": "EUR",
+    "pricePerLearner": "3.90",
+    "pricePerTeacher": "7.50",
+    "pricePerOrgAdmin": "10.50",
+    "isActive": true
+  },
+  {
+    "packageId": "bpkg-enterprise-0000000-0000-0000-000000000003",
+    "currency": "ZAR",
+    "pricePerLearner": "59.00",
+    "pricePerTeacher": "109.00",
+    "pricePerOrgAdmin": "149.00",
+    "isActive": true
+  },
+  {
+    "packageId": "bpkg-enterprise-0000000-0000-0000-000000000003",
+    "currency": "EUR",
+    "pricePerLearner": "3.40",
+    "pricePerTeacher": "6.50",
+    "pricePerOrgAdmin": "8.50",
+    "isActive": true
+  }
+]

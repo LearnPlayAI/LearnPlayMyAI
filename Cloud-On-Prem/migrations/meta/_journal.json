@@ -1,0 +1,503 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1730000000000,
+      "tag": "0000_rainy_morbius",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1730100000000,
+      "tag": "0001_convert_answer_columns_to_jsonb",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1732789200000,
+      "tag": "0002_course_refunds_and_subscription_cancellation",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1733048400000,
+      "tag": "0003_platform_revenue_reports",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1733307600000,
+      "tag": "0004_add_course_visibility",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1733566800000,
+      "tag": "0005_add_credit_transaction_quiz_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1733826000000,
+      "tag": "0006_add_course_completion_certificates",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1734085200000,
+      "tag": "0007_post_fulfillment_jobs_and_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1734344400000,
+      "tag": "0008_payment_webhook_events_deduplication",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1734603600000,
+      "tag": "0009_ai_thumbnail_generation",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1737295200000,
+      "tag": "0010_course_draft_framework",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1737554400000,
+      "tag": "0011_add_course_lessons_topic_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1737813600000,
+      "tag": "0012_org_credit_wallet_system",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1738072800000,
+      "tag": "0013_add_feedback_improvement_activity_types",
+      "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1738332000000,
+      "tag": "0051_add_quiz_generation_enum",
+      "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "7",
+      "when": 1738592000000,
+      "tag": "0052_add_cust_super_role",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1739852000000,
+      "tag": "0053_add_overview_keytakeaways_pricing",
+      "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1740112000000,
+      "tag": "0054_add_missing_course_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1740372000000,
+      "tag": "0055_inter_org_assignment_rules",
+      "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "7",
+      "when": 1740632000000,
+      "tag": "0056_enterprise_portal",
+      "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1740892000000,
+      "tag": "0057_enterprise_keyring",
+      "breakpoints": true
+    },
+    {
+      "idx": 58,
+      "version": "7",
+      "when": 1741152000000,
+      "tag": "0058_enterprise_systems",
+      "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1741412000000,
+      "tag": "0059_build_date_column",
+      "breakpoints": true
+    },
+    {
+      "idx": 62,
+      "version": "7",
+      "when": 1773939000000,
+      "tag": "0062_enterprise_license_lifecycle_and_telemetry",
+      "breakpoints": true
+    },
+    {
+      "idx": 63,
+      "version": "7",
+      "when": 1775048621356,
+      "tag": "0060_add_platform_pricing_ai_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 64,
+      "version": "7",
+      "when": 1775048621357,
+      "tag": "0061_course_framework_v2_segments",
+      "breakpoints": true
+    },
+    {
+      "idx": 65,
+      "version": "7",
+      "when": 1775048621358,
+      "tag": "0063_enterprise_customer_business_profile_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 66,
+      "version": "7",
+      "when": 1775048621359,
+      "tag": "0064_enterprise_metrics_and_royalty",
+      "breakpoints": true
+    },
+    {
+      "idx": 67,
+      "version": "7",
+      "when": 1775048621360,
+      "tag": "0065_enterprise_demo_metrics_telemetry",
+      "breakpoints": true
+    },
+    {
+      "idx": 68,
+      "version": "7",
+      "when": 1775048621361,
+      "tag": "0066_gamification_catalog_dedup_and_uniqueness",
+      "breakpoints": true
+    },
+    {
+      "idx": 69,
+      "version": "7",
+      "when": 1775048621362,
+      "tag": "0067_integration_and_system_change_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 70,
+      "version": "7",
+      "when": 1775048621363,
+      "tag": "0068_lesson_feedback_runs_and_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 71,
+      "version": "7",
+      "when": 1775048621364,
+      "tag": "0069_quiz_draft_source_contracts",
+      "breakpoints": true
+    },
+    {
+      "idx": 72,
+      "version": "7",
+      "when": 1775048621365,
+      "tag": "0070_podcast_pricing_no_loss_fields",
+      "breakpoints": true
+    },
+    {
+      "idx": 73,
+      "version": "7",
+      "when": 1775048621366,
+      "tag": "0071_podcast_ledger_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 74,
+      "version": "7",
+      "when": 1775048621367,
+      "tag": "0072_translation_index_and_analytics",
+      "breakpoints": true
+    },
+    {
+      "idx": 75,
+      "version": "7",
+      "when": 1775328083755,
+      "tag": "0073_platform_theme_singleton_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 76,
+      "version": "7",
+      "when": 1775398392332,
+      "tag": "0074_branding_theme_mode_intent_and_dual_tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 77,
+      "version": "7",
+      "when": 1775443200000,
+      "tag": "0075_remove_lesson_certificates",
+      "breakpoints": true
+    },
+    {
+      "idx": 78,
+      "version": "7",
+      "when": 1775465068382,
+      "tag": "0076_dev_runtime_cloud_318e7436_d1b086b4",
+      "breakpoints": true
+    },
+    {
+      "idx": 79,
+      "version": "7",
+      "when": 1775465068674,
+      "tag": "0077_dev_runtime_onprem_94100bb5_cc8a27f7",
+      "breakpoints": true
+    },
+    {
+      "idx": 80,
+      "version": "7",
+      "when": 1775508562168,
+      "tag": "0078_camelcase_table_column_alignment",
+      "breakpoints": true
+    },
+    {
+      "idx": 81,
+      "version": "7",
+      "when": 1775562228365,
+      "tag": "0079_camelcase_migration_journal",
+      "breakpoints": true
+    },
+    {
+      "idx": 82,
+      "version": "7",
+      "when": 1775564321391,
+      "tag": "0080_shared_organizations_columns_alignment",
+      "breakpoints": true
+    },
+    {
+      "idx": 83,
+      "version": "7",
+      "when": 1775565559519,
+      "tag": "0081_dev_runtime_cloud_01172ffc_f7c9e12e",
+      "breakpoints": true
+    },
+    {
+      "idx": 84,
+      "version": "7",
+      "when": 1775565654881,
+      "tag": "0082_dev_runtime_onprem_fd5f3bc1_a589dea5",
+      "breakpoints": true
+    },
+    {
+      "idx": 85,
+      "version": "7",
+      "when": 1775567966769,
+      "tag": "0083_shared_sessions_pk_and_expire_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 86,
+      "version": "7",
+      "when": 1775568188369,
+      "tag": "0084_dev_runtime_cloud_f7c9e12e_a867a651",
+      "breakpoints": true
+    },
+    {
+      "idx": 87,
+      "version": "7",
+      "when": 1775636804072,
+      "tag": "0085_license_identity_constraints_and_singleton",
+      "breakpoints": true
+    },
+    {
+      "idx": 88,
+      "version": "7",
+      "when": 1775638718754,
+      "tag": "0086_onprem_system_sync_credentials",
+      "breakpoints": true
+    },
+    {
+      "idx": 89,
+      "version": "7",
+      "when": 1775643188456,
+      "tag": "0087_dev_runtime_cloud_a867a651_28a55037",
+      "breakpoints": true
+    },
+    {
+      "idx": 90,
+      "version": "7",
+      "when": 1775646252107,
+      "tag": "0088_dev_runtime_onprem_a589dea5_fd59077e",
+      "breakpoints": true
+    },
+    {
+      "idx": 91,
+      "version": "7",
+      "when": 1775649300000,
+      "tag": "0089_branding_theme_org_unique_constraint",
+      "breakpoints": true
+    },
+    {
+      "idx": 92,
+      "version": "7",
+      "when": 1775650792134,
+      "tag": "0090_dev_runtime_cloud_28a55037_89e0d858",
+      "breakpoints": true
+    },
+    {
+      "idx": 93,
+      "version": "7",
+      "when": 1775658599368,
+      "tag": "0091_dev_runtime_onprem_fd59077e_b245d3ab",
+      "breakpoints": true
+    },
+    {
+      "idx": 94,
+      "version": "7",
+      "when": 1776084000000,
+      "tag": "0092_translation_index_contract_hardening",
+      "breakpoints": true
+    },
+    {
+      "idx": 95,
+      "version": "7",
+      "when": 1776087600000,
+      "tag": "0093_backfill_missing_id_primary_keys",
+      "breakpoints": true
+    },
+    {
+      "idx": 96,
+      "version": "7",
+      "when": 1776105499855,
+      "tag": "0094_dev_runtime_cloud_89e0d858_f7c32a4f",
+      "breakpoints": true
+    },
+    {
+      "idx": 97,
+      "version": "7",
+      "when": 1776107551064,
+      "tag": "0095_dev_runtime_onprem_b245d3ab_bb3368fb",
+      "breakpoints": true
+    },
+    {
+      "idx": 98,
+      "version": "7",
+      "when": 1777036018809,
+      "tag": "0096_content_translation_active_job_uniqueness",
+      "breakpoints": true
+    },
+    {
+      "idx": 99,
+      "version": "7",
+      "when": 1777304004108,
+      "tag": "0097_lesson_progress_unique_contract",
+      "breakpoints": true
+    },
+    {
+      "idx": 100,
+      "version": "7",
+      "when": 1777304004109,
+      "tag": "0098_dev_runtime_cloud_f7c32a4f_6b744754",
+      "breakpoints": true
+    },
+    {
+      "idx": 101,
+      "version": "7",
+      "when": 1777467189088,
+      "tag": "0100_source_documents_and_assets",
+      "breakpoints": true
+    },
+    {
+      "idx": 102,
+      "version": "7",
+      "when": 1777470000000,
+      "tag": "0101_course_assignment_subject_scope",
+      "breakpoints": true
+    },
+    {
+      "idx": 103,
+      "version": "7",
+      "when": 1777470200000,
+      "tag": "0102_repair_course_source_documents_assets",
+      "breakpoints": true
+    },
+    {
+      "idx": 104,
+      "version": "7",
+      "when": 1777470414206,
+      "tag": "0103_dev_runtime_cloud_47e00518_7047083d",
+      "breakpoints": true
+    },
+    {
+      "idx": 105,
+      "version": "7",
+      "when": 1777470438174,
+      "tag": "0104_dev_runtime_onprem_8e2c07f0_5fb7403b",
+      "breakpoints": true
+    },
+    {
+      "idx": 106,
+      "version": "7",
+      "when": 1777554000000,
+      "tag": "0105_organization_source_intelligence_providers",
+      "breakpoints": true
+    },
+    {
+      "idx": 107,
+      "version": "7",
+      "when": 1777551484449,
+      "tag": "0106_dev_runtime_cloud_7047083d_492f90db",
+      "breakpoints": true
+    },
+    {
+      "idx": 108,
+      "version": "7",
+      "when": 1777551509588,
+      "tag": "0107_dev_runtime_onprem_5fb7403b_ff9127b2",
+      "breakpoints": true
+    },
+    {
+      "idx": 109,
+      "version": "7",
+      "when": 1777555200000,
+      "tag": "0108_repair_course_assignment_scope_subject_enum",
+      "breakpoints": true
+    }
+  ]
+}

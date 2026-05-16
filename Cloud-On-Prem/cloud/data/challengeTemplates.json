@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Complete 3 Quizzes",
+    "description": "Complete any 3 quizzes today to earn your reward",
+    "type": "daily",
+    "requirement": "complete_quizzes",
+    "targetValue": 3,
+    "coinReward": 50,
+    "xpReward": 25,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Pass 2 Quizzes",
+    "description": "Pass at least 2 quizzes with a passing score today",
+    "type": "daily",
+    "requirement": "pass_quizzes",
+    "targetValue": 2,
+    "coinReward": 75,
+    "xpReward": 40,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Get 5 Correct Answers",
+    "description": "Answer 5 quiz questions correctly today",
+    "type": "daily",
+    "requirement": "correct_answers",
+    "targetValue": 5,
+    "coinReward": 25,
+    "xpReward": 15,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Win a Card Game",
+    "description": "Win 1 card game match today",
+    "type": "daily",
+    "requirement": "win_streak",
+    "targetValue": 1,
+    "coinReward": 100,
+    "xpReward": 50,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Complete 15 Quizzes This Week",
+    "description": "Complete 15 quizzes before the end of the week",
+    "type": "weekly",
+    "requirement": "complete_quizzes",
+    "targetValue": 15,
+    "coinReward": 300,
+    "xpReward": 150,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Pass 10 Quizzes This Week",
+    "description": "Pass 10 quizzes with a passing score this week",
+    "type": "weekly",
+    "requirement": "pass_quizzes",
+    "targetValue": 10,
+    "coinReward": 500,
+    "xpReward": 250,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Earn 500 XP This Week",
+    "description": "Accumulate 500 XP through any activities this week",
+    "type": "weekly",
+    "requirement": "xp_earned",
+    "targetValue": 500,
+    "coinReward": 200,
+    "xpReward": 0,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "name": "Win 5 Card Games This Week",
+    "description": "Win 5 card game matches before the end of the week",
+    "type": "weekly",
+    "requirement": "win_streak",
+    "targetValue": 5,
+    "coinReward": 400,
+    "xpReward": 200,
+    "powerUpReward": null,
+    "isActive": true
+  }
+]

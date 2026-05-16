@@ -1,0 +1,44 @@
+[
+  {
+    "id": "seed-challenge-daily-quiz-completions",
+    "scope": "global",
+    "organizationId": null,
+    "challengeType": "daily",
+    "title": "Daily Learner Sprint",
+    "description": "Complete 3 quizzes today.",
+    "goalType": "quiz_completions",
+    "goalTarget": 3,
+    "coinReward": 60,
+    "xpReward": 100,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "id": "seed-challenge-daily-logins",
+    "scope": "global",
+    "organizationId": null,
+    "challengeType": "daily",
+    "title": "Daily Check-In",
+    "description": "Log in and complete your daily challenge.",
+    "goalType": "daily_logins",
+    "goalTarget": 1,
+    "coinReward": 25,
+    "xpReward": 25,
+    "powerUpReward": null,
+    "isActive": true
+  },
+  {
+    "id": "seed-challenge-weekly-quiz-wins",
+    "scope": "global",
+    "organizationId": null,
+    "challengeType": "weekly",
+    "title": "Weekly Quiz Wins",
+    "description": "Win 10 quizzes this week.",
+    "goalType": "quiz_wins",
+    "goalTarget": 10,
+    "coinReward": 200,
+    "xpReward": 300,
+    "powerUpReward": null,
+    "isActive": true
+  }
+]

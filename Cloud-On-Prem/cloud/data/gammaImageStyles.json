@@ -1,0 +1,57 @@
+[
+  {
+    "styleKey": "photorealistic",
+    "displayName": "Photorealistic",
+    "description": "High-quality realistic images",
+    "thumbnailUrl": null,
+    "recommendedUseCases": ["Professional presentations", "Business reports", "Academic content"],
+    "source": "manual",
+    "isActive": true,
+    "weight": 100,
+    "lastSyncedAt": null
+  },
+  {
+    "styleKey": "illustrated",
+    "displayName": "Illustrated",
+    "description": "Hand-drawn, artistic illustrations",
+    "thumbnailUrl": null,
+    "recommendedUseCases": ["Creative projects", "Storytelling", "Educational content"],
+    "source": "manual",
+    "isActive": true,
+    "weight": 80,
+    "lastSyncedAt": null
+  },
+  {
+    "styleKey": "minimal",
+    "displayName": "Minimal",
+    "description": "Clean, simple, minimalist design",
+    "thumbnailUrl": null,
+    "recommendedUseCases": ["Modern presentations", "Startup pitches", "Tech content"],
+    "source": "manual",
+    "isActive": true,
+    "weight": 60,
+    "lastSyncedAt": null
+  },
+  {
+    "styleKey": "corporate",
+    "displayName": "Corporate",
+    "description": "Professional business-style images",
+    "thumbnailUrl": null,
+    "recommendedUseCases": ["Business meetings", "Corporate training", "Financial reports"],
+    "source": "manual",
+    "isActive": true,
+    "weight": 40,
+    "lastSyncedAt": null
+  },
+  {
+    "styleKey": "playful",
+    "displayName": "Playful",
+    "description": "Fun and creative cartoon-style images",
+    "thumbnailUrl": null,
+    "recommendedUseCases": ["Children's content", "Creative projects", "Casual presentations"],
+    "source": "manual",
+    "isActive": true,
+    "weight": 20,
+    "lastSyncedAt": null
+  }
+]

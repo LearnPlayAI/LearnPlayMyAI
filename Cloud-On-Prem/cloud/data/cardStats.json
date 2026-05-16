@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "46b6b234-ca11-4931-89d0-0b41199e00ee",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "1.80"
+  },
+  {
+    "id": "3167005f-71fb-46da-917d-df227e0780cc",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "60.00"
+  },
+  {
+    "id": "93f052bf-0693-48cd-b2e9-914d16cbc0ac",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "2.00"
+  },
+  {
+    "id": "2f5c606b-a1b6-40e0-ae1e-d5020887c798",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "7.00"
+  },
+  {
+    "id": "61035394-5a66-493e-909a-f4cd636bebef",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "10.00"
+  },
+  {
+    "id": "ea0245f7-c57f-418c-8162-954060fd892b",
+    "cardId": "cb3e7b63-cf4e-4233-97ea-e1f0c2d8ef16",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "76.00"
+  },
+  {
+    "id": "d824a190-8ff3-4feb-80f9-21e00fb942e5",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "1.50"
+  },
+  {
+    "id": "e5916360-dc0c-4ded-a5e7-ee4e230dcdb7",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "400.00"
+  },
+  {
+    "id": "67d5cd2f-a382-443a-bc2a-9a0327f70b8f",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "2.00"
+  },
+  {
+    "id": "5bd1ca58-9972-43f8-9558-48d07523cf56",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "65bb7126-3b40-424b-aa5c-6a571311f8f8",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "4.00"
+  },
+  {
+    "id": "e7028531-4f7e-4751-8a32-6ace4ccff262",
+    "cardId": "f5cb7438-be8f-40a8-ab8e-25e164ad86dd",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "72.00"
+  },
+  {
+    "id": "242b656d-f714-4d74-83e4-42544ae08a0e",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "59309ac2-fed6-49cb-b8bb-86b206fc257c",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "8000.00"
+  },
+  {
+    "id": "3c86c4d5-0d88-4924-ad1e-90cec426667f",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "8.00"
+  },
+  {
+    "id": "b28723b1-b33e-41fe-bb13-97bfc9cef68d",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "3.00"
+  },
+  {
+    "id": "71167a51-9e6e-4bcb-bc34-e66686c674e9",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "5.00"
+  },
+  {
+    "id": "7736cd68-e792-4fd2-b625-fe9eeba6b7c1",
+    "cardId": "71c331e0-e6e8-48e9-89af-c4334ee6db78",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "75.00"
+  },
+  {
+    "id": "b2bd8012-bb80-4f8c-a151-3c39cb8908db",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "f8faedec-badd-47b1-b9d0-121e1bd5163b",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "3630.00"
+  },
+  {
+    "id": "bcc1567d-7fde-4f76-95a2-06f637b06322",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "7.00"
+  },
+  {
+    "id": "b2c09221-d593-4082-b20b-b7150d5df309",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "e36b734f-b1f8-4764-9959-b5c52881fc8c",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "4.00"
+  },
+  {
+    "id": "579ca63a-70b2-44df-9e5a-89c1a85d07aa",
+    "cardId": "8cb6a23e-0ee7-43ac-bef3-bbb1b5d7173e",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "70.00"
+  },
+  {
+    "id": "a74fd74c-0dc6-4d5a-8197-a8e73caf5d01",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.80"
+  },
+  {
+    "id": "a5ebbc07-78ef-42c0-b6d6-3d5ec7669b61",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "20.00"
+  },
+  {
+    "id": "228e0705-e685-4134-ae89-4dcd7d71a738",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "1.80"
+  },
+  {
+    "id": "c2d24675-9e76-460e-aadb-cdf8f20a2b94",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "5.00"
+  },
+  {
+    "id": "2eaa6787-3379-4efc-818b-64fb3b1f34cd",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "8.00"
+  },
+  {
+    "id": "450501d8-e1a3-4182-8ddd-bc359617bcb2",
+    "cardId": "38ab896e-82aa-4625-8c47-b12bbf1124e5",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "70.00"
+  },
+  {
+    "id": "850f2c7f-3f02-4676-9a9c-6325a6e0eb51",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "fa46fdfe-c75e-4288-ad3a-171c1cd80e1d",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "1000.00"
+  },
+  {
+    "id": "8d0a231e-ab13-4829-bed7-cc62232e5c61",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "9.00"
+  },
+  {
+    "id": "5a05e88a-643e-4ff7-993d-e2a365238287",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "9.00"
+  },
+  {
+    "id": "2620c295-e097-49f5-8e80-04d20cbc2f1f",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "8.00"
+  },
+  {
+    "id": "9fa8fceb-0964-4efb-9dca-6cd8c02607cc",
+    "cardId": "9fa52acc-21d0-4921-a57a-6da7d9705305",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "175.00"
+  },
+  {
+    "id": "dd7a3f10-a55b-40c8-b1fb-ac608732bec4",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "2.50"
+  },
+  {
+    "id": "24268374-b13b-4632-be8c-197c528b77b9",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "3000.00"
+  },
+  {
+    "id": "4062c31d-9615-45ea-8dcd-7ad5be327fd3",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "9.00"
+  },
+  {
+    "id": "37ab24db-c6ee-4544-8af3-d7f50c485203",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "742e10d8-eb8e-4820-8d07-9c3e579f4a91",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "3.00"
+  },
+  {
+    "id": "0da320e1-b9b6-4a7e-8ae0-c975ebfce56f",
+    "cardId": "236b5614-3758-4bbc-a881-34672a3b4747",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "80.00"
+  },
+  {
+    "id": "040031de-07b8-4cbf-a7d4-5421e7acbd51",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "5.00"
+  },
+  {
+    "id": "ccc2b849-e66b-410b-af40-d997c8662546",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "4500.00"
+  },
+  {
+    "id": "9d71a849-6a1f-4809-a8d0-98cde04a542a",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "10.00"
+  },
+  {
+    "id": "c90bdc1a-bc5c-4c2d-a5cc-573c80e4b572",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "3.00"
+  },
+  {
+    "id": "e4c01e8b-de1c-4c8a-b02b-83ad3f20c3bd",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "6.00"
+  },
+  {
+    "id": "483fb7f5-4046-4e0d-8587-0800500b69fd",
+    "cardId": "85e1e8c4-11a8-4e2f-95f1-abbe40df9f9b",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "135.00"
+  },
+  {
+    "id": "987fdc40-f66d-484c-903d-022840a6b908",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.80"
+  },
+  {
+    "id": "86979b04-f2ce-4764-b22c-20aaae9f08af",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "50.00"
+  },
+  {
+    "id": "1170149a-cd95-4252-8e89-bfe0be68a34b",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "2.00"
+  },
+  {
+    "id": "edcc16be-0438-42e2-9926-26ef14139c4e",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "1.00"
+  },
+  {
+    "id": "9470abc7-c916-42d4-8fea-5a69fcc0e4a8",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "6.00"
+  },
+  {
+    "id": "f028b237-68a4-4d7d-a309-36257411d67e",
+    "cardId": "a820bcc3-2708-4459-a92b-a439d6fd5043",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "125.00"
+  },
+  {
+    "id": "a6d1c7b5-bc57-4a26-a46f-f85ae690bd3d",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.50"
+  },
+  {
+    "id": "3cf2e0dd-f821-4d99-a911-09c570a40ad9",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "10.00"
+  },
+  {
+    "id": "447d589f-85d2-4044-a78a-a7742396fe2f",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "1.20"
+  },
+  {
+    "id": "515b9065-32eb-43cc-8cd1-475bbef56cf4",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "1.00"
+  },
+  {
+    "id": "0dce6bad-d0e3-4ca0-9eb1-63d0e72291c7",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "5.00"
+  },
+  {
+    "id": "dd2cb36d-66fe-47c5-971c-ebabdd385062",
+    "cardId": "869bbd20-9a9c-49dc-82fb-04af42dfe400",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "208.00"
+  },
+  {
+    "id": "ac601206-515c-49ef-826b-aba8d7a0a07a",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "1.00"
+  },
+  {
+    "id": "d3f069ba-f72d-46f3-a5e2-2b1a82a62675",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "350.00"
+  },
+  {
+    "id": "a7b9dff5-0a41-4836-8505-fa0677e7259f",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "5.00"
+  },
+  {
+    "id": "da3c1ce6-e98c-475e-81cd-d80b7ee02fa7",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "7.00"
+  },
+  {
+    "id": "c0ff8633-cf78-4340-b0e6-6a10701954d5",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "6.00"
+  },
+  {
+    "id": "aa54e3b6-bf8b-463f-a3fc-31ae431a6c90",
+    "cardId": "50696fff-4203-44e0-8389-ef1a7ef99f78",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "230.00"
+  },
+  {
+    "id": "78d8dda3-a981-4f9b-a62a-c2d92924bdb9",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "6.00"
+  },
+  {
+    "id": "ad127433-3ad7-4cef-8615-64c8c59940ca",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "8000.00"
+  },
+  {
+    "id": "8f415873-edf8-4d85-8681-14451457e2f6",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "16.00"
+  },
+  {
+    "id": "bf53c182-9c00-4db5-bd32-cc905a773b6a",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "10.00"
+  },
+  {
+    "id": "27e357b8-fe1d-4b29-9c86-d492436dcca7",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "7.00"
+  },
+  {
+    "id": "92f591e5-b251-40c5-b486-3cd9ad0e0178",
+    "cardId": "81603e3f-d3fa-44d1-9954-86fcce503ab3",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "100.00"
+  },
+  {
+    "id": "d4685f91-853b-4efd-82cb-51c34fabf714",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "89b7a900-5949-476c-b18d-49f362d6b69c",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "200.00"
+  },
+  {
+    "id": "2402408b-653d-4bfc-9388-39d224f94f3c",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "5.60"
+  },
+  {
+    "id": "1c993853-4ade-40f5-bd3c-27e83c7cb4f9",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "5.00"
+  },
+  {
+    "id": "994cb5e1-4b0b-47e2-b2fc-451d8062a788",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "7.00"
+  },
+  {
+    "id": "6bf193ef-abf7-4d6b-99f9-0d919dad6f1e",
+    "cardId": "74d15b53-2dd6-4027-923d-6ffc17f0ae9e",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "74.00"
+  },
+  {
+    "id": "0ffab357-0bb1-48d5-b42e-cc8791a01e28",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.25"
+  },
+  {
+    "id": "f5c7a693-d162-4093-9e9e-992976369299",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "4.00"
+  },
+  {
+    "id": "6dbd438a-7ea0-4f38-ab4a-8ad8e4ed84fc",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "0.25"
+  },
+  {
+    "id": "34770566-6753-407c-a063-39731c35c721",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "4.00"
+  },
+  {
+    "id": "06eb3429-23d0-4520-9368-82ee4aeccc1d",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "4.00"
+  },
+  {
+    "id": "b3af9d6a-732b-40fe-908c-7151f54418a7",
+    "cardId": "0e046919-5931-4f4f-9ed4-a57efd410bf1",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "200.00"
+  },
+  {
+    "id": "3edb1b51-a403-415b-b50c-7e18d4658553",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "5.00"
+  },
+  {
+    "id": "16bc826e-f0ac-4c07-baaa-422af8ee5e60",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "5000.00"
+  },
+  {
+    "id": "a5b03f83-2cde-4b51-99b4-f580e699b559",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "8.00"
+  },
+  {
+    "id": "1826e2f2-7c0b-4c03-bc9b-6990b64d5933",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "84da7a7f-a66b-4721-b518-db4f9d76d86d",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "5.00"
+  },
+  {
+    "id": "67f8721b-81cf-41d8-b21c-e32ee8359b4d",
+    "cardId": "7336faf6-fd7a-4542-acf6-c0c01a9756a6",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "80.00"
+  },
+  {
+    "id": "c950ae9e-76fb-40f9-b56e-0974884ec93a",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.70"
+  },
+  {
+    "id": "ec209583-fe73-4e1a-9192-244b73b6ebb7",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "3.00"
+  },
+  {
+    "id": "a9875cfd-fca7-4939-9c78-d6e07ee89cb1",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "1.40"
+  },
+  {
+    "id": "b2a3b688-b1c0-48c4-a7fd-bd1db7bc9e54",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "5.00"
+  },
+  {
+    "id": "692e422f-8135-4c4b-8e8a-0a18574b8566",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "7.00"
+  },
+  {
+    "id": "975c8403-2f8e-4ec3-8461-202be71779c7",
+    "cardId": "b7546117-10a8-4f1e-af8d-302198e02ffe",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "145.00"
+  },
+  {
+    "id": "9490f51d-f75a-43e9-9049-023b9eaba7ed",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "9.00"
+  },
+  {
+    "id": "78df5106-539c-43d5-a7c6-a8c08d924703",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "20000.00"
+  },
+  {
+    "id": "4f0bab52-8dfa-46da-b216-8ed505adb310",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "18.00"
+  },
+  {
+    "id": "b392ff4b-c780-4f9c-a929-b8a739c2a203",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "3.00"
+  },
+  {
+    "id": "02e22351-cfaa-422b-8654-829031264025",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "2.00"
+  },
+  {
+    "id": "07f85a51-aa4a-4ebf-8fa8-bee50ecd2c3a",
+    "cardId": "f9e371bd-f001-434d-911b-55ecfae7575c",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "150.00"
+  },
+  {
+    "id": "3f963db7-953f-4f84-975a-7f849b77f898",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "16.00"
+  },
+  {
+    "id": "f5344458-a150-407b-aa4c-0e82b60e1588",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "80000.00"
+  },
+  {
+    "id": "152ef25b-19d1-41a4-8475-28405550a0ff",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "26.00"
+  },
+  {
+    "id": "be817f97-20ee-4986-a60d-bfcb42a9ec4e",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "3.00"
+  },
+  {
+    "id": "12dd5ad4-38f5-4a57-99ab-17f7091592c4",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "2.00"
+  },
+  {
+    "id": "83ba358c-49db-4b17-9774-154a5b4c1369",
+    "cardId": "52631865-f395-4aee-a979-ac22fc952882",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "156.00"
+  },
+  {
+    "id": "59ee2fb4-a559-4403-a10a-53140cee2231",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "2.00"
+  },
+  {
+    "id": "cefc885f-2c3a-4b19-b2e5-707e3521ee23",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "1000.00"
+  },
+  {
+    "id": "6ba9af6c-3df1-4553-9602-c6400479a2c1",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "6.00"
+  },
+  {
+    "id": "3eb64694-3944-42da-9c38-3a07f1e6239c",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "c988abed-fea0-443d-bb4f-9f3cfc624ba6",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "4.00"
+  },
+  {
+    "id": "add8dacc-4264-41bc-9dc5-a02b833a1717",
+    "cardId": "c725a002-ffd9-4de9-922e-88cc56f1b521",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "76.00"
+  },
+  {
+    "id": "b6772d7d-ce17-4672-bef6-a542d525df0d",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "2.00"
+  },
+  {
+    "id": "7b1d7e96-d1ae-49f6-ac2d-69c0ad44f0b9",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "27.00"
+  },
+  {
+    "id": "fe7598d6-ce38-4b19-8f1b-e926da1ec790",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "3.00"
+  },
+  {
+    "id": "e53670a1-757f-4a7f-b586-7a97fac3f662",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "4.00"
+  },
+  {
+    "id": "06e061de-53bf-49cf-8404-4b25de1d6abb",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "7.00"
+  },
+  {
+    "id": "6ba2dec5-7bae-45fd-bd9d-34027da41b85",
+    "cardId": "e2efb2f0-1d66-4601-818b-5af74ccaf5ea",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "225.00"
+  },
+  {
+    "id": "f12bd1dc-8289-4b66-a0e8-15285c9afae2",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "26.00"
+  },
+  {
+    "id": "37fbc857-4a47-43b6-a01e-eb3a650b2a25",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "40000.00"
+  },
+  {
+    "id": "cc4a2bf0-e40e-4653-8d34-0668cf380c84",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "26.00"
+  },
+  {
+    "id": "40e93748-f068-425a-8995-b130a294b981",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "3.00"
+  },
+  {
+    "id": "bf3954b9-9f11-46b6-adc9-c2fda8594ca8",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "2.00"
+  },
+  {
+    "id": "4c93adba-6911-4487-a241-ef59ff75f781",
+    "cardId": "e637d971-ff09-4e9f-b5df-578ab897f248",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "156.00"
+  },
+  {
+    "id": "78947de3-afcc-4801-a091-428b4a585e38",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "0.30"
+  },
+  {
+    "id": "1b30e476-06d8-4329-b795-a6fad7ebc9ab",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "6.00"
+  },
+  {
+    "id": "96d6061c-8d88-4c40-b8fc-dcc3eaf0574d",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "0.30"
+  },
+  {
+    "id": "18ada6dc-dae5-4e6b-9cbc-7a939a97f1cc",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "6.00"
+  },
+  {
+    "id": "f1cf2729-46b4-47d6-945d-a12c30ddf1d1",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "5.00"
+  },
+  {
+    "id": "699b398a-56c0-4c57-b7a1-8917995b2e49",
+    "cardId": "a189466f-bee6-4c0e-9444-e2bfdfa2bd29",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "150.00"
+  },
+  {
+    "id": "015d0804-4aee-4aea-b416-15924ada0917",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "5.00"
+  },
+  {
+    "id": "6bfe6ade-875b-43f0-89d0-628dc0801a7a",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "1700.00"
+  },
+  {
+    "id": "134d472d-3978-4dae-81af-b65e59286c46",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "7.00"
+  },
+  {
+    "id": "a28c0507-b2a3-4677-bc98-bdf21aec46b9",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "9.00"
+  },
+  {
+    "id": "8a1b853e-5508-4fe9-adce-562e2b17cf15",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "5.00"
+  },
+  {
+    "id": "a2c9b4e2-583b-4b10-9175-401759c71201",
+    "cardId": "4d10cf75-02ce-4354-9a6e-b453c9a9e270",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "140.00"
+  },
+  {
+    "id": "d79106da-735c-44da-828c-a07682f0fc0b",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "1.00"
+  },
+  {
+    "id": "4992f45a-3be0-4a43-a844-1ddf2bfac144",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "15.00"
+  },
+  {
+    "id": "fb5e1b16-7133-4e83-84d9-8b0aec921487",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "2.00"
+  },
+  {
+    "id": "15ca88d5-ee87-42ae-9a6c-4411168e8dcc",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "9.00"
+  },
+  {
+    "id": "9e8cb173-f360-43c3-be50-73f9060e4e4f",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "10.00"
+  },
+  {
+    "id": "5436a03f-588b-4fee-b48f-953f786022da",
+    "cardId": "1d093985-55f9-4020-8161-cfec8517d603",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "85.00"
+  },
+  {
+    "id": "bdd54e0f-1848-48c7-ad9d-8634e0623390",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "4.00"
+  },
+  {
+    "id": "770a3b75-3e16-43e7-9a48-2068a70a771f",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "4000.00"
+  },
+  {
+    "id": "a5e4c6fe-c589-499c-9b39-f5edadcb1ab2",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "12.00"
+  },
+  {
+    "id": "5c885023-06b7-4d00-9cd2-9b11f4eb13d3",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "8.00"
+  },
+  {
+    "id": "8d91b0ac-b400-4a29-90dc-4fae13fd36dd",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "7.00"
+  },
+  {
+    "id": "683be6e5-c360-432e-afac-ed46ad2ddbca",
+    "cardId": "d98a68d4-4c89-404d-89b9-8eef7bc41587",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "100.00"
+  },
+  {
+    "id": "2ef54dcd-9080-4ede-9677-72adaf190029",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "5.60"
+  },
+  {
+    "id": "26228d48-731d-4db9-b396-6d15f6ca38f4",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "6000.00"
+  },
+  {
+    "id": "064d8609-4ee3-4c05-821b-293f27cbd6d4",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "12.00"
+  },
+  {
+    "id": "3f5026e4-b79d-4384-8c17-6c3f7c57a83d",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "9.00"
+  },
+  {
+    "id": "15337611-9613-476d-9267-36da67f27ea8",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "9.00"
+  },
+  {
+    "id": "f4083f6a-47f8-418a-acf3-853f01423667",
+    "cardId": "a6c085a0-d15e-49e4-a300-8882b8ef7e10",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "67.00"
+  },
+  {
+    "id": "6cabc29f-592f-4cdb-be41-973c34893fba",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "8.00"
+  },
+  {
+    "id": "9fc6abea-1239-445c-a4a3-0b2a0a454dea",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "12000.00"
+  },
+  {
+    "id": "8d147538-36fa-407b-b36a-ad0a40a2abab",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "27.00"
+  },
+  {
+    "id": "9287a6d2-b775-4714-86d3-8fd8b838ee0d",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "0.00"
+  },
+  {
+    "id": "c5f6ac71-b32a-455f-903f-4d89bdf234ff",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "2.00"
+  },
+  {
+    "id": "af8b7b10-5cf0-4a48-b221-1d6d1d949584",
+    "cardId": "1ad225a2-f43f-4ee0-baba-f2adb661a63a",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "150.00"
+  },
+  {
+    "id": "8b8b1e89-8c26-4b26-98cf-1e45921456e3",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "2.00"
+  },
+  {
+    "id": "541d1ad8-2ee9-461f-9171-d7a3b2a6da40",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "3000.00"
+  },
+  {
+    "id": "0bd8ca3d-ac24-4565-a85d-bfa273a8a6ad",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "5.00"
+  },
+  {
+    "id": "e7fb80d3-095e-44ee-af9b-c114a2f2bcc2",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "25a2c8a4-a590-4715-8847-0275084343e1",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "3.00"
+  },
+  {
+    "id": "2c3735aa-759b-496f-8434-67e6693bf74a",
+    "cardId": "3ae298c7-bf21-4666-9ec3-2f0b0d669b69",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "77.00"
+  },
+  {
+    "id": "275c0d35-0987-4541-a9b7-aa046b85da02",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "94dcaaa7-24b1-4277-87de-f9d39eff2039",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "3100.00"
+  },
+  {
+    "id": "19020efa-39f1-41e2-937f-64d40c63375c",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "9.00"
+  },
+  {
+    "id": "f7f928c9-b0f7-4334-8289-25d9e871214e",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "063ba736-ed9e-4fa7-b280-2172f4ba4bd0",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "1.00"
+  },
+  {
+    "id": "010f805a-faf7-49cc-a088-9cfa1cde3bd8",
+    "cardId": "fbde26b6-adea-45b5-a80f-e5602f51b3e4",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "76.00"
+  },
+  {
+    "id": "f5c19514-6761-43d0-945f-c7afeacce7a7",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "value": "3.00"
+  },
+  {
+    "id": "edf4e963-e6ef-47e9-896e-b7c57ed8406d",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "value": "5500.00"
+  },
+  {
+    "id": "e0864a2f-34ef-4283-a783-7e1b9776975b",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "value": "9.00"
+  },
+  {
+    "id": "d68c8ee2-40aa-4131-9dc4-f4f4603a88f4",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "value": "2.00"
+  },
+  {
+    "id": "15276c52-cc7f-4f05-be1f-40aa931cb7ab",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "value": "4.00"
+  },
+  {
+    "id": "dee1b697-d3ed-4c82-a916-980ba99176a1",
+    "cardId": "c04e638a-3a11-45ce-89f3-0692029db370",
+    "statTypeId": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "value": "72.00"
+  }
+]

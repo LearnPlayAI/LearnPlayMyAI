@@ -1,0 +1,823 @@
+# Overall Progress At A Glance
+
+**Wave status:** `DEV Wave 6 completed (auth/session integration hardening)`
+
+**Platform readiness (DEV scope, current wave):**
+- Critical findings open: `0`
+- High findings open: `0`
+- Medium findings open: `2`
+- Low findings open: `2`
+
+**Program completion estimate (DEV):** `~93%` (major reliability and contract gates green; remaining work is targeted hardening outside this wave)
+
+## Documentation Consolidation Update (2026-04-28)
+
+- Status: `completed`
+- Scope: `both`
+- Outcome: compact `$knowledge` bootstrap introduced under `docs/knowledge`, current landscape/handover/operations/testing docs created under canonical `/antigravity/docs`, repo-local docs root deprecated, and stale/generated/historical material moved into archive paths.
+- Validation: active stale-path reference search returned no results; `/antigravity/Cloud-On-Prem/docs` now contains only a deprecation README; root `HANDOVER.md` is a 16-line stub pointing to current handover and archived history.
+
+## Course Transfer License-Authority Update (2026-04-28)
+
+- Status: `fixed-awaiting-user-rollout-and-e2e`
+- Scope: `both`
+- Outcome: protected course export/import packages now use Cloud PRD license-authority key wrapping. Cloud systems can export/import through normal role and organization scope controls without license gating; onprem systems must receive Cloud PRD active-license authorization for export and import decrypt operations.
+- Validation: focused course-transfer contracts, protected package roundtrip/security tests, license/control-plane contracts, and TypeScript compile passed in source workspace.
+- Awaiting: user-run deployment to all systems and end-to-end scenario testing across cloud-to-cloud, cloud-to-onprem, onprem-to-cloud, and onprem-to-onprem flows.
+
+## Course Transfer Large Package Hardening (2026-04-28)
+
+- Status: `fixed-awaiting-user-rollout-and-e2e`
+- Scope: `both`
+- Outcome: course transfer import/analyze endpoints now have route-specific large streamed reverse-proxy handling, the app no longer has a fixed 1GB transfer upload cap, transfer modal state is recoverable after accidental dismissal, outside-click protection is informational rather than failure-styled, and imports harden foreign keys before insert so optional quiz references cannot fail an otherwise valid clone.
+- Validation: focused and related course-transfer/license contract tests, TypeScript compile, diff whitespace check, and production build passed in source workspace.
+- Awaiting: user-run deployment to all systems and end-to-end testing with a package larger than 100MB, then a package larger than 2GB if available.
+
+## Course Transfer Staged Import Plan (2026-04-28)
+
+- Status: `fixed-awaiting-user-rollout-and-e2e`
+- Scope: `both`
+- Outcome: course import no longer replays package tables through a raw insert loop. The server now builds a staged course-domain import plan, hardens references, runs ordered course/lesson/quiz/artifact/version-history stages, and verifies the imported course exists before completing the job.
+- Validation: focused course-transfer contract test passed in source workspace; broader gates pending in this implementation cycle.
+- Awaiting: user-run deployment to all systems and end-to-end tests for onprem DEV -> onprem ACC import, onprem -> cloud import, cloud -> onprem import, and cloud -> cloud import.
+
+## Translation Artifact-Aware Target Selection (2026-04-28)
+
+- Status: `fixed-awaiting-user-rollout-and-e2e`
+- Scope: `both`
+- Outcome: the lesson translation page now lets admins select existing target languages to update missing artifacts after import or partial translation, automatically enters re-translate mode when target coverage already exists, and no longer blocks with “all languages already have translations” when remediation is possible. Cloud/onprem install and update paths also canonicalize the supported-language catalog as required platform data, with runtime fallback if a database is empty or source-only.
+- Deployment-path hardening: supported-language repair now de-duplicates historical language rows and restores the `supportedLanguages_pkey` primary key before upserting, so runtimes without a `code` constraint do not fail during update.
+- Validation: focused translation artifact contract and cloud/onprem importer syntax checks passed in source workspace; broader gates pending in this implementation cycle.
+- Awaiting: user-run deployment to all systems and end-to-end tests for org preferred-language dropdown population and adding missing podcast script/audio, PPTX, quiz, objectives, and digest artifacts to imported translations.
+
+## Education Organization Subject Hierarchy Fix (2026-04-29)
+
+- Status: `fixed-awaiting-user-deploy-and-manual-e2e`
+- Scope: `both`
+- Defect: education organization registration accepted selected grades and subjects, but selected subjects did not appear in the Central Management Hub.
+- Root cause: registration UI stored selected subjects under `grade-<number>` keys while backend registration consumed numeric grade keys, so no subject rows were inserted; the active Central Management Hub hierarchy also did not include/render grade-level subjects.
+- Outcome: registration now sends numeric grade-subject keys, hierarchy responses include grade-level subject metadata, and the Central Management Hub renders subjects under expanded grade nodes.
+- Validation: focused source-level regression tests and TypeScript check passed in the workspace. Full `npm run check` is blocked by pre-existing `course-builder` route-domain primitive styling debt in `CourseEdit.tsx`, outside this change set. Runtime/browser validation remains pending until the user deploys and manually tests the change set.
+- Awaiting: user deployment to cloud/onprem target runtime(s), manual education-org registration/impersonation test, and screenshot evidence for any residual defect.
+
+## Education Organization Approval + Subject Assignment Contracts (2026-04-29)
+
+- Status: `fixed-awaiting-user-deploy-and-manual-e2e`
+- Scope: `both`
+- Defect: follow-up audit found education organization subject workflows could still drift after the registration wording/hierarchy fix: manual subject creation could omit the grade-subject link, join approvals could mutate request/role state before rejecting incompatible subject-grade choices, and on-prem DEV/QA approval policy could map education joins to `teacher`.
+- Outcome: manual grade/unit-scoped subject creation now creates the `unitSubjects` link, approval paths validate selected/requested subject IDs against the final grade/unit before side effects, education approval defaults to `student`, and active management screens use organization terminology helpers for subject/unit/learner wording.
+- Validation: focused backend and UI contract tests passed in source workspace; broader release gates and runtime/browser validation remain pending in this implementation cycle.
+- Awaiting: user deployment to cloud/onprem target runtime(s), manual join-request approval tests for education organizations, and screenshot evidence for any residual wording or assignment defect.
+
+## Rolling Execution Plan (DEV-only, user-directed)
+
+1. **Wave 6 (completed):** replace skipped auth/session integration placeholder with executable, isolated route-level integration harness.
+2. **Wave 7 (next):** resolve duplicate-ID table outliers blocking strict PK convergence in DEV (`aiConfig`, `cosmeticCatalog`, `gammaCreditSnapshots`, `lessonCreditPricingSettings`).
+3. **Wave 8 (next):** reduce high-volume integration log noise and finalize DEV release checklist decomposition.
+
+## Platform Stocktake + Dependency Map (DEV Revalidated)
+
+- Frontend: `Cloud-On-Prem/client/src` (viewer, builder, translation, branding, admin).
+- Backend: `Cloud-On-Prem/server/routes/*`, `server/services/*`, auth/session/impersonation/org-context middleware.
+- Persistence/contracts: `Cloud-On-Prem/shared/schema.ts`, `Cloud-On-Prem/migrations/*`, `Cloud-On-Prem/contracts/schema/*`.
+- Runtime and diagnostics: `Cloud-On-Prem/server/monitoring/*`, `server/migrate-onprem.ts`, `scripts/*`.
+
+## Risk-Ranked Defect Inventory (DEV Current)
+
+### Critical
+- None open.
+
+### High
+- None open.
+
+### Medium
+1. Duplicate-ID table outliers still need explicit dedupe migrations before universal strict PK enforcement (`aiConfig`, `cosmeticCatalog`, `gammaCreditSnapshots`, `lessonCreditPricingSettings`).
+2. DEV release checklist remains document-heavy; machine-readable release gates are not fully extracted yet.
+
+### Low
+1. Integration test output remains noisy due to non-test-suppressed service logs.
+2. Historical TODO ledger includes mixed environment scopes; a clean DEV-only report artifact should be split out.
+
+## A) What Was Fixed (files + rationale)
+
+1. `Cloud-On-Prem/server/tests/sessionAuth.integration.test.ts`
+   - Replaced `describe.skip` placeholder suite (dead `app = {}` harness) with executable Express+session+auth-router integration tests.
+   - Added scoped fixture lifecycle (targeted cleanup by inserted IDs) to avoid broad destructive table wipes in shared DEV DB.
+   - Aligned assertions to current contracts: admin-gated metrics, non-deterministic primary-org ordering, org-header fallback behavior, stale-session invalidation flow, and feature-flagged refresh behavior.
+   - Hardened suite determinism by forcing cloud-mode test env and host-only cookie domain for supertest session persistence.
+
+## B) Related Issues Also Fixed (pattern-based)
+
+- Eliminated anti-pattern of skipped integration coverage for critical auth/session flow.
+- Eliminated fragile test assumptions tied to env-dependent policy gates (onprem license mode, cookie domain mismatch).
+- Eliminated nondeterministic assumptions around org-order selection and single-org subscription inference.
+
+## C) Evidence: Commands/Tests Run + Outcomes
+
+1. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npx jest server/tests/sessionAuth.integration.test.ts --runInBand`
+   - `PASS` (1 suite, 8 tests).
+
+2. `cd /antigravity/Cloud-On-Prem && npm run -s check`
+   - `PASS` (naming alignment, storage governance, UI/contrast/uikit audits).
+
+3. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npm run -s test:critical`
+   - `PASS` (17 suites, 94 tests).
+
+4. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npm run -s test:critical:integration`
+   - `PASS` (2 suites, 4 tests).
+
+5. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npm run -s test`
+   - `PASS` (54 suites, 249 tests, 0 skipped).
+
+## D) Residual Risks (and why)
+
+1. Strict PK convergence is still partial for known duplicate-ID table outliers; those need data-aware dedupe migrations.
+2. Test logs are verbose, which can reduce signal in CI triage even though functional gates are passing.
+
+## E) Minimal UAT Steps You Can Run (DEV)
+
+1. `cd /antigravity/Cloud-On-Prem && npm run -s check`
+2. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npm run -s test:critical`
+3. `cd /antigravity/Cloud-On-Prem && set -a && source .env && set +a && NODE_OPTIONS=--max-old-space-size=4096 npm run -s test`
+4. Manual auth flow smoke:
+   - Login as OrgAdmin user
+   - Open `/api/auth/user` driven UI flow
+   - Switch org context (where available)
+   - Re-login after session invalidation event and confirm stale-session UX recovery
+
+## F) Copyable Follow-up Screenshot-Analysis Prompt (Next DEV Loop)
+
+```text
+You are validating LearnPlay DEV wave auth/session hardening. Analyze attached screenshots/recordings and report only actionable defects with severity (critical/high/medium/low), exact route and role, expected vs actual behavior, and probable root-cause module. Focus on: login/logout/session persistence, org-context switching, stale-session recovery UX, admin-gated session diagnostics visibility, and loading/error/retry states. Include concise repro steps and a retest checklist.
+```
+
+## Assumptions In This Wave
+
+1. DEV `.env` and runtime DB are the active baseline for all test commands in this workspace.
+2. The requested scope is DEV-only for current execution and reporting.
+3. Historical cloud/onprem entries remain preserved below for audit continuity but are not part of current wave acceptance.
+## Historical Ledger (Preserved from previous tracked todo.md)
+
+# TODO
+
+## Program: Runtime Stability + Filesystem Interaction Audit + UX Reliability
+
+### Status Snapshot (2026-04-07)
+- In progress: Final closure and monitoring after full remediation rollout across all environments.
+- Scope: Cloud + onprem (default), DEV + ACC + PRD.
+- Functional testing owner: User.
+
+### Findings Register
+- [x] F-021 (Critical) Cloud login root cause identified and fixed in DEV runtime DB: `sessions` table was missing PK/ON CONFLICT arbiter (`42P10`), causing session save failure and post-login 401 loop.
+- [x] F-022 (High) Theme Editor remediation list can duplicate equivalent primitive fixes, creating perceived apply/retain loops.
+- [ ] F-023 (High) Lesson/Course generation `Refresh now` action appears non-functional (insufficient refresh signaling/state invalidation) — code-side hardening applied; awaiting user functional confirmation.
+- [x] F-024 (High) Lesson digest state contradiction: digest badge/action path inconsistent with checklist/state.
+- [ ] F-025 (High) Full cloud/onprem filesystem interaction stocktake and risk map not yet finalized.
+- [x] F-026 (High) Digest action route sends users to viewer flow that does not guarantee digest-first render; can appear “stuck on generating”.
+- [x] F-027 (High) Lesson digest badge still surfaced when digest did not exist (source/word fallback), creating contradictory “digest exists vs missing” UX signals.
+- [x] F-028 (Critical) Schema contract parity is broken on both variants: `schema:contract:validate:cloud` and `schema:contract:validate:onprem` fail with major table/column/enum/signature drift versus committed contracts.
+- [x] F-029 (High) Full test suite regression in theme token coverage: missing concrete editor controls for `--alert-info-bg`, `--alert-success-bg`, `--alert-warning-bg`.
+- [x] F-030 (High) Full test suite regression in update safety contract: cloud updater script still matches forbidden pattern `ALLOW_JOURNAL_REPAIR=true node ...scripts/migrate.js`.
+- [x] F-031 (Medium) `server/tests/sessionAuth.integration.test.ts` legacy skip coverage replaced with an executable, isolated integration harness that avoids broad destructive cleanup and validates current auth/session contracts.
+- [x] F-032 (High) `server/tests/courseLesson.integration.test.ts` fails extensively because unlink attempts now hit `overview/key_takeaways` guard; likely test fixtures/workflow assumptions are out of sync with current domain rules.
+- [ ] F-033 (Medium) Codebase contains high-risk TODOs in security/payment/runtime areas (for example unencrypted account numbers in route payload handling and webhook signature verification TODO), indicating latent production risks.
+- [x] F-034 (Critical) Onprem DEV license check-in routed via hardcoded HTTPS cloud endpoint with self-signed certificate, causing transport failure (`DEPTH_ZERO_SELF_SIGNED_CERT`) before business policy evaluation.
+- [x] F-035 (High) Storage reference integrity audit defaulted to repo-local `uploads/` path, producing false missing-file findings instead of runtime `/opt/learnplay/<variant>/uploads`.
+- [x] F-036 (Critical) ACC/PRD update rollback after successful migration apply due to strict runtime contract check failing on legacy constraint/index naming drift (`MGV-9101`) despite functional schema parity.
+- [x] F-037 (Critical) Cloud runtime post-deploy business-data parity regression: core admin/catalog tables observed as empty (`gammaImageStyles`, `gamificationEconomyRules`, `platformPricing`, `platformConfiguration`, `brandingThemes`) despite successful schema contract checks.
+- [x] F-038 (Critical) Snake_case to camelCase parity was not globally enforced as a hard update invariant across all feature domains; required deterministic convergence + cleanup path.
+- [x] F-039 (High) Packaged default platform branding assets were not guaranteed, causing missing LearnPlay default logo/favicon when no platform-theme row exists or asset references drift.
+- [x] F-040 (Critical) Onprem updater still executed packaged platform-data import on live systems, allowing customer-managed integration/gamification/pricing/branding settings to be overwritten during update.
+- [x] F-041 (High) Complete cross-environment (DEV/ACC/PRD, cloud+onprem) runtime data-parity verification report for all feature domains is finalized in docs and rollout logs.
+- [x] F-042 (Critical) Data parity baseline gate in updater failed with `EACCES` because baseline snapshot file was written into root-owned backup path while executed as app user; blocked cloud/onprem updates before migration safety gates.
+- [x] F-043 (Critical) Snake_case remediation coverage needed to be enforced for ALL feature domain scopes (not fixed table subset only), with strict unresolved-table failure to preserve app/schema/database parity.
+- [x] F-044 (Critical) Unauthenticated public license status sync endpoint can mutate enterprise system license state (`/api/enterprise/public/onprem/license-status-sync`) without cryptographic caller proof.
+- [x] F-045 (Critical) Unauthenticated public business profile sync endpoint can create/link enterprise customer/system records and influence bootstrap licensing state (`/api/enterprise/public/onprem/business-profile-sync`).
+- [x] F-046 (High) Public business profile read endpoint can disclose enterprise profile/customer context without strong machine authentication (`/api/enterprise/public/onprem/business-profile-read`).
+- [x] F-047 (High) On-prem hardware binding relies on hostname-only hash, increasing spoof/collision risk for machine identity.
+- [x] F-048 (High) Enterprise system identity matching is OR-based across hardware/baseUrl/hostname without schema-level uniqueness constraints, creating cross-system collision/misassociation risk.
+- [x] F-049 (Medium) Identity comparisons in check-in flow use strict raw string equality (hostname/baseUrl), causing false mismatch blocks on harmless canonicalization differences.
+- [x] F-050 (Medium) License state model drift: stored/allowed statuses diverge across schema comments, route validators, and runtime transitions, increasing policy ambiguity risk.
+- [x] F-051 (High) Policy-vs-enforcement mismatch for replacement licensing: systems with waived/paid billing + auto-approve renewal policy can still be hard-blocked with manual-approval error on check-in.
+- [x] F-052 (High) Dedicated automated test coverage for license domain flows is incomplete (public endpoint auth, policy-driven approval matrix, replacement recovery, renewal, status transitions).
+- [x] F-053 (Critical) Theme Editor domain-management actions (`verify/remove/toggle-active`) do not propagate selected `orgId` in SuperAdmin scoped mode, risking wrong-org mutations or operation failure.
+- [x] F-054 (High) Theme mode intent resolver defaults to `light` when explicit `themeModeIntent` is absent and does not infer from stored token sets, causing dark-theme regressions for legacy/incomplete records.
+- [x] F-055 (High) Organization preset-reset persistence path updates only `tokens`/`presetId`, leaving `tokensLight`/`tokensDark`/`themeModeIntent` out of sync with authored theme data.
+- [x] F-056 (High) Branding asset upload persistence path upserts theme rows without preserving multi-mode token fields (`themeModeIntent`, `tokensLight`, `tokensDark`), risking mode/token drift after logo/favicon updates.
+- [x] F-057 (Medium) Custom domain creation accepts insufficiently validated host input (format/normalization), increasing invalid-domain records and verification workflow noise.
+- [x] F-058 (Medium) Old branding asset cleanup only handles legacy `/api/public/branding/*` URLs; current `/api/public-objects/*` assets are not reclaimed, causing orphaned file buildup.
+- [x] F-059 (High) Theme builder/editor automated coverage is missing critical scenarios (SuperAdmin cross-org domain actions, mode-intent fallback behavior, reset/upload persistence parity).
+- [x] F-060 (Critical) Global onprem cloud-sync shared secret model does not isolate customer-owned systems and creates fleet-wide blast radius for license/control-plane auth.
+- [x] F-061 (High) License check-in/control-plane auth lacked per-system credential lifecycle controls (provision, rotate, revoke) tied to enterprise system identity.
+- [x] F-062 (High) Install/update/lppadmin secret enforcement hard-failed on legacy shared secret even when per-system sync auth should be authoritative, blocking rollouts.
+- [x] F-063 (Medium) Onprem sync client did not persist/apply cloud-issued per-system auth credentials, preventing migration away from shared-secret signing.
+- [x] F-064 (Critical) Update parity gate could continue after functional schema drift when strict mode was downgraded, allowing ACC/PRD drift to pass as warning-only.
+- [x] F-065 (Critical) Onprem build/export asset integrity gate used non-canonical upload-root discovery and could miss valid cloud runtime branding assets during DEV full landscape builds, causing rollout abort before ACC/PRD.
+- [x] F-066 (High) Updater Step 7 always ran full `npm install --omit=dev` even when dependency manifests were unchanged, increasing update duration and variance across DEV/ACC/PRD.
+- [x] F-067 (Critical) Functional schema drift on ACC/PRD (extra public tables/columns) caused update rollback without deterministic in-pipeline reconciliation path for safe empty-table drift cleanup.
+- [x] F-068 (Critical) Baseline-only package migration selection dropped post-baseline migrations (for example `0086_onprem_system_sync_credentials.sql`), causing required runtime columns to never deploy.
+- [x] F-069 (Critical) `schema-full.sql` generation from mutable DEV DB state allowed stale schema contracts to be packaged and silently normalize drift as expected state.
+- [x] F-070 (High) Onprem per-system sync signing could deadlock on stale/revoked credentials without automatic shared-bootstrap fallback recovery path.
+- [x] F-071 (Critical) Functional parity verification used full `public` schema totals/signatures, causing false ACC/PRD hard-fail/rollback when customer-managed extra tables/columns existed (for example `testTable`).
+- [x] F-072 (High) Migration journal unknown-entry handling failed first-run and retried in recovery mode, adding avoidable instability/noise in standard update execution.
+- [x] F-073 (Critical) Theme palette builder directly over-assigns many component-level primitives from anchor colors, causing remediation ping-pong where fixing one contrast pair creates new failures.
+- [x] F-074 (High) Palette suggestions are heuristic-only and not integrated with configured AI provider, limiting brand-fit recommendations for secondary/accent progression.
+- [x] F-075 (High) Theme editor lacks contract-level palette synthesis flow that combines AI recommendations with deterministic accessibility feasibility scoring before apply.
+- [x] F-076 (Critical) Cloud check-in flow hard-fails on `Customer deleted by SuperAdmin` tombstones without deterministic on-prem reprovision recovery, leaving licensed systems permanently blocked.
+- [x] F-077 (High) Customer force-delete removed per-system policy context (auto-approve/billing/grace/fee), so reprovision attempts could not reliably follow prior SuperAdmin policy behavior.
+- [x] F-078 (High) On-prem check-in client did not auto-attempt signed business-profile bootstrap + retry when cloud indicates deleted-customer recovery condition.
+- [x] F-079 (Critical) Cloud onprem request verifier forced per-system signature validation whenever `enterpriseSystemId` was present in payload, even when request auth-mode was explicitly `shared`, breaking bootstrap/recovery for ACC/DEV systems with stale or missing local per-system secrets.
+- [x] F-080 (Critical) SuperAdmin org-theme save path could hard-fail (`42P10`) on environments missing `brandingThemes.organizationId` unique arbiter, causing persistent “Failed to save organization theme”.
+- [x] F-081 (High) AI palette recommendation endpoint was called at high frequency without debounce/cancellation/in-flight dedupe, causing request storms, long tail latency, and unstable Theme Editor behavior.
+- [x] F-082 (Critical) Current primitive token contract couples several foreground/background pairs in ways that can make strict AI palette synthesis infeasible for some brand anchors; requires contract token split/remap for independent tone-aware adjustment.
+- [x] F-083 (Critical) UI runtime primitives diverged from UI Kit previews because many screens used invalid legacy token wrappers (`hsl(var(--token))` / alpha variants) against full-color semantic tokens, causing non-deterministic or broken color rendering.
+- [x] F-084 (Critical) SuperAdmin customer detail view only surfaced approved license requests, leaving pending onprem DEV/QA replacement requests invisible and effectively unapprovable from the customer workflow.
+- [x] F-085 (High) Pending replacement/check-in requests could fail to bind to a concrete `enterpriseSystems` row when no matching system record existed, creating policy/request visibility drift between check-in errors and cloud management state.
+- [ ] F-086 (Critical) Platform-wide primitive adoption drift remains visible on several user-facing flows (course builder/lesson workflows/marketplace and related admin views) where legacy utility classes still override or bypass UI Kit primitive styling contracts.
+- [ ] F-087 (High) Legacy gradient utility debt and orphan gradient-stop classes (`from/via/to`) continue to leak into user-facing components, creating visual inconsistency and masking effective token parity.
+- [ ] F-088 (High) Lesson workflow sequencing drift for structural lessons: Key Takeaways and Overview readiness/CTA flow allowed out-of-order generation when state was inferred from raw content presence instead of required workflow contracts.
+- [x] F-089 (Critical) Lesson artifact viewer resolution was variant-level only (not artifact-level), so translated-language opens from Artifact Quick Access could stall/hang when selected variant lacked specific artifacts instead of falling back to source-language artifacts.
+
+### Execution Plan
+
+#### Phase E: Immediate Runtime Fixes
+- [x] E1 Patch global error middleware to prevent double-send throw/restart loop and preserve runtime stability (workspace patch complete).
+- [x] E2 Validate cloud login persistence (`/api/auth/login` -> `/api/auth/user`) while tailing cloud/onprem logs.
+
+#### Phase F: UX Reliability Fixes
+- [x] F1 Patch contrast remediation duplicate-pair processing to remove repetitive loop-like suggestion entries.
+- [x] F2 Patch lesson refresh controls with forced query invalidation + explicit feedback.
+- [x] F3 Patch digest artifact state logic to remove false-positive digest availability flags.
+- [x] F4 Patch digest regenerate action to stay in context and refresh state instead of routing to ambiguous viewer path.
+- [ ] F5 Validate Theme Editor apply/retain/save/activate end-to-end behavior on running DEV runtime.
+- [ ] F6 Validate lesson digest generate/open flow end-to-end on running DEV runtime.
+- [x] F7 Validate lesson viewer `focus=digest|podcast` fetch/render path when lesson generation state is pending.
+
+#### Phase G: Filesystem Interaction Audit (Cloud + Onprem)
+- [x] G1 Inventory pass completed: 119 code/tooling files interact with storage/upload paths.
+- [x] G2 Produce route/service/script risk matrix (integrity/security/parity/performance).
+- [x] G3 Produce DB field ownership map for file key/path references and lifecycle.
+- [ ] G4 Deliver remediation roadmap with priority and verification gates.
+
+#### Phase H: Sweeping Cross-Domain Audit (Cloud + Onprem)
+- [x] H1 Re-ingest operating directives from `aimem.md` and align audit scope to cloud+onprem DEV.
+- [x] H2 Run global quality gates (`npm run check`, `test:critical`, `test:critical:integration`) with runtime DB wiring.
+- [x] H3 Run storage reference integrity audits for cloud and onprem DEV DBs against host upload roots.
+- [x] H4 Run schema contract parity validation for shared/cloud/onprem and capture drift.
+- [x] H5 Run full test suite with explicit runtime DB URL to separate environment-noise from true regressions.
+- [x] H6 Triage and remediate all failing suites until zero failures.
+- [x] H7 Rebuild schema contracts from canonical DEV state and re-validate cloud+onprem parity.
+- [ ] H8 Produce final domain-by-domain findings closure report (wiring, edge cases, gaps, and preventive controls).
+- [x] H9 Validate canonical environment endpoint reachability and auth/login behavior on cloud+onprem DEV URLs from `aimem.md`.
+
+#### Phase I: License Domain Remediation (Cloud + Onprem)
+- [x] I1 Enforce authenticated/signed machine identity on all public on-prem licensing endpoints that mutate/read sensitive license/customer state.
+- [x] I2 Refactor licensing decision path to policy-driven approval gates (billing + renewal policy + suspension + identity) across DEV/ACC/PRD tracks.
+- [x] I3 Remove track/version-specific approval bottlenecks that contradict active system license policy; allow issuance/renewal when policy permits.
+- [x] I4 Harden machine identity model (hardware key derivation + canonicalized identity matching + conflict-resistant resolution order).
+- [x] I5 Add DB constraints/indexes to reduce enterprise-system identity collision and onprem license-state multiplicity risk.
+- [x] I6 Normalize and centralize license status state machine/transition contract used by cloud + onprem + UI.
+- [x] I7 Add focused automated test suite for license domain edge cases and policy matrix.
+- [x] I8 Produce closure report mapping each license finding (F-044..F-052) to code/test verification evidence.
+
+#### Phase J: Theme Builder + Theme Editor Remediation (Cloud + Onprem)
+- [x] J1 Fix SuperAdmin selected-org domain operations to consistently include target `orgId` for verify/remove/toggle endpoints and enforce server-side ownership/target checks.
+- [x] J2 Harden theme mode-intent resolution contract: explicit intent first, deterministic fallback strategy for legacy rows, and parity across resolved/public/embed flows.
+- [x] J3 Repair reset persistence contract so preset reset writes synchronized `tokens`, `tokensLight`, `tokensDark`, and `themeModeIntent`.
+- [x] J4 Repair upload persistence contract so branding asset updates preserve multi-mode token state and contrast policy fields without regression.
+- [x] J5 Add strict domain input normalization/validation (host/FQDN rules, punycode-safe handling, canonical lowercase/no scheme/path) with clear UX-safe errors.
+- [x] J6 Fix branding asset lifecycle cleanup for canonical `/api/public-objects/*` keys and add safe orphan-pruning path with idempotent behavior.
+- [x] J7 Expand automated tests for theme domain critical paths (cross-org domain actions, mode fallback, reset/upload persistence, cleanup behavior).
+- [x] J8 Produce closure report mapping F-053..F-059 to code/test evidence and rollout verification.
+
+#### Phase K: Onprem License Sync Credential Isolation (Cloud + Onprem)
+- [x] K1 Introduce per-system sync credential model for onprem public license/control-plane routes with encrypted-at-rest cloud storage and system-bound verification.
+- [x] K2 Wire credential provisioning/propagation into existing business-profile + check-in flows so enrolled systems transition from shared bootstrap auth to per-system auth.
+- [x] K3 Add superadmin credential lifecycle controls for system-level rotate/revoke operations and emergency lockout path.
+- [x] K4 Update onprem sync client signing to prefer per-system credential headers and persist cloud-issued credential updates.
+- [x] K5 Relax installer/update/lppadmin enforcement of `ONPREM_CLOUD_SYNC_SHARED_SECRET` to bootstrap-only optional fallback; keep migration-safe warnings.
+- [x] K6 Add/expand automated tests for signing mode behavior and run focused verification + typecheck.
+
+#### Phase L: Update Parity Gate Hardening (Cloud + Onprem)
+- [x] L1 Enforce hard-fail on functional schema parity mismatch (tables, columns, enums, core functional signature) in cloud + onprem update scripts.
+- [x] L2 Keep structural parity tolerant by warning (constraints/index minimum drift and full signature drift) without rollback when functional parity is satisfied.
+- [x] L3 Execute DEV->ACC->PRD full rollout verification on cloud+onprem and attach parity-check evidence after deployment.
+- [x] L4 Fix onprem export/build asset-root resolution to canonical scoped runtime uploads (`/opt/learnplay/cloud/uploads`, `/opt/learnplay/onprem/uploads`) with deterministic fallback ordering and explicit root diagnostics.
+- [x] L5 Remove brittle platform-default branding asset URL drift by consolidating runtime defaults to packaged canonical platform logo/favicon references used across resolved theme + PWA manifest paths.
+- [x] L6 Add dependency-install fingerprint gate in cloud+onprem updaters so Step 7 skips full reinstall when `package.json`/`package-lock.json` are unchanged.
+- [x] L7 Add safe functional schema contract reconciliation pass in cloud+onprem updaters before parity fingerprint verify (create missing contract objects + archive empty extra public objects).
+- [x] L8 Reclassify updater warning semantics: internal DEV-only skips/info remain non-blocking, while ACC/PRD platform access baseline failures are blocking.
+- [x] L9 Re-run full scoped landscape update (cloud+onprem DEV->ACC->PRD) and attach build/update evidence for zero missing-asset and zero functional-parity rollback failures.
+
+#### Phase M: Migration Architecture Hardening (Cloud + Onprem)
+- [x] M1 Root-cause audit migration packaging/runtime-contract path for missing `enterpriseSystems.syncAuth*` columns across cloud+onprem.
+- [x] M2 Patch baseline packaging to include `latest scoped runtime baseline + all subsequent delta migrations` (not single-file baseline truncation).
+- [x] M3 Add build-time hard gate to fail package generation when critical sync-auth columns are absent from generated `schema-full.sql`.
+- [x] M4 Add onprem cloud-sync signed-request fallback (`system` -> `shared`) for stale/revoked per-system credential recovery.
+- [x] M5 Apply missing `0086_onprem_system_sync_credentials.sql` on DEV cloud/onprem databases and verify required columns exist.
+- [x] M6 Re-scope updater functional parity checks to package contract core table set (tolerate customer extra structural objects while hard-failing missing functional schema).
+- [x] M7 Add deterministic auto-reconciliation for unknown migration journal entries in standard mode with strict-mode escape hatch.
+- [ ] M8 Execute full cloud+onprem DEV->ACC->PRD rollout with hardened packages and verify check-in/customer/license flows end-to-end.
+- [ ] M9 Disable forced archival/deletion of extra `public` objects in standard online update path (report-only unless explicit maintenance mode).
+- [ ] M10 Add pre-stop promotion verification gate (`migration-governance verify-promotion`) into ACC/PRD rollout wrappers to block unsafe releases before downtime.
+- [ ] M11 Move DEV drift migration generation out of default build path (manual/approved generation flow only) to prevent implicit runtime state capture.
+- [ ] M12 Define/enforce schema ownership boundary for managed vs customer extension objects (near-term via ownership/exclusions contract, long-term schema split).
+
+#### Phase N: AI-Assisted Palette Reliability (Theme Editor + White-Label)
+- [x] N1 Add authenticated branding API endpoint to return AI-recommended secondary/accent candidates using Gemini integration settings (thinking script model first, with deterministic fallback).
+- [x] N2 Implement deterministic accessibility-feasibility scoring/ranking for palette candidates so AI output is normalized and validated before UI use.
+- [x] N3 Refactor palette anchoring to semantic-first token assignments (reduce direct component-token overrides from anchor colors) to prevent remediation oscillation.
+- [x] N4 Update Theme Editor Palette Builder UI to request and display AI recommendations for secondary (from primary) and accent (from primary+secondary) with rationale.
+- [x] N5 Keep deterministic fallback recommendations when AI is unavailable and clearly label AI vs fallback sources.
+- [x] N6 Add/extend tests for palette recommendation endpoint and palette token generation invariants to ensure no regression in anchor preservation and contrast behavior.
+- [x] N7 Run static/type/test gates and update changelog/aimem/todo progress to closure.
+- [x] N8 Stabilize AI recommendation flow with request debounce/cancel on client and in-flight dedupe/TTL cache + timeout guards on server.
+- [x] N9 Implement contract-level token split/remap for critical infeasible pairs surfaced by AI recommendations:
+  - `--text-primary/--surface-primary`
+  - `--btn-secondary-fg/--btn-secondary-hover`
+  - `--btn-secondary-fg/--btn-secondary-active`
+  - `--badge-fg/--badge-hover-bg`
+  - `--btn-success-fg/--btn-success-disabled-bg`
+- [x] N10 Normalize token consumption across runtime UI so component primitives consume semantic token colors directly (including alpha/tint forms) and match UI Kit previews.
+
+#### Phase O: Deleted-Customer License Recovery (Cloud + Onprem)
+- [x] O1 Persist recoverable customer-deletion policy snapshots during SuperAdmin force-delete so cloud can restore system policy defaults for reprovision.
+- [x] O2 Extend public on-prem business-profile sync to consume deletion recovery snapshots when stale `enterpriseCustomerId` no longer exists, recreate customer/system idempotently, and continue normal license policy flow.
+- [x] O3 Ensure recreated systems inherit policy fields (`autoApproveRenewals`, `billingStatus`, `monthlyFee`, `feeCurrency`, `graceDays`) before request/bootstrap issuance evaluation.
+- [x] O4 Add on-prem client-side deleted-customer recovery path in check-in flow: signed bootstrap sync with `requestBootstrapKey=true`, persist returned IDs/credentials, install bootstrap key when provided, then retry check-in once.
+- [x] O5 Run compile + focused license contract verification and update remediation log.
+- [x] O6 Ensure pending manual-approval requests are always visible/actionable in SuperAdmin customer workflow and always bind to a concrete enterprise-system row for the requesting onprem identity.
+
+#### Phase P: Lesson Workflow Sequencing Remediation (Cloud + Onprem)
+- [x] P1 Re-ingest lesson-editor domain requirements and map current sequencing gaps across UI + API.
+- [x] P2 Enforce strict content-lesson completion contract for Key Takeaways prerequisites (`content + objectives + digest + PPTX/video + quiz`).
+- [x] P3 Enforce strict Key Takeaways completion contract before Overview generation (`source + objectives + digest + PPTX/video + quiz`).
+- [x] P4 Update lesson editor action sequencing and primary CTA logic to require Key Takeaways source generation before objectives/digest.
+- [x] P5 Add backend guardrails to block out-of-order Key Takeaways objectives/digest generation.
+- [ ] P6 Add/refresh automated regression coverage for sequencing and readiness contracts.
+
+### Progress Log
+- [x] P-021 Live monitoring started for both variants:
+  - cloud: `/var/log/learnplay/learnplay-cloud.log`
+  - onprem: `/var/log/learnplay/learnplay-onprem.log`
+- [x] P-022 Captured reproducible cloud login failure sequence in logs (`login 200` -> `ERR_HTTP_HEADERS_SENT` -> `auth/user 401` + restart).
+- [x] P-023 Mapped stack frames to bundled cloud runtime lines (`index.js:135860` and `index.js:135911`) and traced source to `server/index.ts` response wrapper + global error handler.
+- [x] P-024 Added user-reported UX issues to tracked scope (`Apply Suggestion`, `Refresh now`, lesson digest mismatch).
+- [x] P-025 Implemented shared contrast-pair dedupe in remediation + warning generation (`client/src/utils/contrast.ts`).
+- [x] P-026 Implemented digest-state and digest-action flow fixes in lesson workflow (`client/src/pages/CourseLessons.tsx`).
+- [x] P-027 Implemented manual refresh hardening + digest-capable viewer rendering gate (`client/src/pages/LessonViewer.tsx`).
+- [x] P-028 Full static check gate passed after patches (`npm run check`).
+- [x] P-029 Root-cause confirmed for cloud login loop from runtime logs: `connect-pg-simple` failed to write session with `42P10` (`no unique or exclusion constraint matching ON CONFLICT`).
+- [x] P-030 Applied direct DEV DB remediation on cloud: added `sessions_pkey` and `IDX_session_expire`; verified `/api/auth/login` then `/api/auth/user` returns 200.
+- [x] P-031 Added shared migration `0083_shared_sessions_pk_and_expire_index.sql` and journal entry for deploy parity.
+- [x] P-032 Patched lesson digest badge logic to only show when digest exists (removed false-positive source/word fallback).
+- [x] P-033 Patched Lesson Viewer to force fetch on digest/podcast focus and use effective slide payload in renderability checks.
+- [x] P-034 Post-deploy API smoke validated:
+  - cloud: `/api/auth/login` then `/api/auth/user` returns 200.
+  - onprem: lesson viewer/digest/podcast/versions endpoints return 200 for `fc9137a6-7b90-470f-939c-2a7515817389`.
+  - onprem: digest regenerate returns 200 with regenerated payload.
+- [x] P-035 Filesystem interaction audit snapshots completed:
+  - storage pattern audit: no long filename/path violations on cloud or onprem.
+  - storage reference integrity audit: 0 missing referenced files on cloud and onprem.
+- [x] P-036 Sweeping quality checks completed:
+  - `npm run check`: pass.
+  - `npm run test:critical`: pass.
+  - `npm run test:critical:integration` (with onprem `DATABASE_URL`): pass.
+- [x] P-037 Schema contract validations executed:
+  - `schema:contract:validate:shared`: pass.
+  - `schema:contract:validate:cloud`: fail (major drift).
+  - `schema:contract:validate:onprem`: fail (major drift).
+- [x] P-038 Full `npm test` sweep executed with runtime DB URL; 4 suites failing (`themeEditorTokenCoverage`, `dataSafetyContracts`, `sessionAuth.integration`, `courseLesson.integration`).
+- [x] P-039 Static risk scan executed for TODO/FIXME/HACK markers; identified unresolved security/payment/runtime TODO hotspots for follow-up hardening.
+- [x] P-040 Onprem lesson runtime API smoke re-verified with user-reported lesson IDs:
+  - `/api/lessons/:id/viewer?focus=digest` -> 200
+  - `/api/lessons/:id/digest` -> 200
+  - `/api/lessons/:id/digest/regenerate` -> 200
+  This indicates backend lesson digest APIs are reachable; remaining issue is likely UI state/wiring or client-side cache/flow.
+- [x] P-041 Remediated full-suite regressions:
+  - Added missing alert background primitives to Brand Editor control rail (`--alert-info-bg`, `--alert-success-bg`, `--alert-warning-bg`).
+  - Removed unsafe migration invoker flag from cloud updater (`ALLOW_JOURNAL_REPAIR=true`).
+  - Realigned course-lesson integration fixtures with structural lesson-type guardrails (`overview`, `content`, `key_takeaways`).
+- [x] P-042 Full test baseline recovered with runtime DB context:
+  - `npm test` (with onprem DEV `DATABASE_URL`) => 34/34 suites passed.
+- [x] P-043 Schema contracts regenerated from canonical DEV runtime state and validated:
+  - cloud contract: pass
+  - onprem contract: pass
+  - shared contract: pass
+- [x] P-044 Added login session persistence hardening in auth flow (explicit session-store commit before response) to remove intermittent cloud `login 200 -> auth/user 401` races.
+- [x] P-045 Added Theme Editor remediation no-op filtering so Apply Suggestion only surfaces meaningful token changes (normalized value comparison).
+- [x] P-046 Deployed updated cloud DEV runtime via `devadmin update-dev cloud` (LP-CL-V1.00.189) and verified healthy service state.
+- [x] P-047 Deployed updated onprem DEV runtime via `devadmin update-dev onprem` (LP-OP-V1.00.214) and verified healthy service state.
+- [x] P-048 Post-deploy live auth probe for `support@learnplay.co.za` on `stcloud.learnplay.co.za` returns stable authenticated sessions (`/api/auth/login` -> `/api/auth/user` 200), including repeated-cycle stress test (20/20 pass).
+- [x] P-049 Re-ran storage governance + DB reference integrity audits post-deploy:
+  - governance: pass (no prohibited patterns)
+  - cloud references: 0 refs / 0 missing
+  - onprem references: 42 refs / 0 missing
+- [x] P-050 Re-ran critical quality gates on patched build:
+  - `test:critical`: pass
+  - `courseLesson.integration`: pass
+- [x] P-051 Added canonical SSH aliases and canonical environment URLs to `docs/aimem/aimem.md` and re-ingested directives.
+- [x] P-052 Root-caused onprem check-in transport failure to TLS trust error against DEV cloud endpoint (`https://stcloud...` self-signed certificate).
+- [x] P-090 Standardized user-driven E2E validation handoff: completion outputs now require manual test steps + reusable screenshot-analysis prompt template.
+- [x] P-053 Patched onprem cloud endpoint resolution to stage-aware hardcoded control-plane mapping with DEV using `http://stcloud.learnplay.co.za`; redeployed onprem DEV (`LP-OP-V1.00.216`).
+- [x] P-054 Post-patch onprem license scheduler now reaches cloud control-plane and fails with policy reason (`Replacement license requires manual SuperAdmin approval...`) instead of transport error.
+- [x] P-055 Revalidated cloud+onprem auth endpoints using support user:
+  - cloud DEV login/user: 200/200
+  - onprem DEV login/user: 200/200
+- [x] P-056 Fixed `audit-storage-reference-integrity` default upload root selection to runtime variant paths (`/opt/learnplay/cloud/uploads`, `/opt/learnplay/onprem/uploads`) based on `DEPLOYMENT_MODE`.
+- [x] P-057 Re-ran storage integrity audits with runtime DBs:
+  - cloud DEV: refs=0, missing=0
+  - onprem DEV: refs=42, missing=0
+- [x] P-058 Revalidated full test suite against onprem DEV runtime DB context (`DATABASE_URL` from `/opt/learnplay/onprem/.env`): 34/34 suites passed.
+- [x] P-059 Re-deployed cloud DEV runtime to keep shared code parity (`LP-CL-V1.00.191`) and revalidated cloud support login flow (`/api/auth/login` + `/api/auth/user` => 200/200).
+- [x] P-060 Cloud/onprem license check-in flow now reaches cloud control plane; active failure reason is policy-gated (`Replacement license requires manual SuperAdmin approval before check-in can continue`) rather than transport/runtime failure.
+- [x] P-061 Re-ingested `aimem.md` guardrails and executed source-only parity remediation sweep (no runtime hotpatching) across `client/src/pages` and `client/src/components`.
+- [x] P-062 Expanded UI Kit parity automation:
+  - broadened codemod to remove legacy gradient/decorator utilities and normalize to primitive/token-friendly classes;
+  - added strict parity gate checks for any residual `bg-gradient-*` and orphan `from/via/to` utilities.
+- [x] P-063 Applied platform-wide remediation pass and re-ran strict gates:
+  - `check:uikit-parity`: pass
+  - `check:page-primitive-adoption`: pass
+  - `audit:theme-ui:strict`: pass
+  - `npx tsc --noEmit`: pass
+  - `test:client` targeted parity suite: pass (13/13 suites).
+- [ ] P-064 Awaiting user screenshot-based functional validation on live cloud/onprem runtime for final visual parity confirmation (course builder, lesson artifacts, podcast wizard, marketplace/course detail, integration/admin surfaces).
+- [x] P-061 Reproduced onprem ACC rollout failure on `LP-OP-V1.00.217` and captured root cause from `/lppbackups/update_20260407_172337.log`: post-migration `verify-runtime-contract` failed (`MGV-9101`) on constraint/index naming drift only.
+- [x] P-062 Added `--functional-only` mode to migration governance runtime verification and switched cloud/onprem updater post-migration checks to functional schema gating (tables/columns/enums) to prevent false rollback on legacy structural naming drift.
+- [x] P-063 Rebuilt onprem package (`LP-OP-V1.00.218`) and successfully completed ACC + PRD rollout with healthy post-checks and no rollback.
+- [x] P-064 Reproduced cloud ACC rollout failure on `LP-CL-V1.00.193` and captured root cause from `/lppbackups/update_20260407_172944.log`: migration runner aborted in standard mode on legacy no-journal schema state.
+- [x] P-065 Added guarded cloud migration recovery retry (`MIGRATION_RECOVERY_MODE=true` + journal repair env) only after standard-mode failure; retained migration-only safety contract test coverage.
+- [x] P-066 Rebuilt cloud package (`LP-CL-V1.00.194`) and successfully completed ACC + PRD rollout with healthy post-checks and no rollback.
+- [x] P-067 Added global snake_case-to-camelCase remediation utility (`scripts/remediate-snake-case-tables.mjs`) with idempotent table rename/data transfer/drop and wired it into cloud+onprem update flows before migration execution.
+- [x] P-068 Implemented structural lesson workflow contract hardening in shared cloud+onprem code paths:
+  - generation readiness now evaluates required workflow completion (objectives + digest + presentation asset + quiz where required),
+  - Key Takeaways source generation now blocks until all content lessons meet full required completion,
+  - Overview generation now blocks until all content lessons and Key Takeaways lesson meet full required completion,
+  - lesson editor Key Takeaways steps now enforce source -> objectives -> digest -> presentation -> quiz order.
+- [x] P-068 Hardened migration safety in `server/migrate-onprem.ts`: fresh-install detection no longer fails open to destructive wipe when state detection errors occur; migration now aborts safely on detection uncertainty.
+- [x] P-069 Added platform-wide data parity gate utility (`scripts/data-parity-gate.mjs`) and wired snapshot+verify into both cloud and onprem update pipelines to block cross-domain data wipe regressions.
+- [x] P-070 Removed onprem update packaged-data sync path (migration-only update enforcement) and replaced always-on repair-mode migration invocation with guarded retry only after standard-mode failure.
+- [x] P-071 Added onprem importer safety contract parity with cloud (`--dry-run`, non-empty DB refusal unless `--allow-nonempty`) to prevent accidental overwrite maintenance runs.
+- [x] P-072 Restored cloud DEV impacted admin/catalog data from pre-update backup snapshot (`backup_20260407_173431`) for affected tables and revalidated row-count recovery.
+- [x] P-073 Added/packaged baseline platform branding assets (`uploads/public/branding/platform/*`) and hardened cloud/onprem build packaging gates to ensure required runtime branding assets are present.
+- [x] P-074 Removed Node module dependency risk from parity scripts by switching `data-parity-gate.mjs` and `remediate-snake-case-tables.mjs` to `psql`-backed execution (works from `/tmp/dist-*` and runtime paths without `node_modules`).
+- [x] P-075 Expanded snake_case remediation to strict all-domain enforcement: dynamic public-schema snake table discovery, deterministic snake->camel migration/merge/drop flow, and hard-fail on unresolved snake_case tables.
+- [x] P-076 Fixed updater parity-baseline write path permissions by moving pre-update baseline file to scoped `/tmp/learnplay-*-data-parity-baseline-<timestamp>.json` and adding post-verify cleanup.
+- [x] P-077 Re-ran full DEV update pipelines successfully with parity gates active:
+  - cloud DEV updated to `LP-CL-V1.00.198` (`/lppbackups/update_20260407_180334.log`)
+  - onprem DEV updated to `LP-OP-V1.00.221` (`/lppbackups/update_20260407_180609.log`)
+- [x] P-078 Post-update parity/data/asset verification completed:
+  - cloud/onprem core business tables retained parity counts (`gammaImageStyles=5`, `gamificationEconomyRules=9`, `platformPricing=89`, `platformConfiguration=14`, `brandingThemes=1`)
+  - gamma image styles + platform branding assets present in both runtime upload roots
+  - parity safety and theme-editor contract suites passed (`dataSafetyContracts`, `themeEditorApi`, `themeEditorStateSync`)
+- [x] P-079 Resolved ACC rollout blockers in strict parity remediation and completed production-grade update reruns:
+  - cloud ACC updated successfully to `LP-CL-V1.00.205` (`/lppbackups/update_20260407_183739.log`)
+  - onprem ACC updated successfully to `LP-OP-V1.00.222` (`/lppbackups/update_20260407_184024.log`)
+- [x] P-106 Implemented AI-assisted palette recommendation service with authenticated branding routes:
+  - Added `POST /api/branding/palette/recommend` (OrgAdmin scope) and `POST /api/superadmin/branding/palette/recommend` (SuperAdmin/CustSuper scope).
+  - Service uses Gemini integration settings (`thinkingScriptModel` -> `defaultTextModel`) and falls back deterministically when AI is unavailable.
+- [x] P-107 Refactored palette anchoring contract to semantic-first assignment in Theme Editor generation flow:
+  - Reduced component-level forced token overrides in `enforcePaletteCoreTokens`.
+  - Preserved required anchor guarantees (`--primary`, `--secondary`, `--accent`, semantic action/link/cta anchors) while allowing generated primitives to stabilize accessibility.
+- [x] P-108 Wired Theme Editor Palette Builder to consume AI recommendations with source/rationale labeling and deterministic fallback continuity.
+- [x] P-109 Added/updated automated tests for palette remediation slices:
+  - `server/tests/themePaletteRecommendationService.test.ts`
+  - `client/src/tests/themeEditorApi.test.ts`
+  - `client/src/tests/themePaletteBuilder.test.ts`
+- [x] P-110 Verification executed:
+  - `npx tsc --noEmit` passed.
+  - Focused tests passed:
+    - `client/src/tests/themeEditorApi.test.ts`
+    - `client/src/tests/themePaletteBuilder.test.ts`
+    - `server/tests/themePaletteRecommendationService.test.ts`
+  - Note: repository-wide `npm run check` still reports pre-existing DB naming alignment audit flags outside this remediation slice.
+- [x] P-111 Added deleted-customer recovery policy snapshot persistence to SuperAdmin forced customer deletion flow:
+  - new config key shape `ENTERPRISE_DELETED_CUSTOMER_RECOVERY_POLICY_<customerId>` with recoverable system policy metadata.
+- [x] P-112 Extended cloud public business-profile sync to restore deleted-customer links:
+  - when requested customer ID is missing, cloud loads recovery snapshot, recreates customer/system, reapplies policy defaults, and continues standard bootstrap/request handling.
+  - response now includes `recoveredFromDeletedCustomer` signal for observability.
+- [x] P-113 Added on-prem check-in self-heal for deleted-customer failures:
+  - detects cloud deleted-customer rejection, runs signed bootstrap business-profile sync, applies returned cloud IDs + optional bootstrap key, and retries check-in once.
+- [x] P-114 Verification for Phase O:
+  - `npx tsc --noEmit` passed.
+  - `server/tests/licenseStatusContract.test.ts` passed.
+  - Note: `server/tests/onpremLicenseSyncAuth.test.ts` requires runtime `DATABASE_URL` and could not run in current shell context.
+- [x] P-115 Root-caused ACC/DEV onprem licensing failure to auth-mode mismatch handling in cloud verifier:
+  - shared-signed requests carrying `enterpriseSystemId` were incorrectly forced down per-system signature validation and rejected.
+  - patched verifier to honor explicit `x-lp-onprem-auth-mode` (`system` vs `shared`) while preserving legacy no-header behavior.
+- [x] P-116 Root-caused Theme Editor save failure on onprem PRD:
+  - `POST /api/superadmin/branding/org/:orgId/theme` returned 500 with `42P10` (missing ON CONFLICT arbiter on `brandingThemes.organizationId`).
+  - patched storage upsert path to deterministic update-first/insert semantics and added migration `0089_branding_theme_org_unique_constraint.sql` for permanent DB contract enforcement.
+- [x] P-117 Added AI palette flow stability hardening:
+  - expanded AI primitive override allow-list to include critical pairs (`--surface-primary`, `--btn-secondary-hover`, `--btn-secondary-active`, `--badge-hover-bg`, `--btn-success-disabled-bg`, `--btn-success-fg`).
+  - added server-side AI recommendation timeout + in-flight dedupe + short TTL cache.
+  - added client-side debounce + cancellation for recommendation fetches to stop request storms.
+- [x] P-118 Added user-supplied AI contract-change recommendations to remediation backlog (Phase N9) for token-contract split/remap implementation.
+- [x] P-119 Completed token contract split/remap implementation for AI palette feasibility:
+  - Added new independent tokens: `--surface-primary-fg`, `--btn-secondary-hover-fg`, `--btn-secondary-active-fg`, `--badge-hover-fg`, `--btn-success-disabled-fg`.
+  - Updated contract enforcement pairs and core contrast guard to use split tokens.
+  - Updated token generation defaults, token registries, section mapping, and secondary button runtime styling (`hover/active` foreground tokens).
+  - Verification: `npx tsc --noEmit` passed; theme contract + palette tests passed.
+- [x] P-120 Root-caused UI Kit vs runtime primitive mismatch:
+  - identified systemic invalid token wrappers (`hsl(var(--token))` and `hsl(var(--token)/alpha)`) used against semantic tokens that already resolve to full CSS colors.
+  - this produced inconsistent runtime rendering and visual drift compared to UI Kit previews.
+- [x] P-121 Implemented runtime token-consumption normalization for theme primitives:
+  - normalized runtime color references to consume semantic token colors directly (`var(--token)`), including alpha/tint forms in component classes and style strings.
+  - removed active production `hsl(var(--...))` usages from `client/src` + `shared` (excluding backup artifacts).
+  - updated chart/palette helper color outputs and scrollbar gradient alpha handling to valid `var(...)`/`color-mix(...)` forms.
+- [x] P-122 Verification for UI Kit/runtime primitive parity remediation:
+  - `npx tsc --noEmit` passed.
+  - `npm run -s test -- client/src/tests/themePaletteBuilder.test.ts client/src/tests/themeEditorApi.test.ts server/tests/themeComponentContracts.test.ts` passed.
+  - `npm run -s check:ui-contrast` passed.
+  - `npm run -s audit:theme-ui:strict` passed.
+  - note: repo-wide `npm run check` still fails on pre-existing naming-audit findings outside this remediation slice (`scripts/remediate-snake-case-tables.mjs`, `server/migrate-onprem.ts`).
+- [x] P-123 Remediated pending-license visibility and approval gap for onprem DEV/QA replacement flows:
+  - updated SuperAdmin customer detail page to show Pending License Requests with direct `Review`, `Approve`, and `Deny` actions.
+  - retained Approved and Denied request history sections for complete lifecycle visibility.
+- [x] P-124 Remediated pending request -> system binding drift in cloud control-plane:
+  - added deterministic pending-system binding helper in enterprise portal routes.
+  - request-reissue and recovered check-in pending paths now upsert/create a concrete `enterpriseSystems` row with pending/reissue state and request linkage.
+  - prevents “manual approval required” without corresponding customer/system management visibility.
+- [x] P-125 Verification for pending-approval remediation:
+  - `npx tsc --noEmit` passed.
+  - `npm run -s test -- server/tests/licenseStatusContract.test.ts client/src/tests/themeEditorApi.test.ts` passed.
+- [x] P-080 Completed PRD cloud+onprem rollout after parity gate hardening:
+  - cloud PRD updated successfully to `LP-CL-V1.00.205` (`/lppbackups/update_20260407_184150.log`)
+  - onprem PRD updated successfully to `LP-OP-V1.00.222` (`/lppbackups/update_20260407_184322.log`)
+- [x] P-081 Finalized cross-environment parity closure report:
+  - snake_case-to-camelCase convergence enforcement active in update pipelines for all domains (cloud+onprem)
+  - updater data-parity baseline+verify gates passed through DEV/ACC/PRD rollouts (cloud+onprem)
+  - no packaged platform-data overwrite path remains in onprem updates; migration-only upgrade safety enforced
+- [x] P-082 Added license-domain findings and remediation phase to TODO tracker:
+  - registered F-044..F-052 (security, policy, identity, status-contract, and testing gaps)
+  - added Phase I plan (I1..I8) for cloud+onprem license remediation execution
+- [x] P-083 Started Phase I remediation implementation for policy-driven issuance:
+  - added shared policy gate helper for automatic issuance eligibility (`autoApproveRenewals=true` + `billingStatus in {paid,waived}`)
+  - wired policy-aware request bootstrap path to avoid unnecessary pending blocks when system policy is already permissive
+  - patched check-in metadata-recovery path to resolve effective system policy and auto-issue replacement keys when policy allows across DEV/QA/PRD tracks
+  - compile verification: `npx tsc -p tsconfig.json --noEmit` passed
+- [x] P-084 Completed Phase I license remediation slices:
+  - enforced signed cloud-public onprem endpoint authentication (+ timestamp + nonce replay protection) across business-profile sync/read, check-in, status-sync, metrics-sync, and reissue routes
+  - updated onprem sync client to sign all outbound public-license requests using `ONPREM_CLOUD_SYNC_SHARED_SECRET`
+  - added centralized license status contract helpers and integrated runtime-active decision path
+  - added policy-driven auto-approval and auto-issuance path for bootstrap/recovery requests when system policy allows (`autoApproveRenewals` + `billingStatus in paid/waived`)
+  - hardened identity comparisons with canonical matching for hardware/hostname/base URL checks
+  - added migration `0085_license_identity_constraints_and_singleton.sql` for onprem license singleton and enterprise system identity uniqueness constraints
+  - added targeted license tests (`licenseStatusContract.test.ts`, `onpremLicenseSyncAuth.test.ts`)
+- [x] P-085 Completed installer/update/lppadmin operational wiring for license signing secret parity (cloud+onprem):
+  - added required `ONPREM_CLOUD_SYNC_SHARED_SECRET` provisioning in cloud and onprem installer flows (master + app install scripts)
+  - enforced update preflight validation for `ONPREM_CLOUD_SYNC_SHARED_SECRET` in cloud and onprem update pipelines (with optional env override injection)
+  - expanded lppadmin required-secrets validation to include `ONPREM_CLOUD_SYNC_SHARED_SECRET` in both cloud and onprem scopes
+  - updated cloud + onprem `.env.example` templates with explicit shared-secret guidance
+- [x] P-086 Ingested `aimem.md` and completed theme-domain stocktake across cloud+onprem runtime code:
+  - audited Theme Editor UI domain flows (`ThemeEditor.tsx`, `themeEditorApi.ts`, `themeEditorStateSync.ts`, brand-editor components)
+  - audited server branding/theme/domain endpoints and persistence paths (`brandingRoutes.ts`, `storage.ts`, branding policy/security helpers)
+  - audited existing contract/test coverage for theme builder/editor (`themeEditorApi`, `themeEditorStateSync`, `themePaletteBuilder`, token/persistence/security contract suites)
+- [x] P-087 Registered theme-domain findings and remediation phase in TODO tracker:
+  - added findings `F-053..F-059` covering cross-org domain actions, mode/persistence drift, domain validation, asset lifecycle cleanup, and test gaps
+  - added execution plan `Phase J (J1..J8)` for deterministic remediation and closure evidence
+- [x] P-088 Completed Theme Editor SuperAdmin domain-action remediation (`F-053` / `J1`):
+  - added `buildDomainActionUrl(...)` helper and patched verify/remove/toggle mutations to propagate selected `orgId` query context from resolved domain endpoints
+  - retained server-side org ownership enforcement through `getEffectiveOrgId` + `validateOrgOwnership` in domain routes
+- [x] P-089 Completed theme mode + persistence + asset lifecycle remediation (`F-054..F-058` / `J2..J6`):
+  - added shared mode-intent inference service and wired mode-aware token fallback in resolved theme and embed-styles flows
+  - aligned org preset-reset storage contract to persist synchronized `tokens`, `tokensLight`, `tokensDark`, `themeModeIntent`, and `presetId`
+  - hardened domain input normalization/validation (canonical lowercase FQDN + punycode-safe handling, protocol/path/port/IP/wildcard rejection)
+  - fixed branding asset cleanup path resolution for both legacy `/api/public/branding/*` and canonical `/api/public-objects/*` URLs
+- [x] P-090 Expanded theme-domain automated coverage and finalized closure evidence (`F-059` / `J7..J8`):
+  - added/updated tests: `client/src/tests/themeEditorApi.test.ts`, `server/tests/brandingSecurityService.test.ts`, `server/tests/themeModeService.test.ts`, `tests/themePersistenceContracts.test.ts`
+  - targeted verification run passed: 4 suites, 20 tests; `npx tsc -p tsconfig.json --noEmit` passed
+  - closure mapping: `F-053` (domain action org propagation), `F-054` (mode inference fallback), `F-055` (reset contract sync), `F-056` (upload multi-mode preservation), `F-057` (domain validation hardening), `F-058` (public-objects cleanup), `F-059` (automated coverage expansion)
+- [x] P-091 Completed per-system onprem sync credential isolation (`F-060..F-063` / `K1..K6`):
+  - implemented encrypted per-system sync credential storage/service and cloud verifier path that prefers strict system-bound signatures when credential exists
+  - wired cloud responses (`business-profile-sync/read`, `license-status-sync`, `metrics-sync`, `request-reissue`, `check-in`) to provision/propagate per-system credentials
+  - updated onprem sync client to persist cloud-issued credential material and sign with `x-lp-onprem-auth-mode=system` + `x-lp-onprem-system-id` when available
+  - added superadmin system credential lifecycle endpoints for rotate/revoke
+  - updated cloud/onprem install/update/lppadmin flows so legacy shared secret is bootstrap-optional (warning-only when absent) to unblock updates
+  - added migration `0086_onprem_system_sync_credentials.sql` and expanded signing tests for shared + system modes
+- [x] P-092 Hardened cloud+onprem update parity gates for deterministic behavior (`F-064` / `L1..L2`):
+  - removed strict-mode downgrade path tied to deprecated reconciliation flag in both update scripts
+  - made functional schema parity mismatch a mandatory update failure (tables/columns/enums/core functional signature)
+  - retained structural drift tolerance with warnings for constraints/index minimum mismatches and full schema signature drift
+- [x] P-093 Completed asset-export root-cause remediation for full onprem landscape builds (`F-065` / `L4..L5`):
+  - hardened `onprem/export-platform-data.sh` upload-root discovery to prioritize canonical scoped runtime paths from env/runtime and dedupe ordered candidates
+  - added explicit upload-root diagnostics + missing-trace reporting to make integrity failures actionable instead of ambiguous
+  - wired `onprem/build-onprem.sh` to pass resolved `LEARNPLAY_UPLOAD_DIR` into export stage for deterministic devadmin builds
+  - aligned platform default branding URL constants to packaged canonical platform assets across resolved theme + manifest fallback paths
+  - validated end-to-end export against live DEV cloud DB: `unique refs=7`, `copied=7`, `missing=0`, `staged platform assets=141`
+- [x] P-094 Hardened updater reliability semantics for devadmin + lppadmin (`F-066..F-067` / `L6..L8`):
+  - updated cloud+onprem Step 7 dependency handling to use manifest fingerprint gating and skip reinstall when unchanged
+  - added schema contract reconciliation pass before parity fingerprint verification on non-internal DEV hosts
+  - reconciliation now safely archives only empty extra public tables; non-empty drift tables hard-fail with explicit manual-remediation message
+  - downgraded internal DEV-only skip notices from WARN to INFO; retained strict failure on ACC/PRD platform-access baseline verification
+- [x] P-095 Extended dependency/install root-cause prevention across installer + updater flows:
+  - added dependency fingerprint seeding to cloud+onprem `app-install.sh` so first install and subsequent updates share deterministic skip/install behavior
+  - reclassified expected migration-only packaged-data-sync message from WARN to INFO in both cloud+onprem update scripts to reduce false-alarm operator noise
+- [x] P-096 Completed full Cloud landscape rollout verification after parity/remediation hardening (DEV -> ACC -> PRD) on 2026-04-08:
+  - command: `./devadmin.sh deploy-all cloud`
+  - deployed package: `LP-CL-V1.00.212.tar.gz`
+  - DEV/ACC/PRD updates completed with healthy post-checks and no functional-parity rollback
+  - Step 7 confirmed fingerprint skip behavior (`Already up to date (dependency fingerprint match)`) on ACC/PRD
+  - parity outcome: functional contract satisfied; structural signature drift logged as tolerated warning by design
+- [x] P-097 Completed full OnPrem landscape rollout verification after asset/export and parity/remediation hardening (DEV -> ACC -> PRD) on 2026-04-08:
+  - command: `./devadmin.sh deploy-all onprem`
+  - deployed package: `LP-OP-V1.00.224.tar.gz`
+  - prior missing-asset export failure did not recur; build/export integrity gates passed
+  - DEV/ACC/PRD updates completed with healthy post-checks and no functional-parity rollback
+  - reconciliation outcome: extra drift tables archived to `learnplay_legacy_archive` where empty, functional parity maintained
+- [x] P-098 Completed expert-assisted migration reliability audit for license-domain outage:
+  - confirmed runtime failures tied to missing `enterpriseSystems.syncAuth*` columns (`syncAuthMode`, `syncAuthVersion`, `syncAuthSecretHash`, `syncAuthRevokedAt`)
+  - confirmed root cause was baseline-only migration truncation in package artifacts (post-baseline deltas excluded)
+  - confirmed stale `schema-full.sql` packaging from mutable DEV DB state amplified recurrence risk
+- [x] P-099 Implemented migration packaging + build contract hardening:
+  - patched `build-cloud-linux.sh` and `onprem/build-onprem.sh` baseline mode to package baseline + all later delta migrations with complete journal entries
+  - added cloud build critical schema gate for `enterpriseSystems.syncAuth*` columns
+  - expanded onprem build required-column gate to include `enterpriseSystems.syncAuth*`
+- [x] P-100 Implemented onprem signed-request self-recovery path:
+  - added signed cloud POST helper with automatic fallback from per-system auth to shared bootstrap auth on explicit per-system credential rejection signals
+  - wired fallback across profile-read/sync, reissue, check-in, status-sync, and metrics-sync call paths
+- [x] P-101 Applied `0086_onprem_system_sync_credentials.sql` directly to DEV cloud and DEV onprem databases:
+  - cloud DEV and onprem DEV now contain `enterpriseSystems.syncAuthMode`, `syncAuthVersion`, `syncAuthSecretHash`, `syncAuthRevokedAt`
+- [x] P-102 Reworked schema contract capture to emit core-table scope metadata:
+  - build scripts now export `EXPECTED_CORE_TABLES`, `EXPECTED_CORE_TABLE_COUNT`, `EXPECTED_CORE_COLUMN_COUNT`, `EXPECTED_CORE_ENUM_COUNT` into package schema contracts
+- [x] P-103 Patched cloud/onprem updater parity verification to use core-table scoped functional checks:
+  - functional parity now validates core T/C/E minimums + core signature, while tolerating customer-managed extra tables/columns outside package scope
+- [x] P-104 Hardened migration runner reconciliation path:
+  - unknown migration journal entries are auto-pruned in standard mode (with optional strict hard-fail via `LEARNPLAY_MIGRATION_STRICT_UNKNOWN_JOURNAL=true`) to remove first-run fail/retry churn
+- [x] P-105 Completed expert architecture audit for recurring migration parity failures and recorded phased target model:
+  - confirmed current pain points are rooted in ownership-boundary ambiguity, pre-stop coverage gating gaps, and build-time DEV drift capture
+  - added next remediation slices (M9..M12) to transition from tactical stabilization to durable migration architecture
+- [x] P-106 Completed AI palette stability + contract remap remediation (`F-086..F-088`):
+  - split warning disabled contrast contract from `--text-muted/--btn-warning-bg` to dedicated `--btn-warning-disabled-fg/--btn-warning-bg`
+  - propagated new token through required token inventory, token section mapping, token builder output, default CSS seed, and contrast audit pairs
+  - hardened AI palette synthesis for first-click reliability: longer primitive timeout, robust JSON extraction, synthesis retries, inflight/cache dedupe, and issue-guided regeneration pass when broad synthesis fails
+- [x] P-107 Completed AI-first auto-fix workflow remediation (`F-089`):
+  - changed `Apply + Auto-fix Contrast` from deterministic rule-based token generation to strict AI palette build flow with `autoFixContrast=true`
+  - extended palette build API schema and service input contract to support AI auto-fix mode without fallback to non-AI autofix path
+- [x] P-108 Verified theme remediation slice with targeted compile/tests:
+  - `npx tsc --noEmit` passed
+  - `npm run -s test -- server/tests/themePaletteRecommendationService.test.ts server/tests/themeComponentContracts.test.ts client/src/tests/themeEditorApi.test.ts` passed (3 suites / 13 tests)
+- [x] P-109 Remediated theme save/apply persistence regression root cause:
+  - fixed client token hydration path to preserve user-authored primitive overrides when resolving partial token sets (no silent regeneration overwrite of customized primitives)
+  - updated theme editor mode hydration to prefer `tokensLight`/`tokensDark` based on active mode intent before fallback to generic token set
+  - added coverage in `client/src/tests/tokenUtils.themeAnchors.test.ts` for authored-override preservation during resolution
+- [x] P-110 Implemented AI model profile control for palette recommendations/build:
+  - added `aiModelProfile` (`fast` | `thinking`) across recommendation/build API contracts and theme palette service
+  - added Theme Editor palette popover selector so users can switch model profile; default is `fast` (Gemini default text model), `thinking` uses thinking script model
+  - wired both recommended secondary/accent calls and AI palette build/autofix calls to selected profile
+- [x] P-111 Hardened import-time runtime settings durability (cloud+onprem):
+  - import scripts now skip `systemSettings` on non-empty databases by default to preserve runtime/user-managed settings
+  - explicit override remains available via `LEARNPLAY_ALLOW_SYSTEM_SETTINGS_IMPORT_ON_NONEMPTY=true` for approved maintenance only
+- [x] P-112 Verified user-settings durability remediation with compile/tests:
+  - `npx tsc --noEmit` passed
+  - `npm run -s test -- client/src/tests/tokenUtils.themeAnchors.test.ts server/tests/themePaletteRecommendationService.test.ts client/src/tests/themeEditorApi.test.ts server/tests/themeComponentContracts.test.ts` passed (4 suites / 15 tests)
+- [x] P-113 Completed platform-wide settings durability audit and root-cause classification:
+  - audited runtime write paths for `systemSettings` and theme persistence (`brandingThemes`) across routes/services/install/import scripts
+  - root causes identified: partial-token regeneration overwriting authored theme primitives on hydration, non-empty seed imports touching `systemSettings`, and bootstrap provider auto-selection potentially overriding explicit transport when bootstrap marker is absent
+  - classified maintenance scripts (`server/scripts/*theme*`) as operator-only/manual flows (not automatic runtime mutation paths)
+- [x] P-114 Implemented shared durability policy + contract suite:
+  - added shared policy function `decideBootstrapEmailProvider(...)` and applied it in integration bootstrap to avoid overriding explicit provider settings
+  - added `server/tests/userConfigDurabilityContracts.test.ts` covering bootstrap non-override contract and non-empty import guards for cloud/onprem scripts
+  - verification: `npx jest --runInBand server/tests/userConfigDurabilityContracts.test.ts` passed (3 tests)
+- [x] P-115 Recovered and hardened theme parity pipeline after failed gradient codemod attempt:
+  - restored corrupted `Cloud-On-Prem/client/src/**` files from git `HEAD` to recover source integrity
+  - retained and validated enhanced contrast-coverage contracts (`shared/themeContrastGuard.ts`) with parity tests
+  - hardened AI palette synthesis to degrade safely when Gemini secret decryption/config fails (deterministic fallback path instead of hard failure)
+  - increased palette build remediation passes (`12` default / `24` auto-fix) for stronger first-pass accessibility convergence
+  - verification:
+    - `npx tsc -p tsconfig.json --noEmit` passed
+    - `npx jest --runInBand server/tests/themePaletteRecommendationService.test.ts server/tests/themeCompilerService.test.ts server/tests/themeContrastParity.test.ts` passed
+    - `npx jest --runInBand client/src/tests/contrastUtils.test.ts client/src/tests/themePaletteBuilder.test.ts client/src/tests/themeEditorApi.test.ts client/src/tests/PreviewParity.test.tsx` passed
+    - `npm run -s check:uikit-parity && npm run -s check:uikit-coverage && npm run -s check:page-primitive-adoption && npm run -s check:ui-contrast` passed
+
+### Functional Test Runbook (User)
+- [x] T7 Cloud login with `support@learnplay.co.za` persists and lands on authenticated context.
+- [ ] T8 Theme editor apply/retain/save/activate confirms no loop behavior and persistent changes after refresh/reopen.
+- [ ] T9 Lesson/Course generation `Refresh now` updates state immediately when backend status changed.
+- [ ] T10 Lesson digest indicator + checklist + generate action remain consistent across refresh/navigation.
+- [x] T11 Lesson viewer `Refresh now` and `focus=digest` no longer stall on loading state when digest exists.
+- [ ] T12 Cloud login with `support@learnplay.co.za` confirms no bounce-to-home loop in browser session after latest cloud DEV deployment (LP-CL-V1.00.189).
+- [x] P-116 Complete platform-wide primitive token standardization and override removal:
+  - enforce UI Kit token consumption on all user-facing pages (admin + learner) with no page-level visual overrides
+  - remove remaining runtime/style systems that can supersede primitive tokens
+  - add strict CI parity gates for action/status/link/component token usage by route domain
+  - completed route-domain codemod sweep for raw action/status/link token classes in user-facing page/component surfaces
+  - upgraded `check-route-domain-primitive-parity` to strict-zero enforcement for:
+    - `primitive_state_override`
+    - `action_btn_raw_tokens`
+    - `gradient_utilities`
+  - retained baseline-ratchet only for `inline_visual_styles` while strict-zero debt is eliminated incrementally by domain-safe refactors
+- [ ] P-117 Complete camelCase migration reconciliation across all layers:
+  - audit DB migrations + drizzle schema + server queries/services + client API contracts for snake_case remnants
+  - remove legacy naming assumptions in storage/versioning and lesson artifact pipelines
+  - add regression tests for canonical storage-key/version consistency in generation + replace flows
+- [x] P-118 Fixed canonical lesson storage-key/version validation root regression:
+  - replaced legacy suffix-only `/v{n}.pptx` validation with canonical-key-aware deterministic validation
+  - preserved compatibility with legacy versioned paths to avoid data loss during transition
+  - added regression test coverage (`server/tests/lessonStorageKeyValidation.test.ts`)
+- [x] P-119 Fixed onprem cloud check-in shared-signature authority drift:
+  - onprem sender now prefers `ONPREM_CLOUD_SYNC_SHARED_SECRET_PRD` for bootstrap signing (all stages targeting cloud PRD)
+  - cloud verifier now includes PRD-scoped secret candidates (`*_PRD`, `*_PRD_PREVIOUS`, `*_PRD_FALLBACKS`) in signature verification chain
+- [x] P-120 Fixed AI palette strict-mode false-failure policy:
+  - strict mode now requires valid AI candidate participation, not forced AI anchor mutation selection
+  - prevents failing palette builds when selected anchors remain optimal after AI evaluation
+- [x] P-121 Enforced PRD-authoritative shared-secret wiring for onprem check-in across source + installers:
+  - removed server/runtime fallback from `ONPREM_CLOUD_SYNC_SHARED_SECRET_PRD` to generic shared secret in sender and cloud verifier paths
+  - cloud verifier candidate chain now accepts only PRD-scoped shared-secret keys (`*_PRD`, `*_PRD_PREVIOUS`, `*_PRD_FALLBACKS`)
+  - aligned cloud/onprem install + update scripts to persist/migrate `ONPREM_CLOUD_SYNC_SHARED_SECRET_PRD` so deployments keep auth-mode parity
+- [x] P-122 Fixed AI candidate provenance loss causing strict-mode false negatives:
+  - palette recommendation merge now preserves `source='ai'` when AI returns a hex that overlaps deterministic seeds
+  - added regression coverage ensuring overlapping AI candidates retain AI provenance and pass strict participation checks
+- [x] P-123 Fixed artifact availability/download contract drift from language normalization mismatch:
+  - normalized lesson presentation language handling (`en` canonical) across PPTX store/read/query paths to prevent generated artifacts from being filtered out by case differences (`EN` vs `en`)
+  - normalized podcast completed/version selection logic to be case-insensitive for `status` and `languageCode` matching
+  - ensured presentation version signed URLs include explicit download filenames to prevent hashed-key filename leakage
+- [x] P-124 Removed legacy shared-secret fallback aliases from installer/update source flows:
+  - cloud/onprem install + update + master-install scripts now consume only PRD-authoritative shared-secret variable names
+  - removed migration/fallback reads from legacy generic shared-secret env keys to prevent stage-local signature drift against cloud PRD
+- [x] P-125 Hardened onprem->cloud PRD signed check-in for shared-secret rotation continuity:
+  - onprem signer now supports PRD-scoped shared-secret candidate retry (`*_PRD`, `*_PRD_PREVIOUS`, `*_PRD_FALLBACKS`) when shared signature mismatch is returned
+  - preserves PRD-only authority while removing transient deployment-order failures during shared-secret rotation
+- [x] P-126 Hardened UI primitive semantic-token guardrails for direct-consumption parity:
+  - strengthened `client/src/components/ui/primitiveClassGuard.ts` to strip legacy semantic wrapper overrides (`hsl(var(--...))`, `rgba(var(--...))`, etc.) even inside arbitrary/custom-property utility tokens
+  - added focused client coverage for sanitizer regression cases plus a filesystem contract test that fails if `client/src/components/ui/**` reintroduces forbidden legacy semantic wrappers
+- [x] P-127 Remediated theme token contract drift and accessibility-preservation regressions (cloud+onprem shared paths):
+  - preserved accessible user-authored companion primitives during palette enforcement instead of unconditional reset
+  - fixed contrast candidate list mutation leak in remediation helper
+  - added missing primitive contract tokens (`--btn-focus-ring`, `--nav-pill-active-bg`, `--filter-pill-disabled-bg`, `--email-header-bg`) across generator + required token registry
+  - added missing Theme Editor concrete control coverage for `--action-accent`
+- [x] P-128 Fixed SuperAdmin impersonation stale-org leakage root cause across shared session paths:
+  - legacy org-context projection now rehydrates from context (`impersonated -> primary -> first`) and clears stale legacy org ids when no effective org exists
+  - end-impersonation route now clears/rehydrates legacy org session fields deterministically
+  - effective-org resolver no longer falls back to unmatched stale `session.organizationId` when session context is present
+- [x] P-129 Added/expanded automated regression coverage for root-cause classes:
+  - new cloud impersonation contract suite (`server/tests/impersonationCloudSessionContracts.test.ts`)
+  - new client impersonation cache invalidation suite (`client/src/tests/impersonationQueryInvalidation.test.ts`)
+  - expanded org credit authorization and theme editor API scoping tests for impersonation contexts
+  - expanded palette/contrast/primitive parity tests and token coverage contracts
+- [x] P-130 Validation evidence captured for this cycle:
+  - `NODE_OPTIONS=--max-old-space-size=4096 npm run -s test:critical` => pass (17 suites / 94 tests)
+  - impersonation-focused suites => pass (4 suites / 16 tests)
+  - theme/token suites => pass (`themeEditorTokenCoverage`, `PreviewParity`, `themePaletteBuilder`, `contrastUtils`, primitive guard suites)
+  - smoke endpoint matrix pass on all canonical environments (cloud DEV/ACC/PRD + onprem DEV/ACC/PRD)
+  - `npm run -s check` remains failing on pre-existing db naming-alignment debt outside changed scope
+- [x] P-131 Completed primitive-token granularity sweep for navigation/link surfaces and accessibility-safe token generation:
+  - added explicit independent nav/sidebar/nav-pill/link primitives in shared token generation and required token contracts to reduce cross-primitive palette coupling
+  - added missing link-focused primitives (`--link-focus-ring`, `--link-muted-fg`) and gradient button base primitive (`--btn-gradient-bg`) to full token contract + section mapping + runtime defaults
+  - aligned UI Kit preview edit targets to primitive-local link tokens (removed shared action-token fallback usage in link examples)
+- [x] P-132 Fixed root-cause theme contract/a11y preset regressions in canonical generator:
+  - remediated systematic contrast failures for visited links, footer social states, stepper complete state, outline CTA/breadcrumb hover, and hero accent text with contrast-aware token derivation
+  - `npm run -s check:theme-contracts` => pass (100 presets validated)
+- [x] P-133 Validation evidence for 2026-04-10 UI/theme sweep:
+  - `npx tsc --noEmit` => pass
+  - `npm run -s check:uikit-parity` => pass
+  - `npm run -s check:uikit-coverage` => pass
+  - `npm run -s check:page-primitive-adoption` => pass
+  - `npm run -s check:route-domain-primitive-parity` => pass
+  - `npx jest --runInBand client/src/tests/themePaletteBuilder.test.ts client/src/tests/PreviewParity.test.tsx server/tests/themeComponentContracts.test.ts server/tests/themeContrastParity.test.ts` => pass
+- [x] P-134 Added critical operating-standard expansion to `aimem.md` from user governance guidance:
+  - enforced deterministic scope expansion from user findings/examples (examples are signals, not absolute scope bounds)
+  - codified expert-owner AI delivery expectation, expert-agent collaboration, and mandatory post-change standards-conformance review reporting
+- [x] P-135 Fixed platform default theme apply visibility/reliability root path (save/activate/reset):
+  - added dedicated branding cache refresh helper for runtime-resolved theme + org-context invalidation after theme mutations
+  - wired Theme Editor save/activate/reset success paths to shared branding refresh flow and `no-store` fetches
+  - hardened `/api/theme/resolved` response headers to disable stale caching and vary by host/session/org context
+  - clarified Theme Editor platform-target behavior with explicit scoped note (platform default applies where no active org theme overrides it)
+- [x] P-136 Executed platform-wide contrast remediation sweep from shared primitives outward:
+  - removed opacity-based disabled styling in shared UI primitives and replaced with semantic disabled token usage (text/bg/border)
+  - remediated page-level low-contrast hotspots reported/derived from findings (`landing`, `login`, `register`, `ThemeEditor`, `NotificationCenter`, `LessonCredits`, `OrgRegistrationWizard`, `LessonPodcastWizard`, `QuizSinglePlayer`, `SinglePlayer`)
+- [x] P-137 Validation evidence for 2026-04-13 theme+contrast reliability sweep:
+  - `npx tsc --noEmit` => pass
+  - `npm run -s check:ui-contrast` => pass
+  - `npm run -s audit:theme-ui:strict` => pass (0 findings)
+  - `npm run -s check:page-primitive-adoption` => pass
+  - `npx jest client/src/tests/lessonViewerNavigation.test.ts server/tests/languageArtifactService.test.ts server/tests/brandingAccessPolicy.test.ts --runInBand` => pass (3 suites / 18 tests)
+- [x] P-138 Agentic standards-conformance review loop completed (aimem P0):
+  - expert-agent review pass #1 surfaced 2 theme freshness conformance gaps and 4 contrast/token consistency gaps
+  - remediation applied in the same cycle (query-path cache bypass + endpoint no-store headers + residual opacity/token fixes)
+  - expert-agent review pass #2 => zero findings (with residual recommendation for user visual smoke tests across cloud/onprem)
+- [x] P-139 Optimized AI operating standards architecture for directive reliability:
+  - refactored `aimem.md` into explicit master-directory role with mandatory skill-routing and preflight selection checklist
+  - created modular LearnPlay skills for governance, UI/tokens, API/data contracts, testing/release gates, and observability/rollback
+  - published team-scoped skills under `/antigravity/.agents/skills` and mirrored local scope under `~/.codex/skills`
+- [x] P-140 Translation wizard cohesion + long-wait remediation cycle (cloud+onprem shared paths):
+  - unified run entry at Step 1 with explicit execution mode (`AI Auto Run` vs `Manual Draft`) and immediate run start from primary CTA
+  - strengthened run lifecycle visibility with persistent run-status chip and deterministic step labeling (`Scope & Confirm` -> `Run Translation` -> `Review Outcomes` -> remediations/finalize)
+  - fixed quick-artifact language/source fallback routing to honor resolved artifact lesson targets
+  - reduced viewer perceived wait by rendering PPTX immediately during background slide optimization and starting viewer fetch without lesson-status waterfall gating
+  - hardened translation resume state restoration against hidden-step ping-pong when optional podcast/PPTX flow visibility changes
+- [x] P-141 Full landscape devtools rollout and parity verification (cloud+onprem):
+  - fixed package build/runtime blockers discovered during rollout: build DB URL resolution, devadmin Node runtime loading, promotion DB tunnel parsing, and onprem variant upload-root asset export
+  - committed and pushed rollout fixes before deployment per source-control policy
+  - deployed cloud via devtools/devadmin DEV -> ACC -> PRD with package `LP-CL-V1.00.005`
+  - verified cloud devtools 3-way compare: learnplay `LP-CL-V1.00.005` on DEV/ACC/PRD; DB tables `198`, columns `2624`, enums `65`, schema diff `0`
+  - deployed onprem via devtools/devadmin DEV -> ACC -> PRD with package `LP-OP-V1.00.003`
+  - verified onprem devtools 3-way compare: learnplay `LP-OP-V1.00.003` on DEV/ACC/PRD; DB tables `196`, columns `2591`, enums `65`, schema diff `0`
+- [x] P-142 Added customer-facing lppadmin rollout verification:
+  - extended cloud/onprem `lppadmin parity-report` into a `rollout-verify` alias and Quick Status menu item
+  - added local DB schema counts for tables, columns, enums, constraints, and indexes alongside installed and manifest version evidence
+- [x] P-143 Fixed lesson viewer language-switch regression and captured Node test-runner knowledge:
+  - lesson viewer now keeps the presentation surface renderable during translated-language PPTX fallback/pending states
+  - language switcher recovers the source-language option from artifact fallback metadata when `/languages` only returns the selected variant
+  - persisted Codex WSL Jest runner guidance to `docs/aimem/aimem.md` and `docs/handoverdocs/COMMAND_RUNBOOK.md`
+  - validation: focused Jest suites passed with Linux Node; TypeScript `--noEmit` passed

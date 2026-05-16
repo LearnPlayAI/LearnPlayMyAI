@@ -1,0 +1,11 @@
+{
+  "fixtureId": "pptx-basic-ai-course",
+  "requiredSlideSectionsMin": 4,
+  "requiredFields": [
+    "rawText",
+    "wordCount",
+    "sections",
+    "sourceMap"
+  ],
+  "expectsSlideReferences": true
+}

@@ -1,0 +1,12 @@
+{
+  "fixtureId": "pdf-numbered-headings",
+  "expectedHeadingPattern": "numbered",
+  "requiredSectionsMin": 5,
+  "requiredFields": [
+    "rawText",
+    "wordCount",
+    "sections",
+    "sourceMap"
+  ],
+  "expectsPageReferences": true
+}

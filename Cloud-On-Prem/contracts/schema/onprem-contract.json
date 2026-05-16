@@ -1,0 +1,13 @@
+{
+  "product": "onprem",
+  "version": "1",
+  "generatedAt": "2026-04-27T16:50:14Z",
+  "expected": {
+    "tables": 198,
+    "columns": 2624,
+    "constraints": 207,
+    "indexes": 274,
+    "enums": 65,
+    "schemaSignature": "b1fadf69b34b6bcccb19673c33de0317"
+  }
+}

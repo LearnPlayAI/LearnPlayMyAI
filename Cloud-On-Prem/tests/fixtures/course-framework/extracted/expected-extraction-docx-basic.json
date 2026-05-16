@@ -1,0 +1,20 @@
+{
+  "fixtureId": "docx-basic-ai-course",
+  "wordCountMin": 120,
+  "requiredHeadings": [
+    "Course Title",
+    "Overview",
+    "Lesson 1",
+    "Lesson 2",
+    "Lesson 3",
+    "Key Takeaways"
+  ],
+  "requiredFields": [
+    "rawText",
+    "wordCount",
+    "sections",
+    "structuredHints",
+    "sourceMap",
+    "metadata"
+  ]
+}

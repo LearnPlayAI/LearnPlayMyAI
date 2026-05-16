@@ -1,0 +1,146 @@
+# AI Development Operating Standard (Priority List)
+
+## How To Use This File
+- This file is the mandatory operating standard for AI developer agents on LearnPlay.
+- Use it before any analysis, planning, implementation, migration, testing guidance, or deployment guidance.
+- Priority order is strict: `P0` (highest), then `P1`, then `P2`.
+- If directives conflict, follow the highest-priority directive and surface the conflict to the user.
+- Treat user requests as goals and apply these directives to derive a complete, safe, production-ready implementation plan.
+- Keep this file self-evolving by adding new durable architecture/operating rules when important considerations are discovered.
+
+## Master Directory And Skill Routing
+- `aimem.md` is the master control file. It defines universal directives plus the mandatory skill-routing model.
+- Detailed operational playbooks are modularized as LearnPlay skills under repository scope: `/antigravity/.agents/skills` (team/source-of-truth), with optional local mirror under `~/.codex/skills` for personal/global use:
+- `learnplay-core-governance`
+- `learnplay-ui-ux-tokens`
+- `learnplay-api-data-contracts`
+- `learnplay-testing-release-gates`
+- `learnplay-observability-rollback`
+- Before any work starts, AI must select and apply the exact skill set required by task scope.
+- Skill routing is mandatory:
+- Always load `learnplay-core-governance` first.
+- Add `learnplay-ui-ux-tokens` for any UI/UX/frontend/styling/accessibility change.
+- Add `learnplay-api-data-contracts` for any API/backend/data/schema/migration/change-contract work.
+- Add `learnplay-testing-release-gates` for all substantial change sets and all release-impacting changes.
+- Add `learnplay-observability-rollback` for mutable runtime behavior, propagation, caching, telemetry, or rollback-sensitive domains.
+
+## Mandatory Preflight Skill Checklist
+- `1.` Confirm goal in plain language and target scope (`cloud + onprem` unless explicitly narrowed).
+- `2.` Select applicable skills from the routing map and state them before implementation.
+- `3.` Complete code stocktake (direct + indirect impact areas) before proposing implementation.
+- `4.` Define validation matrix and expert review loop before edits.
+- `5.` After implementation, run standards conformance review (self + expert-agent) and remediate until zero findings.
+
+## User-Driven E2E Validation Protocol (Default)
+- For user-facing runtime behavior, default validation approach is user-executed end-to-end testing with AI-assisted triage/remediation.
+- Current operator contract: the user owns deployment and manual runtime testing unless they explicitly ask AI to deploy or run browser validation. AI must not run browser testing by default. AI must provide deployment-ready source changes, exact manual test steps, and screenshot triage support, and must not treat source-local checks as deployed runtime validation.
+- AI must provide explicit step-by-step manual test steps (preconditions, actions, expected results) for each impacted flow.
+- User screenshot findings are first-class evidence and must be mapped to exact UI/API/code paths before remediation.
+- AI must maintain an iterative loop until closure: `user test -> screenshot evidence -> root-cause analysis -> fix -> targeted regression checks -> user retest`.
+- For each iteration, AI must call out `pass/fail/blocked` per step and list the remaining defects/gaps.
+- This protocol applies to both `cloud` and `onprem` by default unless user explicitly narrows scope.
+
+- `P0` Default scope is always `cloud + onprem`; single-variant only when user explicitly limits scope.
+- `P0` YOU MUST ALWAYS base your recommendations and plans on facts, so you may only propose solutions or recommendations after you have analyzed the code related (directly and indirectly) to the issue.
+- `P0` User findings/examples are signals, not absolute scope boundaries; AI must deterministically expand investigation/fix scope platform-wide to capture related direct and indirect patterns even when not explicitly listed by the user.
+- `P0` AI must operate as the technical expert owner across system/UI/DB/backend/testing architecture and implementation, minimizing technical burden on the user while translating user vision into production-grade delivery.
+- `P0` AI must consult and coordinate relevant expert agents when beneficial, and synthesize their outputs into one cohesive implementation plan and execution path.
+- `P0` Expert-agent scope is to strengthen technical correctness, bug/gap detection, and edge-case coverage; when end-to-end user validation is needed, AI must request focused user functional tests and accept screenshots/findings as input.
+- `P0` For UI/runtime flow defects, AI must always provide deterministic manual E2E test steps the user can execute, then use returned screenshots/findings as required evidence for subsequent fixes.
+- `P0` On completion of any implementation cycle, AI must provide both: (a) manual test steps and (b) a reusable screenshot-analysis prompt template the user can paste with test evidence for follow-up remediation.
+- `P0` After every change set, AI must validate implemented changes against `aimem.md` standards (self-review plus expert-agent review where relevant) and report any non-conformance findings with required remediation actions.
+- `P0` All app/schema/db changes are implemented in `DEV` only; DEV workspace + DEV DB are the single source of truth.
+- `P0` Deployments flow only through `devadmin`: `DEV -> ACC -> PRD`.
+- `P0` Every deployment/migration must be idempotent and state-aware (compare target state to canonical DEV state; apply only required diffs).
+- `P0` Every change made in DEV must remain fully deployable and installable for both variants (unless explicitly scoped to one variant).
+- `P0` Any new mandatory runtime env/secret key introduced by application changes must be wired in the same cycle across installers, update scripts, env examples, and admin secret-validation tooling for both cloud and onprem.
+- `P0` App/schema/DB naming must stay in strict alignment with zero naming drift.
+- `P0` No compatibility bridges in final state (no dual-name fallback logic, no alias compatibility layers for drift).
+- `P0` AI must use expert judgment and challenge risky/incorrect requests with safer alternatives.
+- `P0` User requests must be interpreted as goals, not literal implementation instructions; AI must determine the complete solution scope using grounded code analysis.
+- `P0` Before implementation, AI must complete a codebase stocktake covering direct and indirect impact areas (application logic, API routes, services, DB/schema/migrations, scripts, jobs, tooling, and deployment/runtime paths) for both cloud and onprem unless explicitly scoped otherwise.
+- `P0` AI must include edge-case analysis and gap analysis before implementation, then execute review/remediation loops and only stop when there are zero outstanding findings.
+- `P0` Before any major change set, AI must restate its understanding of the goal in plain language and request user approval before implementation starts.
+- `P0` If user intent/prompt quality is ambiguous, AI must offer to generate a complete execution prompt, accept user notes, refine it, and ask for final approval (`run that`) before proceeding.
+- `P0` Before presenting a recommended implementation approach, AI must consult the relevant expert perspectives for the goal domain (for example system architecture, UI/UX, security, data) and include those expert recommendations in the proposed plan.
+- `P0` After implementation, AI must perform a self-review and also obtain a findings report from the relevant domain expert(s) for the changed area.
+- `P0` Expert findings must be presented with required remediation actions, then executed in a loop: fix -> expert review -> findings -> fix, and only stop when there are zero remaining findings.
+- `P0` Before any potentially destructive action on any system, AI must explicitly ask the user to create a snapshot/backup of that target system and wait for user confirmation before proceeding.
+- `P0` Fixes must be applied to source code only (DEV workspace canonical paths), never as runtime hotpatches on deployed artifacts (`/opt/learnplay/...`). Runtime systems may be updated only through the normal deployment pipeline from source.
+- `P0` Before implementing any fix, AI must verify root cause directly in the relevant code paths; AI must not implement workarounds/fallback-only patches that bypass root cause resolution or introduce parallel competing systems.
+- `P0` Avoid parallel/competing remediation systems: if a fallback exists for resilience, it must be temporary, explicitly bounded, and accompanied by a direct root-cause fix path in the same implementation cycle.
+- `P0` Mutable domain reads must obey a read-after-write coherence contract: every feature domain and related (directly and indirectly) mutation must invalidate and refetch all active consumer query keys across all scope variants.
+- `P0` All live mutable-domain read endpoints must enforce explicit freshness/cache policy by contract and apply it consistently across all read paths.
+- `P0` Scope-sensitive payloads must include resolved source scope and a monotonic revision identifier; clients must use this metadata as authoritative for hydration and state reconciliation.
+- `P0` Any change affecting user-visible runtime behavior must pass a mandatory smoke matrix before merge/release across all relevant scopes, contexts, and variants.
+- `P0` Before ANY testing of code changes (AI/browser/manual/automation), the current change set MUST first be deployed to both DEV runtimes using host devadmin deployment tools/scripts:
+- `P0` Cloud DEV target: `https://stcloud.learnplay.co.za`
+- `P0` Onprem DEV target: `https://stonprem.learnplay.co.za`
+- `P0` Tests run before this dual DEV deployment are invalid and must be repeated post-deploy.
+
+- `P1` Use ORM/query builder by default; raw SQL only when necessary (migrations/admin/ORM gap), always parameterized and reviewed.
+- `P1` All UI/UX changes must align with theme token architecture and remain cloud/onprem consistent.
+- `P1` User-visible labels and wording that differ by organization type (education, business, elearning) must render through the approved terminology helpers/components (`getTerminology`, `getLowercaseTerminology`, `useOrganizationTerminology`, `Term`, or closely related shared helpers). Do not hardcode core role/unit/subject wording in UI paths where organization type changes the user's vocabulary.
+- `P1` Runtime UI token consumption must not wrap full-color semantic tokens in legacy `hsl(var(--token))` forms; consume semantic tokens directly (`var(--token)`) and use valid alpha/tint composition (`/opacity` utilities or `color-mix`) to preserve UI Kit/runtime primitive parity.
+- `P1` License-management UX must always surface pending onprem license requests (all system types) and provide an explicit SuperAdmin approval path in customer and global workflows; pending request creation must also bind to a concrete enterprise-system record for policy parity.
+- `P1` Theme palette actions must remain AI-first for synthesis/remediation workflows: `Apply AI Palette` and `Apply + Auto-fix Contrast` must use AI synthesis endpoints (no deterministic auto-fix path), and any recurring low-contrast contract pair must be remapped to dedicated tone-aware tokens rather than shared generic text tokens.
+- `P1` Theme editor hydration/resolution must preserve user-authored token values as authoritative. Token expansion/regeneration may fill missing contract keys but must never overwrite explicitly authored primitive values during fetch/save/apply loops.
+- `P1` Platform data import on non-empty databases must preserve runtime/user-managed settings by default (especially `systemSettings`); any override to import these settings must be explicit, operator-approved, and opt-in.
+- `P1` Integration bootstrap/migration helpers must never override an explicitly persisted user transport/provider selection; env-derived bootstrap defaults are allowed only when no explicit persisted selection exists.
+- `P1` Shared durability contracts are mandatory for user-managed configuration domains: add/maintain automated contract tests that assert non-overwrite behavior for runtime settings and theme customization persistence paths.
+- `P1` Structural lesson workflow gating (content lessons, key takeaways, overview) must be enforced by explicit required-step contracts in both UI and API; do not infer completion from raw content presence alone.
+- `P1` Translation wizard UX must default to a cohesive single-run orchestration model: target language + artifact selection up front, one explicit run start action, live per-artifact processing status, and targeted remediation/retry for failed artifacts (no forced per-artifact manual stepping unless user explicitly selects manual mode).
+- `P1` All UI/UX changes must meet a modern, professional, polished standard (no placeholder/unstyled/boilerplate-looking output).
+- `P1` UI must be fully responsive with mobile-first quality and desktop excellence; layouts, spacing, hierarchy, and interactions must be intentionally designed for both.
+- `P1` Prefer card-based responsive patterns over table-based layouts; tables are disallowed by default unless explicitly approved by the user for the specific case.
+- `P1` Avoid tab-heavy navigation patterns on mobile; prefer stacked/sectioned card flows, accordions, or progressive disclosure patterns that are mobile-friendly.
+- `P1` Do not introduce modals/popovers/dialog flows unless explicitly requested by the user.
+- `P1` User-edited/customized theme tokens and accessibility remediation decisions must persist and never be overwritten by other systems.
+- `P1` Keep DEV schema/database at 100% parity with code-defined schema.
+- `P1` Storage reference integrity must be validated for both cloud and onprem in DEV: every DB-referenced `/private` or `/public` file key must resolve to an existing file under the variant upload root before promotion.
+- `P1` Build/export scripts that package file assets must resolve upload roots from canonical scoped runtime paths first (`/opt/learnplay/cloud/uploads`, `/opt/learnplay/onprem/uploads`, or env-declared scoped overrides), and only use legacy/repo paths as explicit fallback with diagnostic logging.
+- `P1` Migration package generation in baseline mode must include the latest scoped runtime baseline plus all subsequent delta migrations and complete journal entries; never ship a single-file baseline that truncates newer migrations.
+- `P1` `schema-full.sql` and schema parity contracts used for runtime enforcement must not silently normalize stale DEV drift; critical runtime-required columns/tables must be hard-gated at build time.
+- `P1` Updater functional schema parity checks must be scoped to package-owned contract tables/columns/enums (core scope) and must not hard-fail on customer-managed extra structural objects outside contract scope.
+- `P1` Onprem cloud-sync request verification must honor explicit request auth mode (`system` vs `shared`) and must not force per-system signature validation solely because a system id appears in payload; shared mode remains the controlled bootstrap/recovery path.
+- `P1` Onprem license/check-in control-plane authority is Cloud PRD only for all onprem stages (`DEV/ACC/PRD`); source code, env wiring, installers, and update scripts must not route or sign onprem check-ins against non-PRD cloud stages.
+- `P1` Onprem/cloud install+update tooling must not use legacy generic shared-secret aliases (`ONPREM_CLOUD_SYNC_SHARED_SECRET` / `LEARNPLAY_ONPREM_CLOUD_SYNC_SHARED_SECRET`); only PRD-authoritative key names are permitted in source (`ONPREM_CLOUD_SYNC_SHARED_SECRET_PRD`, `LEARNPLAY_ONPREM_CLOUD_SYNC_SHARED_SECRET_PRD`).
+- `P1` Unknown migration journal entries must be reconciled deterministically during updates (auto-prune with explicit strict-mode override) so normal updates do not fail/retry due to rotated runtime-baseline migration sets.
+- `P1` GitHub is backup/transport only; this host workspace is authoritative and must not be overwritten by uncontrolled pull behavior.
+- `P1` Documentation root is `/antigravity/docs` (not inside `Cloud-On-Prem`).
+- `P1` `$knowledge` and broad AI context bootstraps must use the compact kernel/index model: default-load `docs/knowledge/KNOWLEDGE_KERNEL.md`, `docs/knowledge/KNOWLEDGE_INDEX.md`, current landscape, and current handover only; archives, old handover packs, generated audits, changelog history, and repo-local legacy docs are searchable references, not default context.
+- `P1` Active documentation must describe current truth only. Historical, generated, temporary, superseded, or wave-specific material belongs under an `archive/` path and must not be treated as active operating guidance unless explicitly revived.
+- `P1` `docs/TODO/todo.md` is mandatory execution tracking. AI must keep it current for phases, tasks, findings, statuses, and progress so no required activity is missed.
+- `P1` For screenshot-driven UAT cycles, `docs/TODO/todo.md` must track each user-reported defect iteration with status (`open`, `fixed-awaiting-retest`, `closed`) and latest evidence timestamp.
+- `P1` `aimem.md` is self-evolving: when important architecture/operating considerations are discovered during or after work, AI must add them here as durable directives.
+- `P1` The global changelog at `/antigravity/docs/handoverdocs/CHANGELOG.md` must be updated for completed implementation cycles using its required format: entry ID, timestamp (`YYYY-MM-DD HH:MM:SS TZ +/-HH:MM`), variant (`cloud|onprem|both`), issue summary, and fix summary (high-level, no file/code detail).
+- `P1` On task completion, AI must provide a short non-technical "stupid human" summary of what was changed and why.
+- `P1` Shared invalidation/refresh helpers must be the only approved mechanism per domain, with automated tests asserting exact key coverage, scope variants, and active refetch behavior.
+- `P1` Mutable-domain operations must emit structured audit telemetry for target scope, previous revision, new revision, and propagation/invalidation outcome, including stale-read detection signals.
+- `P1` Mutable runtime state must be rollback-safe by design, with last-known-good recovery and versioned activation/change history where applicable.
+
+- `P2` Enforce platform boundary discipline in all decisions:
+- `P2` `devadmin` is internal LearnPlay tooling for orchestration/build/deploy.
+- `P2` `lppadmin` is runtime/customer-facing onprem administration tooling.
+- `P2` Remote operations must use approved SSH alias/target discipline.
+- `P2` Approved passwordless remote SSH aliases from this host:
+- `P2` Cloud ACC: `ssh acc-cloud-devadmin`
+- `P2` Cloud PRD: `ssh prd-cloud-devadmin`
+- `P2` Onprem ACC: `ssh acc-onprem-devadmin`
+- `P2` Onprem PRD: `ssh prd-onprem-devadmin`
+- `P2` Canonical LearnPlay environment URLs:
+- `P2` Cloud DEV: `https://stcloud.learnplay.co.za`
+- `P2` Cloud ACC: `https://acccl.learnplay.co.za`
+- `P2` Cloud PRD: `https://learnplay.co.za`
+- `P2` Onprem DEV: `https://stonprem.learnplay.co.za`
+- `P2` Onprem ACC: `https://accop.learnplay.co.za`
+- `P2` Onprem PRD: `https://prdop.learnplay.co.za`
+- `P2` Respect environment segregation across `cloud/onprem` and `DEV/ACC/PRD`.
+- `P2` Any release touching mutable runtime behavior must include a documented scope map of readers, writers, mutation paths, and cache/state boundaries for all supported variants.
+- `P2` The dev host runs the LearnPlay workspace and project Node tooling inside WSL/Linux, not Windows-native execution. Do not run LearnPlay Jest/Node tooling with the bundled Windows Node runtime from `C:\Users\...\codex-runtimes`; it resolves the repo as a UNC path and can fail with `Preset ts-jest/presets/default-esm not found relative to rootDir \\wsl.localhost\...`. Use WSL Node/npm/npx for Jest, TypeScript, package builds, and local app processes. If shell Node tooling is missing, run `bash scripts/dev-workspace/bootstrap-wsl-dev.sh node`; known WSL Node path: `/home/lppadmin/.nvm/versions/node/v20.20.2/bin/node`. Scope: both cloud and onprem source-workspace testing.
+
+- `P2` File storage/path canonicalization standard is approved in principle but marked `Pending Remediation`.
+- `P2` Before enforcement, run full stocktake and remediation planning for both `/opt/learnplay/cloud/uploads` and `/opt/learnplay/onprem/uploads`, including DB path/value remediation plan for DEV only.
+- `P2` No file-storage restructuring implementation starts until that remediation plan is presented and explicitly approved.
+## 2026-04-28: Supported languages are required platform data
+- The `supportedLanguages` catalog is required platform data for both cloud and onprem runtimes. Install and update maintenance paths must canonicalize it, and translation/language APIs should fail safe to the canonical list if a target database is empty or source-only. Do not make normal app startup perform implicit persistent-data seeding; use explicit package/install/update data paths.

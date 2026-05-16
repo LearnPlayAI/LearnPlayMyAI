@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Starter Pack",
+    "creditsAmount": 500,
+    "priceAmount": "49.99",
+    "currency": "ZAR",
+    "badge": null,
+    "features": ["500 LP Credits", "Use for quiz generation", "Use for lesson AI features", "No expiry"],
+    "isActive": true,
+    "displayOrder": 1,
+    "colorScheme": "green"
+  },
+  {
+    "name": "Professional Pack",
+    "creditsAmount": 2000,
+    "priceAmount": "149.99",
+    "currency": "ZAR",
+    "badge": "Popular",
+    "features": ["2000 LP Credits", "25% more value than Starter", "Full AI feature access", "No expiry"],
+    "isActive": true,
+    "displayOrder": 2,
+    "colorScheme": "blue"
+  },
+  {
+    "name": "Enterprise Pack",
+    "creditsAmount": 5000,
+    "priceAmount": "349.99",
+    "currency": "ZAR",
+    "badge": "Best Value",
+    "features": ["5000 LP Credits", "30% more value than Starter", "Priority AI processing", "No expiry"],
+    "isActive": true,
+    "displayOrder": 3,
+    "colorScheme": "purple"
+  },
+  {
+    "name": "Power Pack",
+    "creditsAmount": 10000,
+    "priceAmount": "599.99",
+    "currency": "ZAR",
+    "badge": null,
+    "features": ["10000 LP Credits", "Maximum value", "Dedicated AI capacity", "No expiry"],
+    "isActive": true,
+    "displayOrder": 4,
+    "colorScheme": "orange"
+  }
+]

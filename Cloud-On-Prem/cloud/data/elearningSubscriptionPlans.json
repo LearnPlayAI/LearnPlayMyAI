@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Basic Learner",
+    "planType": "learner",
+    "interval": "monthly",
+    "priceAmount": "99.00",
+    "currency": "ZAR",
+    "learnerAllotment": 50,
+    "creditAllotment": null,
+    "features": ["Up to 50 learners", "Course purchases at full price", "Progress tracking", "Certificates"],
+    "badge": null,
+    "colorScheme": "green",
+    "isActive": true,
+    "displayOrder": 1
+  },
+  {
+    "name": "Pro Learner",
+    "planType": "learner",
+    "interval": "monthly",
+    "priceAmount": "199.00",
+    "currency": "ZAR",
+    "learnerAllotment": 200,
+    "creditAllotment": null,
+    "features": ["Up to 200 learners", "15% discount on all course purchases", "Advanced progress tracking", "Certificates", "Priority support"],
+    "badge": "Most Popular",
+    "colorScheme": "blue",
+    "isActive": true,
+    "displayOrder": 2
+  },
+  {
+    "name": "Basic Educator",
+    "planType": "educator",
+    "interval": "monthly",
+    "priceAmount": "149.00",
+    "currency": "ZAR",
+    "learnerAllotment": null,
+    "creditAllotment": 500,
+    "features": ["500 monthly LP Credits", "Course creation tools", "Quiz builder", "Basic analytics", "Student management"],
+    "badge": null,
+    "colorScheme": "purple",
+    "isActive": true,
+    "displayOrder": 3
+  },
+  {
+    "name": "Pro Educator",
+    "planType": "educator",
+    "interval": "monthly",
+    "priceAmount": "499.00",
+    "currency": "ZAR",
+    "learnerAllotment": null,
+    "creditAllotment": 2500,
+    "features": ["2500 monthly LP Credits", "Full AI course generation", "Advanced analytics", "Custom branding", "Revenue sharing", "Priority support"],
+    "badge": "Best Value",
+    "colorScheme": "orange",
+    "isActive": true,
+    "displayOrder": 4
+  }
+]

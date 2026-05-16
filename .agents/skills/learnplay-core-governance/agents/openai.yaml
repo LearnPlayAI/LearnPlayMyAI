@@ -1,0 +1,5 @@
+interface:
+  display_name: "LearnPlay Governance"
+  short_description: "Mandatory planning, scope, and root-cause governance"
+  default_prompt: "Apply LearnPlay governance preflight, determine full scope, and produce a safe execution plan before coding."
+allow_implicit_invocation: true

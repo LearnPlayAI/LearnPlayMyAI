@@ -1,0 +1,23 @@
+[
+  {
+    "learnerMonthlyCost": "8.99",
+    "elearningLearnerMonthlyCost": "19.99",
+    "elearningLearnerDiscountPercent": "15.00",
+    "currency": "ZAR",
+    "defaultCourseCommissionRate": "0.3000",
+    "minCoursePrice": "50.00",
+    "maxCoursePrice": "10000.00",
+    "creditsPerThumbnailGeneration": 15,
+    "creditsPerHealthReport": 10,
+    "creditsPerTopicAnalysis": 5,
+    "creditsPerFrameworkGeneration": 20,
+    "creditsPerExplanationGeneration": 25,
+    "creditsPerAnswerCheck": 20,
+    "creditsPerLessonGeneration": 50,
+    "creditsPerAiFix": 10,
+    "creditsPerQuizGeneration": 15,
+    "creditsPerLessonTranslation": 10,
+    "creditsPerQuizTranslation": 5,
+    "creditsPerCourseTranslation": 50
+  }
+]

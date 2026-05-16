@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ac00b9b5-ab8f-42b2-85be-3b483aec8762",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Height",
+    "statUnit": "meters",
+    "displayOrder": 1
+  },
+  {
+    "id": "4db7f33d-c2b3-4ed6-a1a3-c7860ac2f281",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Weight",
+    "statUnit": "kg",
+    "displayOrder": 2
+  },
+  {
+    "id": "b9008429-b503-47bc-983a-ad3b1d00dd40",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Length",
+    "statUnit": "meters",
+    "displayOrder": 3
+  },
+  {
+    "id": "95c6d2a0-699f-4b3d-b27a-998f441b6781",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Killer Rating",
+    "statUnit": "/10",
+    "displayOrder": 4
+  },
+  {
+    "id": "bea9d1a6-b94a-4546-8598-ca1913d47ffe",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Intelligence",
+    "statUnit": "/10",
+    "displayOrder": 5
+  },
+  {
+    "id": "1d8eca37-5880-445f-a4d9-3b5cca79961c",
+    "collectionId": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "statName": "Age",
+    "statUnit": "million years",
+    "displayOrder": 6
+  }
+]

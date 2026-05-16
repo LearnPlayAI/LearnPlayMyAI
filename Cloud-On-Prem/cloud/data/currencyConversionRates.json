@@ -1,0 +1,34 @@
+[
+  {
+    "baseCurrency": "ZAR",
+    "targetCurrency": "USD",
+    "rate": "0.05500000",
+    "source": "manual",
+    "isActive": true,
+    "updatedBy": null
+  },
+  {
+    "baseCurrency": "ZAR",
+    "targetCurrency": "EUR",
+    "rate": "0.05100000",
+    "source": "manual",
+    "isActive": true,
+    "updatedBy": null
+  },
+  {
+    "baseCurrency": "USD",
+    "targetCurrency": "ZAR",
+    "rate": "18.18000000",
+    "source": "manual",
+    "isActive": true,
+    "updatedBy": null
+  },
+  {
+    "baseCurrency": "EUR",
+    "targetCurrency": "ZAR",
+    "rate": "19.60000000",
+    "source": "manual",
+    "isActive": true,
+    "updatedBy": null
+  }
+]

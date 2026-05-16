@@ -1,0 +1,4 @@
+interface:
+  display_name: "Core Governance"
+  short_description: "Mandatory cross-task delivery governance."
+  default_prompt: "Apply this skill to all tasks. Enforce preflight reading, root-cause workflow, safe/idempotent changes, docs/tests lockstep, completion discipline, and mandatory changelog updates."

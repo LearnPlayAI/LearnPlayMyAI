@@ -1,0 +1,11 @@
+[
+  {
+    "minimumProfitPercentage": "30.00",
+    "profitStepDecrease": "5.00",
+    "platformCostTiers": [],
+    "creditsPerLessonTextOnlyMin": 40,
+    "creditsPerLessonTextOnlyMax": 90,
+    "creditsPerLessonWithImagesMin": 140,
+    "creditsPerLessonWithImagesMax": 290
+  }
+]

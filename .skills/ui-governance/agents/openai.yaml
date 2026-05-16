@@ -1,0 +1,4 @@
+interface:
+  display_name: "LearnPlay UI Governance"
+  short_description: "Mobile-first, branded, no-modal UI standards."
+  default_prompt: "Apply this skill for all UI/frontend tasks. Enforce a design contract before coding, mobile-first responsiveness, Theme Editor-governed branding compliance, non-modal flows, reusable token-driven patterns, draft/persistence patterns, cache invalidation, and manual visual QA evidence."

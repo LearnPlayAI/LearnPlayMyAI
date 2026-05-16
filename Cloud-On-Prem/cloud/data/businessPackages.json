@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bpkg-starter-00000000-0000-0000-000000000001",
+    "name": "Starter",
+    "tier": "starter",
+    "maxLearners": 25,
+    "maxTeachers": 3,
+    "maxOrgAdmins": 2,
+    "monthlyCredits": 100,
+    "annualDiscountPercent": "10.00",
+    "valueProposition": "Perfect for small teams getting started with LearnPlay. Get 2 months free when you pay annually!",
+    "features": ["Up to 25 learners", "3 teachers", "100 monthly LP Credits", "Standard support", "Quiz creation", "Basic analytics"],
+    "badge": null,
+    "colorScheme": "green",
+    "isActive": true,
+    "displayOrder": 1
+  },
+  {
+    "id": "bpkg-professional-000000-0000-0000-000000000002",
+    "name": "Professional",
+    "tier": "professional",
+    "maxLearners": 100,
+    "maxTeachers": 10,
+    "maxOrgAdmins": 5,
+    "monthlyCredits": 500,
+    "annualDiscountPercent": "15.00",
+    "valueProposition": "Ideal for growing organizations. Save 15% with annual billing!",
+    "features": ["Up to 100 learners", "10 teachers", "500 monthly LP Credits", "Priority support", "AI quiz generation", "Advanced analytics", "Custom branding"],
+    "badge": "Most Popular",
+    "colorScheme": "blue",
+    "isActive": true,
+    "displayOrder": 2
+  },
+  {
+    "id": "bpkg-enterprise-0000000-0000-0000-000000000003",
+    "name": "Enterprise",
+    "tier": "enterprise",
+    "maxLearners": 500,
+    "maxTeachers": 50,
+    "maxOrgAdmins": 20,
+    "monthlyCredits": 2500,
+    "annualDiscountPercent": "20.00",
+    "valueProposition": "For large organizations with unlimited potential. Best value with 20% annual discount!",
+    "features": ["Up to 500 learners", "50 teachers", "2500 monthly LP Credits", "Dedicated support", "API access", "SSO integration", "White-label options", "Custom integrations"],
+    "badge": "Best Value",
+    "colorScheme": "purple",
+    "isActive": true,
+    "displayOrder": 3
+  }
+]

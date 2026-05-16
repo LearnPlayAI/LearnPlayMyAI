@@ -1,0 +1,16 @@
+# Shared functionality schema surface between cloud and onprem
+users
+organizations
+userOrganizationRoles
+courses
+courseLessons
+platformConfiguration
+platformPricing
+quizCreditPricing
+currencyConversionRates
+systemSettings
+supportedLanguages
+enterpriseCustomers
+enterpriseSystems
+enterpriseLicenseRequests
+enterpriseLicenseKeys

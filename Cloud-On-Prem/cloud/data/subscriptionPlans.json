@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Standard",
+    "tier": "standard",
+    "monthlyCredits": 1000,
+    "pricePerTeacher": "99.00",
+    "currency": "ZAR",
+    "badge": null,
+    "features": ["1000 monthly LP Credits", "Unlimited learners", "Quiz creation", "Basic analytics", "Email support"],
+    "colorScheme": "green",
+    "isActive": true,
+    "displayOrder": 1
+  },
+  {
+    "name": "Professional",
+    "tier": "premium",
+    "monthlyCredits": 3000,
+    "pricePerTeacher": "289.00",
+    "currency": "ZAR",
+    "badge": "Most Popular",
+    "features": ["3000 monthly LP Credits", "Unlimited learners", "AI lesson generation", "Advanced analytics", "Custom branding", "Priority support"],
+    "colorScheme": "blue",
+    "isActive": true,
+    "displayOrder": 2
+  },
+  {
+    "name": "Enterprise",
+    "tier": "enterprise",
+    "monthlyCredits": 10000,
+    "pricePerTeacher": "959.00",
+    "currency": "ZAR",
+    "badge": "Best Value",
+    "features": ["10000 monthly LP Credits", "Unlimited learners", "Full AI suite", "Custom integrations", "Dedicated support", "SLA guarantee"],
+    "colorScheme": "purple",
+    "isActive": true,
+    "displayOrder": 3
+  }
+]

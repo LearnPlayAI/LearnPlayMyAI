@@ -1,0 +1,3684 @@
+[
+  {
+    "varName": "achievementCatalog",
+    "tableName": "achievementCatalog",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "category",
+      "requirement",
+      "targetValue",
+      "coinReward",
+      "badgeUrl",
+      "permanentBonus",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "achievementUnlocks",
+    "tableName": "achievementUnlocks",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "achievementId",
+      "progress",
+      "isUnlocked",
+      "unlockedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "activeOneVOneGames",
+    "tableName": "activeOneVOneGames",
+    "columnCount": 36,
+    "columns": [
+      "id",
+      "gameId",
+      "collectionId",
+      "player1Id",
+      "player1Name",
+      "player1SocketId",
+      "player1Ready",
+      "player2Id",
+      "player2Name",
+      "player2SocketId",
+      "player2Ready",
+      "currentTurn",
+      "gamePhase",
+      "bothPlayersReady",
+      "roundTimeSeconds",
+      "gameTimeSeconds",
+      "gameStartedAt",
+      "lastActivityAt",
+      "createdAt",
+      "gameSeed",
+      "roundNumber",
+      "player1Deck",
+      "player2Deck",
+      "player1WonCards",
+      "player2WonCards",
+      "player1RoundsWon",
+      "player2RoundsWon",
+      "tiedCards",
+      "player1CurrentCard",
+      "player2CurrentCard",
+      "selectedStatTypeId",
+      "roundWinner",
+      "roundPhase",
+      "isSpecialTieMode",
+      "tiedStats",
+      "specialTieStatName"
+    ]
+  },
+  {
+    "varName": "activePowerUps",
+    "tableName": "activePowerUps",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "powerUpId",
+      "activatedAt",
+      "expiresAt",
+      "effect",
+      "gameId",
+      "usesRemaining"
+    ]
+  },
+  {
+    "varName": "activeQuizGames",
+    "tableName": "activeQuizGames",
+    "columnCount": 34,
+    "columns": [
+      "id",
+      "gameId",
+      "collectionId",
+      "gameMode",
+      "player1Id",
+      "player1Name",
+      "player1SocketId",
+      "player1Ready",
+      "player1CardCount",
+      "player1RoundsWon",
+      "player2Id",
+      "player2Name",
+      "player2SocketId",
+      "player2Ready",
+      "player2CardCount",
+      "player2RoundsWon",
+      "gamePhase",
+      "bothPlayersReady",
+      "roundTimeSeconds",
+      "gameTimeSeconds",
+      "gameStartedAt",
+      "lastActivityAt",
+      "createdAt",
+      "currentCardIndex",
+      "currentCard",
+      "shuffledCardIds",
+      "turnVersion",
+      "player1Answer",
+      "player2Answer",
+      "player1AnswerTime",
+      "player2AnswerTime",
+      "player1Correct",
+      "player2Correct",
+      "roundNumber"
+    ]
+  },
+  {
+    "varName": "adminChallengeConfig",
+    "tableName": "adminChallengeConfig",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "scope",
+      "organizationId",
+      "challengeType",
+      "title",
+      "description",
+      "goalType",
+      "goalTarget",
+      "coinReward",
+      "xpReward",
+      "powerUpReward",
+      "isActive",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "aiConfig",
+    "tableName": "aiConfig",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "provider",
+      "apiKey",
+      "modelName",
+      "purpose",
+      "isActive",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "brandingThemes",
+    "tableName": "branding_themes",
+    "columnCount": 23,
+    "columns": [
+      "id",
+      "organizationId",
+      "orgName",
+      "status",
+      "presetId",
+      "tokens",
+      "logoUrl",
+      "faviconUrl",
+      "fontHeading",
+      "fontBody",
+      "supportUrl",
+      "supportEmail",
+      "termsUrl",
+      "privacyUrl",
+      "allowEmailBranding",
+      "enableContrastCorrections",
+      "gradientEnabled",
+      "gradientFrom",
+      "gradientTo",
+      "gradientAngle",
+      "customCopy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "buildVersions",
+    "tableName": "build_versions",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "versionNumber",
+      "releaseNotes",
+      "fileName",
+      "filePath",
+      "fileSize",
+      "uploadedBy",
+      "isActive",
+      "buildDate",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "bulkQuizGenerationJobs",
+    "tableName": "bulkQuizGenerationJobs",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "courseId",
+      "organizationId",
+      "createdBy",
+      "status",
+      "totalLessons",
+      "completedLessons",
+      "failedLessons",
+      "jobResults",
+      "createdAt",
+      "completedAt"
+    ]
+  },
+  {
+    "varName": "businessPackagePrices",
+    "tableName": "businessPackagePrices",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "packageId",
+      "currency",
+      "pricePerLearner",
+      "pricePerTeacher",
+      "pricePerOrgAdmin",
+      "isActive",
+      "effectiveFrom",
+      "createdBy",
+      "updatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "businessPackages",
+    "tableName": "businessPackages",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "name",
+      "tier",
+      "maxLearners",
+      "maxTeachers",
+      "maxOrgAdmins",
+      "monthlyCredits",
+      "annualDiscountPercent",
+      "valueProposition",
+      "features",
+      "badge",
+      "colorScheme",
+      "isActive",
+      "displayOrder",
+      "createdBy",
+      "updatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "cardCollections",
+    "tableName": "cardCollections",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "totalCards",
+      "imageKey",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "cards",
+    "tableName": "cards",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "collectionId",
+      "name",
+      "imageKey",
+      "displayOrder",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "cardStats",
+    "tableName": "cardStats",
+    "columnCount": 4,
+    "columns": [
+      "id",
+      "cardId",
+      "statTypeId",
+      "value"
+    ]
+  },
+  {
+    "varName": "certificates",
+    "tableName": "certificates",
+    "columnCount": 19,
+    "columns": [
+      "id",
+      "certificateId",
+      "certificateType",
+      "userId",
+      "organizationId",
+      "lessonId",
+      "courseId",
+      "learnerName",
+      "organizationName",
+      "lessonTitle",
+      "courseTitle",
+      "pdfStoragePath",
+      "pdfFileUrl",
+      "previewImageUrl",
+      "xpEarned",
+      "shareToken",
+      "sharedPlatforms",
+      "completedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "challengeProgress",
+    "tableName": "challengeProgress",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "userId",
+      "challengeId",
+      "currentValue",
+      "isCompleted",
+      "isClaimed",
+      "completedAt",
+      "claimedAt",
+      "resetAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "challengeTemplates",
+    "tableName": "challengeTemplates",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "type",
+      "requirement",
+      "targetValue",
+      "coinReward",
+      "xpReward",
+      "powerUpReward",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "coinAdjustments",
+    "tableName": "coinAdjustments",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "amount",
+      "reason",
+      "adminId",
+      "balanceBefore",
+      "balanceAfter",
+      "adjustedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "coinTransactions",
+    "tableName": "coinTransactions",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "amount",
+      "balance",
+      "type",
+      "description",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "collectionStatTypes",
+    "tableName": "collectionStatTypes",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "collectionId",
+      "statName",
+      "statUnit",
+      "universalUnitId",
+      "displayOrder",
+      "comparisonType"
+    ]
+  },
+  {
+    "varName": "contentTranslationJobs",
+    "tableName": "contentTranslationJobs",
+    "columnCount": 21,
+    "columns": [
+      "id",
+      "organizationId",
+      "sourceCourseId",
+      "targetLanguageCode",
+      "sourceLanguageCode",
+      "status",
+      "progress",
+      "currentStage",
+      "totalItems",
+      "completedItems",
+      "failedItems",
+      "translatedCourseId",
+      "stageDetails",
+      "creditsCharged",
+      "creditCorrelationId",
+      "errorMessage",
+      "startedAt",
+      "completedAt",
+      "initiatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "cosmeticCatalog",
+    "tableName": "cosmeticCatalog",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "type",
+      "effect",
+      "coinCost",
+      "tier",
+      "isActive",
+      "previewUrl",
+      "isSeasonPassExclusive",
+      "seasonNumber",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "cosmeticOwnership",
+    "tableName": "cosmeticOwnership",
+    "columnCount": 4,
+    "columns": [
+      "id",
+      "userId",
+      "cosmeticId",
+      "purchasedAt"
+    ]
+  },
+  {
+    "varName": "courseAssignments",
+    "tableName": "courseAssignments",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "courseId",
+      "organizationId",
+      "assignedBy",
+      "assignmentScope",
+      "userId",
+      "unitId",
+      "subUnitId",
+      "teamId",
+      "targetOrganizationId",
+      "audience",
+      "mandatory",
+      "dueDate",
+      "assignedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseCategories",
+    "tableName": "courseCategories",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "organizationId",
+      "name",
+      "description",
+      "iconName",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseDraftCoverageReports",
+    "tableName": "courseDraftCoverageReports",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "draftId",
+      "totalSegments",
+      "assignedSegments",
+      "unassignedSegments",
+      "overlapSegments",
+      "excludedSegments",
+      "status",
+      "details",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseDraftDocuments",
+    "tableName": "courseDraftDocuments",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "draftId",
+      "fileName",
+      "mimeType",
+      "fileSize",
+      "storagePath",
+      "checksum",
+      "extractionStatus",
+      "extractedContent",
+      "extractionError",
+      "lessonIndex",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseDraftDocumentSegments",
+    "tableName": "courseDraftDocumentSegments",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "draftId",
+      "documentId",
+      "segmentIndex",
+      "segmentType",
+      "text",
+      "textHash",
+      "startOffset",
+      "endOffset",
+      "headingPath",
+      "pageOrSlide",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseDraftFrameworks",
+    "tableName": "courseDraftFrameworks",
+    "columnCount": 25,
+    "columns": [
+      "id",
+      "organizationId",
+      "createdBy",
+      "courseDescription",
+      "analyzedTopics",
+      "selectedTopics",
+      "customTopics",
+      "suggestedTitle",
+      "generatedTitle",
+      "generatedDescription",
+      "generatedLessons",
+      "recommendedLessons",
+      "courseSettings",
+      "generationStatus",
+      "generationError",
+      "generationStartedAt",
+      "generationCompletedAt",
+      "generationMetadata",
+      "currentStep",
+      "version",
+      "expiresAt",
+      "isPublished",
+      "publishedCourseId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseDrafts",
+    "tableName": "courseDrafts",
+    "columnCount": 17,
+    "columns": [
+      "id",
+      "originalCourseId",
+      "organizationId",
+      "createdBy",
+      "title",
+      "description",
+      "thumbnailUrl",
+      "price",
+      "currency",
+      "difficultyLevel",
+      "estimatedDuration",
+      "visibility",
+      "category",
+      "tags",
+      "draftNotes",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseDraftTopicAssignments",
+    "tableName": "courseDraftTopicAssignments",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "draftId",
+      "topicId",
+      "segmentId",
+      "assignmentMethod",
+      "confidence",
+      "isUserConfirmed",
+      "createdBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseFrameworks",
+    "tableName": "courseFrameworks",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "courseId",
+      "organizationId",
+      "topics",
+      "sourceMap",
+      "contentHealth",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseLessons",
+    "tableName": "courseLessons",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "courseId",
+      "lessonId",
+      "topicId",
+      "topicOrder",
+      "topicName",
+      "primaryQuizId",
+      "learningObjectives",
+      "lessonDetail",
+      "realWorldExample",
+      "lessonType",
+      "contentHealth",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "coursePayoutLineItems",
+    "tableName": "coursePayoutLineItems",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "payoutId",
+      "courseId",
+      "salesCount",
+      "grossRevenue",
+      "platformCommission",
+      "netAmount",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "coursePayouts",
+    "tableName": "coursePayouts",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "organizationId",
+      "periodStart",
+      "periodEnd",
+      "currency",
+      "grossRevenue",
+      "platformCommission",
+      "netAmount",
+      "exchangeRateSnapshot",
+      "status",
+      "paidAt",
+      "paymentReference",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "coursePriceHistory",
+    "tableName": "coursePriceHistory",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "courseId",
+      "oldPrice",
+      "newPrice",
+      "currency",
+      "changedAt",
+      "changedBy"
+    ]
+  },
+  {
+    "varName": "courseProgress",
+    "tableName": "courseProgress",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "courseId",
+      "userId",
+      "organizationId",
+      "status",
+      "completedLessons",
+      "totalLessons",
+      "percentComplete",
+      "lastAccessedAt",
+      "startedAt",
+      "completedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "coursePurchases",
+    "tableName": "coursePurchases",
+    "columnCount": 19,
+    "columns": [
+      "id",
+      "courseId",
+      "courseVersionId",
+      "userId",
+      "checkoutId",
+      "status",
+      "purchasePrice",
+      "purchaseCurrency",
+      "platformCurrency",
+      "exchangeRateUsed",
+      "platformAmount",
+      "commissionRate",
+      "commissionAmount",
+      "creatorEarnings",
+      "purchasedAt",
+      "refundedAt",
+      "baseCurrency",
+      "basePrice",
+      "receiptPdfPath"
+    ]
+  },
+  {
+    "varName": "courseRatings",
+    "tableName": "courseRatings",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "courseId",
+      "userId",
+      "rating",
+      "review",
+      "isHidden",
+      "isReported",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseRefunds",
+    "tableName": "courseRefunds",
+    "columnCount": 22,
+    "columns": [
+      "id",
+      "purchaseId",
+      "courseId",
+      "userId",
+      "organizationId",
+      "status",
+      "requestReason",
+      "decisionReason",
+      "decidedBy",
+      "originalAmount",
+      "originalCurrency",
+      "exchangeRateSnapshot",
+      "platformCommission",
+      "creatorRefundAmount",
+      "platformCurrency",
+      "completionPercentage",
+      "eligibilityWindowDays",
+      "requestedAt",
+      "decidedAt",
+      "paidOutAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseReviews",
+    "tableName": "courseReviews",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "courseId",
+      "userId",
+      "organizationId",
+      "rating",
+      "comment",
+      "displayName",
+      "reviewerDisplayName",
+      "useRealName",
+      "isHidden",
+      "isVisible",
+      "moderatedBy",
+      "moderatedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courses",
+    "tableName": "courses",
+    "columnCount": 31,
+    "columns": [
+      "id",
+      "organizationId",
+      "title",
+      "description",
+      "thumbnailUrl",
+      "thumbnailSource",
+      "thumbnailGeneratedAt",
+      "thumbnailPromptSummary",
+      "price",
+      "currency",
+      "categoryId",
+      "difficultyLevel",
+      "estimatedDuration",
+      "status",
+      "visibility",
+      "unitId",
+      "subUnitId",
+      "teamId",
+      "currentVersionId",
+      "averageRating",
+      "totalRatings",
+      "createdBy",
+      "languageCode",
+      "contentGroupId",
+      "isDefaultLanguage",
+      "sourceLanguageVersion",
+      "translationStatus",
+      "createdAt",
+      "updatedAt",
+      "sourceVersionCourseId",
+      "cloneMapping"
+    ]
+  },
+  {
+    "varName": "courseTags",
+    "tableName": "courseTags",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "organizationId",
+      "courseId",
+      "tagName",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "courseUpgradeOrders",
+    "tableName": "courseUpgradeOrders",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "courseId",
+      "versionId",
+      "status",
+      "checkoutId",
+      "amount",
+      "currency",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseVersionNotifications",
+    "tableName": "courseVersionNotifications",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "courseId",
+      "oldVersionId",
+      "newVersionId",
+      "notifiedAt",
+      "wasViewed",
+      "viewedAt"
+    ]
+  },
+  {
+    "varName": "courseVersions",
+    "tableName": "courseVersions",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "courseId",
+      "versionNumber",
+      "title",
+      "description",
+      "thumbnailUrl",
+      "basePrice",
+      "baseCurrency",
+      "isPublished",
+      "publishedAt",
+      "previousVersionId",
+      "upgradePrice",
+      "upgradeCurrency",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "courseVersionUpgrades",
+    "tableName": "courseVersionUpgrades",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "userId",
+      "courseId",
+      "fromVersionId",
+      "toVersionId",
+      "upgradePrice",
+      "upgradeCurrency",
+      "exchangeRateUsed",
+      "platformAmount",
+      "commissionAmount",
+      "creatorEarnings",
+      "purchasedAt"
+    ]
+  },
+  {
+    "varName": "creditOrders",
+    "tableName": "creditOrders",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "packageId",
+      "purchaserId",
+      "organizationId",
+      "checkoutId",
+      "paymentIntentId",
+      "creditsAmount",
+      "amount",
+      "currency",
+      "status",
+      "purchaseTarget",
+      "receiptPdfPath",
+      "fulfillmentAt",
+      "metadata",
+      "retryCount",
+      "lastRetryAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "creditPurchasePackages",
+    "tableName": "creditPurchasePackages",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "name",
+      "creditsAmount",
+      "priceAmount",
+      "currency",
+      "badge",
+      "features",
+      "isActive",
+      "displayOrder",
+      "colorScheme",
+      "createdBy",
+      "updatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "creditTransactions",
+    "tableName": "creditTransactions",
+    "columnCount": 16,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "allocationId",
+      "amount",
+      "balanceAfter",
+      "transactionType",
+      "description",
+      "lessonId",
+      "quizId",
+      "questionTier",
+      "adminUserId",
+      "correlationId",
+      "gammaLedgerEntryId",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "creditUsageLogs",
+    "tableName": "creditUsageLogs",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "organizationId",
+      "lessonId",
+      "creditsUsed",
+      "actionType",
+      "userId",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "currencyConversionRates",
+    "tableName": "currencyConversionRates",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "baseCurrency",
+      "targetCurrency",
+      "rate",
+      "source",
+      "lastUpdated",
+      "updatedBy",
+      "isActive"
+    ]
+  },
+  {
+    "varName": "dailyStreaks",
+    "tableName": "dailyStreaks",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "currentStreak",
+      "bestStreak",
+      "lastCompletedDate",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "elearningSubscriptionPlans",
+    "tableName": "elearningSubscriptionPlans",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "name",
+      "planType",
+      "interval",
+      "priceAmount",
+      "currency",
+      "learnerAllotment",
+      "creditAllotment",
+      "features",
+      "badge",
+      "colorScheme",
+      "isActive",
+      "displayOrder",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "emailLogs",
+    "tableName": "emailLogs",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "recipientEmail",
+      "recipientName",
+      "subject",
+      "templateType",
+      "status",
+      "mailersendId",
+      "subscriptionId",
+      "invoiceId",
+      "attachmentPaths",
+      "errorMessage",
+      "retryCount",
+      "sentAt",
+      "deliveredAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseAgreementTemplates",
+    "tableName": "enterprise_agreement_templates",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "templateName",
+      "templateType",
+      "filePath",
+      "fileName",
+      "version",
+      "uploadedBy",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseCustomers",
+    "tableName": "enterprise_customers",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "email",
+      "passwordHash",
+      "companyName",
+      "contactPersonName",
+      "contactEmail",
+      "contactMobile",
+      "companyAddress",
+      "country",
+      "royaltyPercentage",
+      "status",
+      "emailVerified",
+      "emailVerificationToken",
+      "emailVerificationExpiry",
+      "accountActivatedAt",
+      "parentEnterpriseId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "enterpriseDocuments",
+    "tableName": "enterprise_documents",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "documentType",
+      "fileName",
+      "filePath",
+      "fileSize",
+      "mimeType",
+      "status",
+      "rejectionReason",
+      "verifiedBy",
+      "verifiedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseKeyring",
+    "tableName": "enterprise_keyring",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "keyId",
+      "purpose",
+      "encryptedKeyBlob",
+      "keyVersion",
+      "isActive",
+      "createdAt",
+      "retiredAt"
+    ]
+  },
+  {
+    "varName": "enterpriseLicenseKeys",
+    "tableName": "enterprise_license_keys",
+    "columnCount": 17,
+    "columns": [
+      "id",
+      "licenseId",
+      "licenseRequestId",
+      "enterpriseCustomerId",
+      "encryptedKeyData",
+      "systemType",
+      "issuedReason",
+      "renewalSequence",
+      "issuedAt",
+      "expiresAt",
+      "downloadedAt",
+      "lastCheckInAt",
+      "checkInCount",
+      "isRevoked",
+      "revokedAt",
+      "revokedReason",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseLicenseRequests",
+    "tableName": "enterprise_license_requests",
+    "columnCount": 30,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "requestData",
+      "hardwareKey",
+      "hostname",
+      "serverBaseUrl",
+      "systemType",
+      "status",
+      "denialReason",
+      "monthlyFee",
+      "feeCurrency",
+      "requestType",
+      "autoApproveRenewals",
+      "autoApproveDisabledAt",
+      "autoApproveDisabledBy",
+      "autoApproveDisableReason",
+      "graceDays",
+      "billingStatus",
+      "billingNotes",
+      "lastCheckInAt",
+      "lastRenewedAt",
+      "nextRenewalDueAt",
+      "reminder5SentAt",
+      "reminder3SentAt",
+      "reminder1SentAt",
+      "overdueNoticeSentAt",
+      "reviewedBy",
+      "reviewedAt",
+      "updatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseRevenueSync",
+    "tableName": "enterprise_revenue_sync",
+    "columnCount": 21,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "licenseKeyId",
+      "orgName",
+      "orgId",
+      "systemBaseUrl",
+      "systemType",
+      "totalUsers",
+      "totalLearners",
+      "totalInstructors",
+      "totalAdmins",
+      "totalCourses",
+      "totalEnrollments",
+      "totalRevenueLocal",
+      "revenueCurrency",
+      "commissionPercentage",
+      "commissionValue",
+      "syncPeriodStart",
+      "syncPeriodEnd",
+      "syncedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseSystemDailyTelemetry",
+    "tableName": "enterprise_system_daily_telemetry",
+    "columnCount": 39,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "enterpriseSystemId",
+      "systemType",
+      "serverBaseUrl",
+      "hostname",
+      "organizationId",
+      "organizationName",
+      "totalUsers",
+      "totalOrgAdmins",
+      "totalTrainers",
+      "totalLearners",
+      "totalCustSupers",
+      "totalSuperAdmins",
+      "totalOrganizations",
+      "totalCourses",
+      "totalPublishedCourses",
+      "totalEnrollments",
+      "totalPublishedEnrollments",
+      "totalPaidCourseEnrollments",
+      "totalFreeCourseEnrollments",
+      "totalPaidEnrollmentValue",
+      "totalFreeEnrollmentValue",
+      "totalAssignments",
+      "totalPublishedAssignments",
+      "totalPaidCourseCompletions",
+      "totalFreeCourseCompletions",
+      "totalPaidCompletionValue",
+      "totalFreeCourseCompletionsValue",
+      "activeUsers30Days",
+      "royaltyPercentageApplied",
+      "royaltyRevenueEnrollments",
+      "royaltyRevenueCompletions",
+      "royaltyRevenueTotal",
+      "metricCurrency",
+      "metricsSchemaVersion",
+      "reportDate",
+      "reportedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "enterpriseSystems",
+    "tableName": "enterprise_systems",
+    "columnCount": 30,
+    "columns": [
+      "id",
+      "enterpriseCustomerId",
+      "name",
+      "systemType",
+      "baseUrl",
+      "internalHostname",
+      "cpu",
+      "memory",
+      "appPort",
+      "dbPort",
+      "nginxHttpPort",
+      "nginxHttpsPort",
+      "hardwareKey",
+      "activeLicenseRequestId",
+      "activeLicenseKeyId",
+      "licenseStatus",
+      "licenseExpiresAt",
+      "lastCheckInAt",
+      "nextCheckInDueAt",
+      "lastTelemetryAt",
+      "alertEmails",
+      "lastContactSyncAt",
+      "autoApproveRenewals",
+      "graceDays",
+      "billingStatus",
+      "monthlyFee",
+      "feeCurrency",
+      "status",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "equippedCosmetics",
+    "tableName": "equippedCosmetics",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "userId",
+      "cosmeticId",
+      "slot",
+      "equippedAt"
+    ]
+  },
+  {
+    "varName": "exchangeRateHistory",
+    "tableName": "exchangeRateHistory",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "baseCurrency",
+      "targetCurrency",
+      "rate",
+      "source",
+      "provider",
+      "recordedAt"
+    ]
+  },
+  {
+    "varName": "explanationTerms",
+    "tableName": "explanationTerms",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "explanationId",
+      "termId",
+      "termOccurrences",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "financialAuditLog",
+    "tableName": "financialAuditLog",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "eventType",
+      "entityType",
+      "entityId",
+      "userId",
+      "beforeState",
+      "afterState",
+      "ipAddress",
+      "userAgent",
+      "timestamp",
+      "notes"
+    ]
+  },
+  {
+    "varName": "gameResults",
+    "tableName": "gameResults",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "gameRoomId",
+      "collectionId",
+      "winnerId",
+      "gameMode",
+      "playerIds",
+      "playerXPChanges",
+      "totalRounds",
+      "gameDuration",
+      "isMultiplayer",
+      "gameStartedAt",
+      "gameEndedAt"
+    ]
+  },
+  {
+    "varName": "gameRooms",
+    "tableName": "gameRooms",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "hostPlayerId",
+      "collectionId",
+      "gameMode",
+      "maxPlayers",
+      "currentPlayers",
+      "gameState",
+      "gameData",
+      "roundTimeSeconds",
+      "gameTimeSeconds",
+      "joinCode",
+      "gameStartedAt",
+      "gameEndedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "gamificationEconomyRules",
+    "tableName": "gamificationEconomyRules",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "scope",
+      "organizationId",
+      "actionType",
+      "coinReward",
+      "xpReward",
+      "description",
+      "isActive",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "gammaCreditLedger",
+    "tableName": "gammaCreditLedger",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "correlationId",
+      "eventType",
+      "deltaCredits",
+      "runningBalance",
+      "gammaRequestId",
+      "lessonId",
+      "initiatedByUserId",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "gammaCreditSnapshots",
+    "tableName": "gammaCreditSnapshots",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "capturedAt",
+      "reportedBalance",
+      "source",
+      "gammaRequestId",
+      "ledgerRunningBalanceAtCapture",
+      "varianceFromLedger",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "gammaImageStyles",
+    "tableName": "gammaImageStyles",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "styleKey",
+      "displayName",
+      "description",
+      "thumbnailUrl",
+      "recommendedUseCases",
+      "source",
+      "isActive",
+      "weight",
+      "lastSyncedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "gammaThemes",
+    "tableName": "gammaThemes",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "thumbnailUrl",
+      "categories",
+      "isActive",
+      "lastSyncedAt",
+      "lastSyncError",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "guestSessions",
+    "tableName": "guestSessions",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "sessionId",
+      "guestName",
+      "lastActiveAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "interOrgCourseAssignmentRules",
+    "tableName": "interOrgCourseAssignmentRules",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "sourceOrganizationId",
+      "targetOrganizationId",
+      "enabled",
+      "createdBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "joinRequestApprovalTokens",
+    "tableName": "joinRequestApprovalTokens",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "token",
+      "joinRequestId",
+      "adminUserId",
+      "expiresAt",
+      "usedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "joinRequests",
+    "tableName": "joinRequests",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "requestedUnitId",
+      "requestedSubUnitId",
+      "requestedTeamId",
+      "requestedSubjectIds",
+      "assignedUnitId",
+      "assignedSubUnitId",
+      "assignedTeamId",
+      "assignedSubjectIds",
+      "status",
+      "denialReason",
+      "reviewedBy",
+      "reviewedAt",
+      "approvedAt",
+      "approvalMethod",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "leaderBoard",
+    "tableName": "leaderBoard",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "gamerName",
+      "avatarImageUrl",
+      "country",
+      "playerTitle",
+      "rank",
+      "totalWins",
+      "totalGames",
+      "winPercentage",
+      "bestWinStreak",
+      "currentWinStreak",
+      "averageGameDuration",
+      "lastActiveAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lessonAccessLogs",
+    "tableName": "lessonAccessLogs",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "lessonId",
+      "userId",
+      "organizationId",
+      "actionType",
+      "ipAddress",
+      "userAgent",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessonAssignments",
+    "tableName": "lessonAssignments",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "lessonId",
+      "studentId",
+      "organizationId",
+      "assignedBy",
+      "gradeLevel",
+      "departmentId",
+      "subjectId",
+      "unitId",
+      "dueDate",
+      "assignedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessonContentVersions",
+    "tableName": "lessonContentVersions",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "lessonId",
+      "versionNumber",
+      "source",
+      "changeDescription",
+      "previousContent",
+      "newContent",
+      "previousTitle",
+      "newTitle",
+      "previousDescription",
+      "newDescription",
+      "metadata",
+      "createdAt",
+      "createdBy"
+    ]
+  },
+  {
+    "varName": "lessonCreditPricingSettings",
+    "tableName": "lessonCreditPricingSettings",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "minimumProfitPercentage",
+      "profitStepDecrease",
+      "platformCostTiers",
+      "creditsPerLessonTextOnlyMin",
+      "creditsPerLessonTextOnlyMax",
+      "creditsPerLessonWithImagesMin",
+      "creditsPerLessonWithImagesMax",
+      "updatedBy",
+      "updatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessonPresentationVersions",
+    "tableName": "lessonPresentationVersions",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "lessonId",
+      "version",
+      "gammaCardId",
+      "presentationUrl",
+      "storageKey",
+      "themeId",
+      "gammaImageOptions",
+      "gammaTextOptions",
+      "creditsCharged",
+      "isGenerated",
+      "isCompressed",
+      "languageCode",
+      "createdAt",
+      "createdBy"
+    ]
+  },
+  {
+    "varName": "lessonProgress",
+    "tableName": "lessonProgress",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "lessonId",
+      "userId",
+      "organizationId",
+      "status",
+      "percentComplete",
+      "secondsSpent",
+      "lastCheckpoint",
+      "slidesViewedCount",
+      "totalSlides",
+      "completedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lessonProgressSlides",
+    "tableName": "lessonProgressSlides",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "lessonProgressId",
+      "slideIndex",
+      "viewedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessonQuizLinks",
+    "tableName": "lessonQuizLinks",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "lessonId",
+      "quizId",
+      "isPrimary",
+      "presentationVersionId",
+      "slideContentHash",
+      "isOutdated",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessons",
+    "tableName": "lessons",
+    "columnCount": 63,
+    "columns": [
+      "id",
+      "organizationId",
+      "createdBy",
+      "title",
+      "description",
+      "gradeLevel",
+      "department",
+      "subject",
+      "unit",
+      "generationMode",
+      "generationStatus",
+      "transcriptStatus",
+      "transcriptKey",
+      "learningAssetContract",
+      "topics",
+      "mainTopic",
+      "subtopic1",
+      "subtopic2",
+      "inputText",
+      "gammaCardId",
+      "presentationUrl",
+      "storageKey",
+      "sourceDocumentPath",
+      "generationParamsKey",
+      "videoStorageKey",
+      "videoDurationSec",
+      "videoSizeBytes",
+      "videoUploadedAt",
+      "presenterNotesJson",
+      "themeId",
+      "gammaImageOptions",
+      "gammaTextOptions",
+      "slideCount",
+      "creditsUsed",
+      "currentSlideVersion",
+      "isPublished",
+      "publishedAt",
+      "publishedBy",
+      "isArchived",
+      "archivedAt",
+      "relatedQuizId",
+      "viewCount",
+      "completionCount",
+      "metadata",
+      "contentScore10",
+      "previousScore10",
+      "lastFeedbackAt",
+      "lastFeedbackHash",
+      "feedbackReport",
+      "feedbackStatus",
+      "aiImproveStatus",
+      "aiImproveResult",
+      "detail",
+      "realWorldExample",
+      "sourceMap",
+      "languageCode",
+      "contentGroupId",
+      "isDefaultLanguage",
+      "sourceLanguageVersion",
+      "translationStatus",
+      "activeLessonVersionId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lessonScopeAssignments",
+    "tableName": "lessonScopeAssignments",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "lessonId",
+      "organizationId",
+      "unitId",
+      "subjectId",
+      "audience",
+      "assignedBy",
+      "dueDate",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "lessonSlides",
+    "tableName": "lessonSlides",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "lessonId",
+      "version",
+      "slideIndex",
+      "title",
+      "bullets",
+      "speakerNotes",
+      "mediaPrompt",
+      "role",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lessonTranslationJobs",
+    "tableName": "lessonTranslationJobs",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "lessonId",
+      "sourceLessonId",
+      "organizationId",
+      "targetLanguageCode",
+      "sourceLanguageCode",
+      "status",
+      "currentStep",
+      "creditsCharged",
+      "errorMessage",
+      "initiatedBy",
+      "completedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lessonVersions",
+    "tableName": "lessonVersions",
+    "columnCount": 35,
+    "columns": [
+      "id",
+      "lessonId",
+      "organizationId",
+      "versionNumber",
+      "title",
+      "description",
+      "gradeLevel",
+      "department",
+      "subject",
+      "unit",
+      "generationMode",
+      "generationStatus",
+      "themeId",
+      "slideCount",
+      "creditsUsed",
+      "relatedQuizId",
+      "isPublished",
+      "isArchived",
+      "publishedAt",
+      "publishedBy",
+      "viewCount",
+      "completionCount",
+      "languageCode",
+      "lessonSnapshot",
+      "storageKey",
+      "fileSize",
+      "videoStorageKey",
+      "videoDurationSec",
+      "videoSizeBytes",
+      "videoUploadedAt",
+      "presenterNotesJson",
+      "changeDescription",
+      "diffSummary",
+      "editedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "licenseFlagAudit",
+    "tableName": "licenseFlagAudit",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "flagKey",
+      "action",
+      "oldValue",
+      "newValue",
+      "changedBy",
+      "reason",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "licenseFlagOverrides",
+    "tableName": "licenseFlagOverrides",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "flagKey",
+      "value",
+      "description",
+      "setBy",
+      "expiresAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "licensePayments",
+    "tableName": "licensePayments",
+    "columnCount": 17,
+    "columns": [
+      "id",
+      "organizationId",
+      "paymentIntentId",
+      "billingPeriodStart",
+      "billingPeriodEnd",
+      "seatsCount",
+      "amount",
+      "currency",
+      "status",
+      "paidAt",
+      "metadata",
+      "fulfilledAt",
+      "fulfillmentStatus",
+      "errorMessage",
+      "processedByWebhookId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "licenseRolloutBetaUsers",
+    "tableName": "licenseRolloutBetaUsers",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "userId",
+      "addedBy",
+      "notes",
+      "expiresAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "licenseRolloutOrganizations",
+    "tableName": "licenseRolloutOrganizations",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "organizationId",
+      "addedBy",
+      "notes",
+      "expiresAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "loginStreaks",
+    "tableName": "loginStreaks",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "currentStreak",
+      "longestStreak",
+      "lastLoginDate",
+      "totalCoinsEarned",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "lpCreditLedger",
+    "tableName": "lpCreditLedger",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "transactionType",
+      "amount",
+      "balanceAfter",
+      "correlationId",
+      "description",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "notificationPreferences",
+    "tableName": "notificationPreferences",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "emailNotifications",
+      "inAppNotifications",
+      "coursePurchaseNotifications",
+      "courseVersionNotifications",
+      "payoutNotifications",
+      "reviewNotifications",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "onpremLicenseState",
+    "tableName": "onprem_license_state",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "licenseKeyData",
+      "hardwareKey",
+      "hostname",
+      "serverBaseUrl",
+      "systemType",
+      "installedAt",
+      "expiresAt",
+      "isValid",
+      "lastValidatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "organizationDomains",
+    "tableName": "organization_domains",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "organizationId",
+      "domain",
+      "verified",
+      "verificationToken",
+      "verifiedAt",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "organizationBankDetails",
+    "tableName": "organizationBankDetails",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "organizationId",
+      "bankName",
+      "accountNumber",
+      "branchCode",
+      "accountHolderName",
+      "isVerified",
+      "verifiedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "organizationBankingDetails",
+    "tableName": "organizationBankingDetails",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "organizationId",
+      "bankName",
+      "accountHolderName",
+      "accountNumber",
+      "branchCode",
+      "swiftCode",
+      "accountType",
+      "bankAddress",
+      "createdAt",
+      "updatedAt",
+      "updatedBy"
+    ]
+  },
+  {
+    "varName": "organizationLicenses",
+    "tableName": "organizationLicenses",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "organizationId",
+      "tier",
+      "totalSeats",
+      "seatsConsumed",
+      "billingPeriodMonths",
+      "currentTermStart",
+      "currentTermEnd",
+      "autoRenew",
+      "status",
+      "metadata",
+      "fulfilledPaymentId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "organizationLicenseSettings",
+    "tableName": "organizationLicenseSettings",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "organizationId",
+      "autoRenew",
+      "maxSeats",
+      "billingDay",
+      "trialEndsAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "organizationPackageAssignments",
+    "tableName": "organizationPackageAssignments",
+    "columnCount": 16,
+    "columns": [
+      "id",
+      "organizationId",
+      "packageId",
+      "interval",
+      "status",
+      "currency",
+      "currentPeriodStart",
+      "currentPeriodEnd",
+      "nextBillingDate",
+      "scheduledPackageId",
+      "scheduledEffectiveDate",
+      "scheduledUserSelections",
+      "lastPaymentId",
+      "lastPaymentDate",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "organizationPackageOverrides",
+    "tableName": "organizationPackageOverrides",
+    "columnCount": 24,
+    "columns": [
+      "id",
+      "organizationId",
+      "maxLearners",
+      "maxTeachers",
+      "maxOrgAdmins",
+      "monthlyCredits",
+      "pricePerLearnerZAR",
+      "pricePerLearnerUSD",
+      "pricePerLearnerEUR",
+      "pricePerTeacherZAR",
+      "pricePerTeacherUSD",
+      "pricePerTeacherEUR",
+      "pricePerOrgAdminZAR",
+      "pricePerOrgAdminUSD",
+      "pricePerOrgAdminEUR",
+      "discountPercentage",
+      "reason",
+      "validFrom",
+      "validUntil",
+      "createdBy",
+      "createdAt",
+      "updatedBy",
+      "updatedAt",
+      "isActive"
+    ]
+  },
+  {
+    "varName": "organizations",
+    "tableName": "organizations",
+    "columnCount": 40,
+    "columns": [
+      "id",
+      "name",
+      "type",
+      "inviteCode",
+      "curriculum",
+      "streetAddress",
+      "city",
+      "province",
+      "postalCode",
+      "country",
+      "contactPhone",
+      "studentCount",
+      "howHeardAboutUs",
+      "isActive",
+      "isDemo",
+      "isGeneralOrg",
+      "isShowcaseOrg",
+      "subscriptionStatus",
+      "trialStartDate",
+      "trialEndDate",
+      "subscriptionStartDate",
+      "billingEmail",
+      "pricingTier",
+      "monthlyPrice",
+      "lastCreditResetDate",
+      "bonusCredits",
+      "trialGammaUserId",
+      "trialCreditsAwarded",
+      "orgCreditWallet",
+      "useOrgCreditWallet",
+      "allowTeachersToSpendCredits",
+      "timezone",
+      "currency",
+      "defaultLanguage",
+      "commissionRate",
+      "hasBankingDetails",
+      "licenseEnabled",
+      "licenseBillingStartDate",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "organizationSubUnits",
+    "tableName": "organizationSubUnits",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "unitId",
+      "name",
+      "displayOrder",
+      "joinCode",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "organizationTeams",
+    "tableName": "organizationTeams",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "subUnitId",
+      "name",
+      "displayOrder",
+      "joinCode",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "organizationUnits",
+    "tableName": "organizationUnits",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "organizationId",
+      "name",
+      "displayOrder",
+      "joinCode",
+      "isActive",
+      "isShowcaseDepartment",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "organizationUsageLimits",
+    "tableName": "organizationUsageLimits",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "organizationId",
+      "concurrentUsers",
+      "dailyQuizCount",
+      "aiExplanationCount",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "orgCreditLedger",
+    "tableName": "orgCreditLedger",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "organizationId",
+      "actorUserId",
+      "transactionType",
+      "activityType",
+      "activityId",
+      "amount",
+      "balanceAfter",
+      "correlationId",
+      "description",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "packageChangeEvents",
+    "tableName": "packageChangeEvents",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "packageId",
+      "organizationId",
+      "changeType",
+      "previousValues",
+      "newValues",
+      "changedBy",
+      "ipAddress",
+      "userAgent",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "packageRecommendationDismissals",
+    "tableName": "packageRecommendationDismissals",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "organizationId",
+      "dismissedBy",
+      "recommendedPackageId",
+      "dismissedAt",
+      "expiresAt"
+    ]
+  },
+  {
+    "varName": "paymentFulfillments",
+    "tableName": "paymentFulfillments",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "paymentIntentId",
+      "checkoutId",
+      "intentType",
+      "intentId",
+      "invoiceId",
+      "fulfilledBy",
+      "fulfillmentData",
+      "fulfilledAt"
+    ]
+  },
+  {
+    "varName": "paymentIntents",
+    "tableName": "paymentIntents",
+    "columnCount": 21,
+    "columns": [
+      "id",
+      "checkoutId",
+      "intentType",
+      "intentId",
+      "invoiceId",
+      "organizationId",
+      "userId",
+      "amount",
+      "currency",
+      "originalAmount",
+      "originalCurrency",
+      "status",
+      "metadata",
+      "checkoutUrl",
+      "successUrl",
+      "cancelUrl",
+      "failureUrl",
+      "lastWebhookAt",
+      "reconciledAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "paymentTransactions",
+    "tableName": "paymentTransactions",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "organizationId",
+      "userId",
+      "courseId",
+      "courseVersionId",
+      "provider",
+      "checkoutId",
+      "amount",
+      "currency",
+      "status",
+      "metadata",
+      "createdAt",
+      "completedAt"
+    ]
+  },
+  {
+    "varName": "paymentWebhookEvents",
+    "tableName": "paymentWebhookEvents",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "eventId",
+      "checkoutId",
+      "eventType",
+      "processedAt",
+      "processingDurationMs",
+      "fulfilledBy",
+      "success",
+      "errorMessage",
+      "metadata",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "payoutBatches",
+    "tableName": "payoutBatches",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "batchDate",
+      "periodStart",
+      "periodEnd",
+      "status",
+      "totalPayouts",
+      "totalAmount",
+      "currency",
+      "processedAt",
+      "createdAt",
+      "createdBy"
+    ]
+  },
+  {
+    "varName": "payoutDisbursements",
+    "tableName": "payoutDisbursements",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "organizationId",
+      "periodStart",
+      "periodEnd",
+      "originalCurrency",
+      "originalAmount",
+      "convertedCurrency",
+      "convertedAmount",
+      "exchangeRateSnapshot",
+      "totalSales",
+      "commissionRate",
+      "commissionAmount",
+      "netPayout",
+      "dueDate",
+      "status",
+      "paidAt",
+      "paymentReference",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "pendingGammaJobs",
+    "tableName": "pendingGammaJobs",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "organizationId",
+      "lessonId",
+      "gammaGenerationId",
+      "status",
+      "retryCount",
+      "lastPolledAt",
+      "firstPollingAt",
+      "errorMessage",
+      "metadata",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformConfiguration",
+    "tableName": "platformConfiguration",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "key",
+      "value",
+      "dataType",
+      "description",
+      "isEditable",
+      "lastModifiedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformCostAllocations",
+    "tableName": "platformCostAllocations",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "costEntryId",
+      "organizationId",
+      "allocationPercentage",
+      "allocatedAmountZAR",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "platformCostCategories",
+    "tableName": "platformCostCategories",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "name",
+      "type",
+      "description",
+      "isActive",
+      "displayOrder",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformCostCategoryTypes",
+    "tableName": "platformCostCategoryTypes",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "name",
+      "label",
+      "description",
+      "isActive",
+      "displayOrder",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformCostEntries",
+    "tableName": "platformCostEntries",
+    "columnCount": 18,
+    "columns": [
+      "id",
+      "categoryId",
+      "organizationId",
+      "description",
+      "amount",
+      "currency",
+      "exchangeRateUsed",
+      "normalizedAmountZAR",
+      "recurrence",
+      "effectiveDate",
+      "endDate",
+      "isAutomated",
+      "sourceReference",
+      "metadata",
+      "createdBy",
+      "updatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformFinancialAuditLog",
+    "tableName": "platformFinancialAuditLog",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "tableName",
+      "recordId",
+      "action",
+      "beforeData",
+      "afterData",
+      "changedBy",
+      "changedAt",
+      "ipAddress",
+      "userAgent"
+    ]
+  },
+  {
+    "varName": "platformFinancialSnapshots",
+    "tableName": "platformFinancialSnapshots",
+    "columnCount": 19,
+    "columns": [
+      "id",
+      "periodStart",
+      "periodEnd",
+      "periodType",
+      "organizationId",
+      "grossRevenueZAR",
+      "netRevenueZAR",
+      "totalCostsZAR",
+      "netProfitZAR",
+      "profitMarginPercent",
+      "courseRevenue",
+      "creditRevenue",
+      "licenseRevenue",
+      "subscriptionRevenue",
+      "chargebackAmount",
+      "refundAmount",
+      "transactionCount",
+      "metadata",
+      "generatedAt"
+    ]
+  },
+  {
+    "varName": "platformPaymentSettings",
+    "tableName": "platformPaymentSettings",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "yocoMode",
+      "updatedBy",
+      "updatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "platformPricing",
+    "tableName": "platformPricing",
+    "columnCount": 26,
+    "columns": [
+      "id",
+      "learnerMonthlyCost",
+      "elearningLearnerMonthlyCost",
+      "elearningLearnerDiscountPercent",
+      "currency",
+      "defaultCourseCommissionRate",
+      "minCoursePrice",
+      "maxCoursePrice",
+      "creditsPerThumbnailGeneration",
+      "creditsPerHealthReport",
+      "creditsPerTopicAnalysis",
+      "creditsPerFrameworkGeneration",
+      "creditsPerExplanationGeneration",
+      "creditsPerAnswerCheck",
+      "creditsPerLessonGeneration",
+      "creditsPerAiFix",
+      "creditsPerQuizGeneration",
+      "creditsPerLessonTranslation",
+      "creditsPerQuizTranslation",
+      "creditsPerCourseTranslation",
+      "creditsPerTranslatedPptxGeneration",
+      "creditsPerOverviewGeneration",
+      "creditsPerKeyTakeawaysGeneration",
+      "updatedBy",
+      "updatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "platformReportJobs",
+    "tableName": "platformReportJobs",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "reportName",
+      "reportType",
+      "format",
+      "status",
+      "parameters",
+      "filePath",
+      "fileSize",
+      "generatedAt",
+      "expiresAt",
+      "errorMessage",
+      "requestedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "platformReportSchedules",
+    "tableName": "platformReportSchedules",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "reportName",
+      "reportType",
+      "format",
+      "schedule",
+      "parameters",
+      "recipients",
+      "isActive",
+      "lastRunAt",
+      "nextRunAt",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "platformRevenueReports",
+    "tableName": "platformRevenueReports",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "reportDate",
+      "organizationType",
+      "totalRevenue",
+      "totalCommission",
+      "totalPayouts",
+      "currency",
+      "reportData",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "platformRevenueSources",
+    "tableName": "platformRevenueSources",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "sourceType",
+      "sourceId",
+      "organizationId",
+      "userId",
+      "grossAmount",
+      "netAmount",
+      "platformCommission",
+      "processingFee",
+      "currency",
+      "exchangeRateUsed",
+      "normalizedAmountZAR",
+      "metadata",
+      "recordedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "playerSeasonRewards",
+    "tableName": "playerSeasonRewards",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "seasonPassConfigId",
+      "tier",
+      "isPremiumReward",
+      "rewardType",
+      "rewardId",
+      "rewardAmount",
+      "rewardSnapshot",
+      "claimedAt"
+    ]
+  },
+  {
+    "varName": "playerSessions",
+    "tableName": "playerSessions",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "gameRoomId",
+      "playerId",
+      "playerName",
+      "playerPosition",
+      "cardStack",
+      "cardCount",
+      "isActive",
+      "isNPC",
+      "joinedAt"
+    ]
+  },
+  {
+    "varName": "playerStats",
+    "tableName": "playerStats",
+    "columnCount": 25,
+    "columns": [
+      "id",
+      "playerId",
+      "gamerName",
+      "currentXP",
+      "currentLevel",
+      "currentRank",
+      "totalGamesPlayed",
+      "totalWins",
+      "totalLosses",
+      "winPercentage",
+      "currentWinStreak",
+      "bestWinStreak",
+      "singlePlayerGames",
+      "singlePlayerWins",
+      "multiplayerGames",
+      "multiplayerWins",
+      "averageGameDuration",
+      "totalXPEarned",
+      "totalXPLost",
+      "certificatesEarned",
+      "lastGameAt",
+      "lastLevelChangeAt",
+      "lastRankChangeAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "postFulfillmentJobs",
+    "tableName": "postFulfillmentJobs",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "orderId",
+      "jobType",
+      "status",
+      "retryCount",
+      "maxRetries",
+      "lastAttemptAt",
+      "nextRetryAt",
+      "claimedAt",
+      "completedAt",
+      "errorMessage",
+      "resultData",
+      "metadata",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "powerUpCatalog",
+    "tableName": "powerUpCatalog",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "type",
+      "effect",
+      "coinCost",
+      "tier",
+      "isActive",
+      "iconUrl",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "powerUpInventory",
+    "tableName": "powerUpInventory",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "userId",
+      "powerUpId",
+      "quantity",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "quizCardExplanations",
+    "tableName": "quizCardExplanations",
+    "columnCount": 4,
+    "columns": [
+      "id",
+      "cardId",
+      "explanation",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "quizCards",
+    "tableName": "quizCards",
+    "columnCount": 16,
+    "columns": [
+      "id",
+      "collectionId",
+      "questionType",
+      "question",
+      "answer1",
+      "answer2",
+      "answer3",
+      "answer4",
+      "answer5",
+      "answer6",
+      "correctAnswerIndex",
+      "matchPairs",
+      "correctAnswer",
+      "imageKey",
+      "displayOrder",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "quizCardVersions",
+    "tableName": "quizCardVersions",
+    "columnCount": 19,
+    "columns": [
+      "id",
+      "cardId",
+      "collectionId",
+      "versionNumber",
+      "questionType",
+      "question",
+      "answer1",
+      "answer2",
+      "answer3",
+      "answer4",
+      "answer5",
+      "answer6",
+      "correctAnswerIndex",
+      "matchPairs",
+      "correctAnswer",
+      "cardSnapshot",
+      "changeDescription",
+      "editedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "quizCollectionAssignments",
+    "tableName": "quizCollectionAssignments",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "collectionId",
+      "subjectId",
+      "unitId",
+      "subUnitId",
+      "requiredPassPercentage",
+      "availableFrom",
+      "availableTo",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "quizCollections",
+    "tableName": "quizCollections",
+    "columnCount": 20,
+    "columns": [
+      "id",
+      "organizationId",
+      "subjectId",
+      "createdBy",
+      "name",
+      "description",
+      "totalCards",
+      "imageKey",
+      "isActive",
+      "isPublic",
+      "isDeleted",
+      "difficulty",
+      "passPercentage",
+      "languageCode",
+      "contentGroupId",
+      "isDefaultLanguage",
+      "sourceLanguageVersion",
+      "translationStatus",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "quizCollectionVersions",
+    "tableName": "quizCollectionVersions",
+    "columnCount": 14,
+    "columns": [
+      "id",
+      "collectionId",
+      "organizationId",
+      "versionNumber",
+      "name",
+      "description",
+      "totalCards",
+      "difficulty",
+      "passPercentage",
+      "collectionSnapshot",
+      "changeDescription",
+      "diffSummary",
+      "editedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "quizCreditPricing",
+    "tableName": "quizCreditPricing",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "organizationId",
+      "questionTier",
+      "creditCost",
+      "isActive",
+      "createdBy",
+      "updatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "quizDrafts",
+    "tableName": "quizDrafts",
+    "columnCount": 26,
+    "columns": [
+      "id",
+      "organizationId",
+      "createdBy",
+      "gradeId",
+      "subjectId",
+      "topic",
+      "primaryTopic",
+      "subtopic1",
+      "subtopic2",
+      "numberOfQuestions",
+      "difficulty",
+      "requiredPassPercentage",
+      "questionTypeDistribution",
+      "name",
+      "description",
+      "quizName",
+      "quizDescription",
+      "isPublic",
+      "passPercentage",
+      "generatedQuestions",
+      "currentStep",
+      "isPublished",
+      "publishedCollectionId",
+      "lessonId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "quizGameProgress",
+    "tableName": "quizGameProgress",
+    "columnCount": 15,
+    "columns": [
+      "id",
+      "userId",
+      "collectionId",
+      "organizationId",
+      "unitId",
+      "subUnitId",
+      "totalGamesPlayed",
+      "totalGamesWon",
+      "totalCorrectAnswers",
+      "totalAnswers",
+      "averageScore",
+      "bestScore",
+      "lastPlayedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "quizGameResults",
+    "tableName": "quizGameResults",
+    "columnCount": 23,
+    "columns": [
+      "id",
+      "gameId",
+      "collectionId",
+      "gameMode",
+      "player1Id",
+      "player1Name",
+      "player1Score",
+      "player1CorrectAnswers",
+      "player1TotalAnswers",
+      "player2Id",
+      "player2Name",
+      "player2Score",
+      "player2CorrectAnswers",
+      "player2TotalAnswers",
+      "winnerId",
+      "gameDuration",
+      "gameStartedAt",
+      "gameEndedAt",
+      "courseId",
+      "lessonId",
+      "courseVersionId",
+      "organizationId",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "reviewModerationActions",
+    "tableName": "reviewModerationActions",
+    "columnCount": 6,
+    "columns": [
+      "id",
+      "reviewId",
+      "moderatorId",
+      "action",
+      "reason",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "salesInquiries",
+    "tableName": "salesInquiries",
+    "columnCount": 16,
+    "columns": [
+      "id",
+      "name",
+      "surname",
+      "email",
+      "phone",
+      "organizationName",
+      "position",
+      "positionOther",
+      "studentCount",
+      "hearAboutUs",
+      "hearAboutUsOther",
+      "customMessage",
+      "status",
+      "statusUpdatedAt",
+      "statusUpdatedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "seasonPassConfig",
+    "tableName": "seasonPassConfig",
+    "columnCount": 20,
+    "columns": [
+      "id",
+      "scope",
+      "organizationId",
+      "seasonNumber",
+      "seasonName",
+      "description",
+      "status",
+      "tierDefinitions",
+      "coinCost",
+      "coinMultiplier",
+      "xpMultiplier",
+      "advantages",
+      "startDate",
+      "endDate",
+      "activatedAt",
+      "expiredAt",
+      "isActive",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "seasonPassProgress",
+    "tableName": "seasonPassProgress",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "userId",
+      "seasonPassConfigId",
+      "currentTier",
+      "seasonXP",
+      "unlockedTiers",
+      "claimedTiers",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "seasonPassPurchases",
+    "tableName": "seasonPassPurchases",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "seasonPassConfigId",
+      "purchasedAt",
+      "expiresAt",
+      "coinsPaid",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "seasonPassTiers",
+    "tableName": "seasonPassTiers",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "seasonPassConfigId",
+      "tier",
+      "xpRequired",
+      "freeRewardType",
+      "freeRewardId",
+      "freeRewardAmount",
+      "premiumRewardType",
+      "premiumRewardId",
+      "premiumRewardAmount",
+      "isActive",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "sessions",
+    "tableName": "sessions",
+    "columnCount": 3,
+    "columns": [
+      "sid",
+      "sess",
+      "expire"
+    ]
+  },
+  {
+    "varName": "shopItemPricing",
+    "tableName": "shopItemPricing",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "scope",
+      "organizationId",
+      "itemType",
+      "itemId",
+      "coinCost",
+      "isAvailable",
+      "customDescription",
+      "createdBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "subjects",
+    "tableName": "subjects",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "organizationId",
+      "unitId",
+      "name",
+      "description",
+      "createdBy",
+      "isActive",
+      "isDeleted",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "subscriptionEvents",
+    "tableName": "subscriptionEvents",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "subscriptionId",
+      "eventType",
+      "previousStatus",
+      "newStatus",
+      "metadata",
+      "initiatedBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "subscriptionInvoices",
+    "tableName": "subscriptionInvoices",
+    "columnCount": 19,
+    "columns": [
+      "id",
+      "subscriptionId",
+      "yocoCheckoutId",
+      "checkoutUrl",
+      "amountDue",
+      "currency",
+      "originalAmount",
+      "originalCurrency",
+      "exchangeRate",
+      "billingPeriodStart",
+      "billingPeriodEnd",
+      "status",
+      "dueAt",
+      "paidAt",
+      "reminderSent",
+      "pdfStoragePath",
+      "metadata",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "subscriptionPlans",
+    "tableName": "subscriptionPlans",
+    "columnCount": 13,
+    "columns": [
+      "id",
+      "name",
+      "tier",
+      "monthlyCredits",
+      "pricePerTeacher",
+      "currency",
+      "badge",
+      "features",
+      "colorScheme",
+      "isActive",
+      "displayOrder",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "subscriptions",
+    "tableName": "subscriptions",
+    "columnCount": 21,
+    "columns": [
+      "id",
+      "planId",
+      "targetType",
+      "targetId",
+      "status",
+      "currentPeriodStart",
+      "currentPeriodEnd",
+      "nextBillingDate",
+      "graceUntil",
+      "autoRenew",
+      "cancelAtPeriodEnd",
+      "cancelRequestedAt",
+      "cancellationSource",
+      "cancelledAt",
+      "cancelReason",
+      "processedBy",
+      "scheduledSeatReleaseAt",
+      "reactivatedAt",
+      "reactivationEligible",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "supportedLanguages",
+    "tableName": "supportedLanguages",
+    "columnCount": 7,
+    "columns": [
+      "code",
+      "name",
+      "nativeName",
+      "region",
+      "isActive",
+      "sortOrder",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "systemSettings",
+    "tableName": "systemSettings",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "settingKey",
+      "settingValue",
+      "dataType",
+      "description",
+      "updatedBy",
+      "updatedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "termDefinitions",
+    "tableName": "termDefinitions",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "term",
+      "definition",
+      "subjectId",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "unitSubjects",
+    "tableName": "unitSubjects",
+    "columnCount": 4,
+    "columns": [
+      "id",
+      "unitId",
+      "subjectId",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "universalStatUnits",
+    "tableName": "universalStatUnits",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "unitName",
+      "unitSymbol",
+      "description",
+      "category",
+      "isActive",
+      "isPredefined",
+      "createdBy",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "userCosmeticLoadouts",
+    "tableName": "userCosmeticLoadouts",
+    "columnCount": 6,
+    "columns": [
+      "userId",
+      "equippedBorder",
+      "equippedGlow",
+      "equippedBadge",
+      "equippedAnimation",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "userCourseEnrollments",
+    "tableName": "userCourseEnrollments",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "userId",
+      "courseId",
+      "courseVersionId",
+      "hasNewerVersion",
+      "latestVersionId",
+      "enrolledAt"
+    ]
+  },
+  {
+    "varName": "userCourseLessonProgress",
+    "tableName": "userCourseLessonProgress",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "userId",
+      "courseId",
+      "courseVersionId",
+      "lessonId",
+      "status",
+      "completedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "userCreditAdjustments",
+    "tableName": "userCreditAdjustments",
+    "columnCount": 11,
+    "columns": [
+      "id",
+      "allocationId",
+      "requestedBy",
+      "approvedBy",
+      "amountChange",
+      "reason",
+      "status",
+      "correlationId",
+      "approvedAt",
+      "rejectedAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "userCreditAllocations",
+    "tableName": "userCreditAllocations",
+    "columnCount": 10,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "currentBalance",
+      "monthlyAllocation",
+      "lastResetDate",
+      "status",
+      "isTrialAllocation",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "userLicenses",
+    "tableName": "userLicenses",
+    "columnCount": 12,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "tier",
+      "status",
+      "activatedAt",
+      "expiresAt",
+      "deactivatedAt",
+      "activatedBy",
+      "deactivatedBy",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "userNotifications",
+    "tableName": "userNotifications",
+    "columnCount": 9,
+    "columns": [
+      "id",
+      "userId",
+      "type",
+      "title",
+      "message",
+      "metadata",
+      "isRead",
+      "readAt",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "userOrganizationAssignments",
+    "tableName": "userOrganizationAssignments",
+    "columnCount": 8,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "unitId",
+      "subUnitId",
+      "teamId",
+      "subjectId",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "userOrganizationRoles",
+    "tableName": "userOrganizationRoles",
+    "columnCount": 5,
+    "columns": [
+      "id",
+      "userId",
+      "organizationId",
+      "role",
+      "createdAt"
+    ]
+  },
+  {
+    "varName": "userQuizProgress",
+    "tableName": "userQuizProgress",
+    "columnCount": 16,
+    "columns": [
+      "id",
+      "userId",
+      "collectionId",
+      "assignmentId",
+      "organizationId",
+      "unitId",
+      "subUnitId",
+      "attemptsCount",
+      "bestScore",
+      "bestPercentage",
+      "isPassed",
+      "completionStatus",
+      "lastAttemptAt",
+      "passedAt",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "users",
+    "tableName": "users",
+    "columnCount": 41,
+    "columns": [
+      "id",
+      "gamerName",
+      "email",
+      "password",
+      "isAdmin",
+      "isSuperAdmin",
+      "isCustSuper",
+      "firstName",
+      "lastName",
+      "positionAtOrg",
+      "profileImageUrl",
+      "avatarImageUrl",
+      "country",
+      "bio",
+      "playerTitle",
+      "preferredGameModes",
+      "isStatsPublic",
+      "bestWinStreak",
+      "currentWinStreak",
+      "averageGameDuration",
+      "totalGamesPlayed",
+      "totalWins",
+      "winPercentage",
+      "isLocked",
+      "isDisabled",
+      "failedLoginAttempts",
+      "lockedUntil",
+      "passwordResetToken",
+      "passwordResetExpires",
+      "emailVerified",
+      "emailVerificationToken",
+      "emailVerificationExpiry",
+      "lastActiveAt",
+      "timezone",
+      "preferredCurrency",
+      "preferredLanguage",
+      "needsCurrencyOnboarding",
+      "sessionVersion",
+      "lpCreditBalance",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  {
+    "varName": "webhookEvents",
+    "tableName": "webhookEvents",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "source",
+      "eventId",
+      "signature",
+      "receivedAt",
+      "expiresAt",
+      "processed"
+    ]
+  },
+  {
+    "varName": "webhookRegistrations",
+    "tableName": "webhookRegistrations",
+    "columnCount": 7,
+    "columns": [
+      "id",
+      "webhookId",
+      "mode",
+      "webhookUrl",
+      "isActive",
+      "registeredBy",
+      "registeredAt"
+    ]
+  }
+]

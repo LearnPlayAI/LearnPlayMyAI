@@ -1,0 +1,10 @@
+[
+  {"unitName": "meters", "unitSymbol": "m", "category": "length", "isPredefined": true, "isActive": true},
+  {"unitName": "kilograms", "unitSymbol": "kg", "category": "weight", "isPredefined": true, "isActive": true},
+  {"unitName": "km/h", "unitSymbol": "km/h", "category": "speed", "isPredefined": true, "isActive": true},
+  {"unitName": "/10", "unitSymbol": "/10", "category": "rating", "isPredefined": true, "isActive": true},
+  {"unitName": "million years", "unitSymbol": "Ma", "category": "geological_time", "isPredefined": true, "isActive": true},
+  {"unitName": "years", "unitSymbol": "yr", "category": "time", "isPredefined": true, "isActive": true},
+  {"unitName": "degrees Celsius", "unitSymbol": "°C", "category": "temperature", "isPredefined": true, "isActive": true},
+  {"unitName": "mph", "unitSymbol": "mph", "category": "speed", "isPredefined": true, "isActive": true}
+]

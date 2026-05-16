@@ -1,0 +1,46 @@
+[
+  {
+    "id": "pu-001-xpboost-10min-0000-000000000001",
+    "name": "XP Boost (10 min)",
+    "description": "Double XP for 10 minutes",
+    "type": "xp_boost",
+    "effect": {"multiplier": 2, "duration": 600},
+    "coinCost": 100,
+    "tier": "common",
+    "isActive": true,
+    "iconUrl": null
+  },
+  {
+    "id": "pu-002-xpboost-30min-0000-000000000002",
+    "name": "XP Boost (30 min)",
+    "description": "Double XP for 30 minutes",
+    "type": "xp_boost",
+    "effect": {"multiplier": 2, "duration": 1800},
+    "coinCost": 250,
+    "tier": "rare",
+    "isActive": true,
+    "iconUrl": null
+  },
+  {
+    "id": "pu-003-triplexp-5min-0000-000000000003",
+    "name": "Triple XP (5 min)",
+    "description": "Triple XP for 5 minutes",
+    "type": "xp_boost",
+    "effect": {"multiplier": 3, "duration": 300},
+    "coinCost": 300,
+    "tier": "epic",
+    "isActive": true,
+    "iconUrl": null
+  },
+  {
+    "id": "pu-004-timeext-30sec-0000-000000000004",
+    "name": "Time Extension",
+    "description": "+30 seconds for each question",
+    "type": "time_extension",
+    "effect": {"bonus": 30, "duration": 600},
+    "coinCost": 200,
+    "tier": "rare",
+    "isActive": true,
+    "iconUrl": null
+  }
+]

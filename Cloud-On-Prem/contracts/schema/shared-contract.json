@@ -1,0 +1,14 @@
+{
+  "product": "shared",
+  "version": "1",
+  "generatedAt": "2026-04-13T14:14:27Z",
+  "tables": ["courseLessons","courses","currencyConversionRates","enterpriseCustomers","enterpriseLicenseKeys","enterpriseLicenseRequests","enterpriseSystems","organizations","platformConfiguration","platformPricing","quizCreditPricing","supportedLanguages","systemSettings","userOrganizationRoles","users"],
+  "expected": {
+    "tables": 15,
+    "columns": 317,
+    "constraints": 0,
+    "indexes": 0,
+    "enums": 24,
+    "schemaSignature": "1014f681f170efd00a57f3fed3bfd5c2"
+  }
+}

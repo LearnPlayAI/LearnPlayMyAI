@@ -1,0 +1,52 @@
+[
+  {
+    "id": "seed-rule-quiz-win",
+    "scope": "global",
+    "organizationId": null,
+    "actionType": "quiz_win",
+    "coinReward": 10,
+    "xpReward": 50,
+    "description": "Seeded global rule: quiz win",
+    "isActive": true
+  },
+  {
+    "id": "seed-rule-quiz-participation",
+    "scope": "global",
+    "organizationId": null,
+    "actionType": "quiz_participation",
+    "coinReward": 5,
+    "xpReward": 25,
+    "description": "Seeded global rule: quiz participation",
+    "isActive": true
+  },
+  {
+    "id": "seed-rule-daily-login",
+    "scope": "global",
+    "organizationId": null,
+    "actionType": "daily_login",
+    "coinReward": 5,
+    "xpReward": 0,
+    "description": "Seeded global rule: daily login",
+    "isActive": true
+  },
+  {
+    "id": "seed-rule-perfect-score",
+    "scope": "global",
+    "organizationId": null,
+    "actionType": "perfect_score",
+    "coinReward": 25,
+    "xpReward": 100,
+    "description": "Seeded global rule: perfect score",
+    "isActive": true
+  },
+  {
+    "id": "seed-rule-streak-bonus",
+    "scope": "global",
+    "organizationId": null,
+    "actionType": "streak_bonus",
+    "coinReward": 10,
+    "xpReward": 0,
+    "description": "Seeded global rule: streak bonus",
+    "isActive": true
+  }
+]

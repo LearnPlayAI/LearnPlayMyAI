@@ -1,0 +1,5 @@
+interface:
+  display_name: "LearnPlay UI/UX Tokens"
+  short_description: "Token architecture, accessibility, and UI parity"
+  default_prompt: "Execute a UI/token remediation plan with primitive-first fixes and run required UI parity/contrast gates."
+allow_implicit_invocation: true

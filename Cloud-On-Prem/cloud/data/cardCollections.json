@@ -1,0 +1,11 @@
+[
+  {
+    "id": "07a9821f-e3d3-4ccf-9f42-e61493dd3c4e",
+    "name": "Dinosaurs",
+    "description": "Prehistoric creatures with fascinating stats and abilities",
+    "totalCards": 30,
+    "imageKey": "/collection/Dinosaurs/coverImage.jpg",
+    "isActive": true,
+    "createdAt": "2025-09-02T12:30:54.544Z"
+  }
+]

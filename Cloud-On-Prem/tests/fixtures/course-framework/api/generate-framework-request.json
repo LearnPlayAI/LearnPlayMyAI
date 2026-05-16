@@ -1,0 +1,14 @@
+{
+  "targetLessonCount": 5,
+  "selectedTopics": [
+    "ai-fundamentals",
+    "ai-governance",
+    "ai-metrics"
+  ],
+  "customTopics": [
+    "AI rollout playbooks for schools and enterprises"
+  ],
+  "difficulty": "intermediate",
+  "includeOverview": true,
+  "includeKeyTakeaways": true
+}
