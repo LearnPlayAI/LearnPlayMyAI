@@ -1,5 +1,0 @@
-interface:
-  display_name: "LearnPlay Observability/Rollback"
-  short_description: "Telemetry, propagation checks, and rollback safety"
-  default_prompt: "Add observability and rollback-safe controls for mutable runtime behavior and verify propagation integrity."
-allow_implicit_invocation: true

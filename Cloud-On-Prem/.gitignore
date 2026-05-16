@@ -7,10 +7,7 @@ vite.config.ts.*
 output/
 *.cdp-profile
 .cdp-profile/
-playwright-cli/
-.playwright-cli/
 ui-theme-retry-pass.mjs
-page-*.yml
 
 # Runtime output stays out of source control
 uploads/

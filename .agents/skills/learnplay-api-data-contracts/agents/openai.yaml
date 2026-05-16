@@ -1,5 +1,0 @@
-interface:
-  display_name: "LearnPlay API/Data Contracts"
-  short_description: "API, data, schema, and migration contract discipline"
-  default_prompt: "Analyze cross-layer API/data contracts, implement root-cause fixes, and validate schema/migration safety."
-allow_implicit_invocation: true

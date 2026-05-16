@@ -1,5 +1,0 @@
-interface:
-  display_name: "LearnPlay Test/Release Gates"
-  short_description: "Validation matrix and release readiness enforcement"
-  default_prompt: "Run the full validation matrix, report findings, and produce release readiness with residual risks."
-allow_implicit_invocation: true

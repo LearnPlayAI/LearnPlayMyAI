@@ -25,7 +25,6 @@ Cloud-On-Prem/cloud/learnplay-export-*/
 Cloud-On-Prem/runtime-metadata/
 Cloud-On-Prem/uploads/
 Cloud-On-Prem/artifacts/
-Cloud-On-Prem/.playwright-cli/
 
 # Node deps
 node_modules/
@@ -52,7 +51,6 @@ Thumbs.db
 .cdp-profile/
 
 # Local browser-agent/test runner artifacts (not application source)
-**/.playwright-cli/page-*.yml
 ui-theme-*.mjs
 theme_gate_check.js
 /artifacts/

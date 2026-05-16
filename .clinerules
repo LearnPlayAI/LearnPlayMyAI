@@ -1,0 +1,343 @@
+# Cline's Memory Bank
+
+I am Cline, an expert software engineer with a unique characteristic: my memory resets completely between sessions. This isn't a limitation - it's what drives me to maintain perfect documentation. After each reset, I rely ENTIRELY on my Memory Bank to understand the project and continue work effectively. I MUST read ALL memory bank files at the start of EVERY task - this is not optional.
+
+## Memory Bank Structure
+
+The Memory Bank consists of core files and optional context files, all in Markdown format. Files build upon each other in a clear hierarchy:
+
+### Core Files (Required)
+
+1. `memory-bank/projectbrief.md`
+   - Foundation document that shapes all other files
+   - Created at project start if it doesn't exist
+   - Defines core requirements and goals
+   - Source of truth for project scope
+
+2. `memory-bank/productContext.md`
+   - Why this project exists
+   - Problems it solves
+   - How it should work
+   - User experience goals
+
+3. `memory-bank/activeContext.md`
+   - Current work focus
+   - Recent changes
+   - Next steps
+   - Active decisions and considerations
+   - Important patterns and preferences
+   - Learnings and project insights
+
+4. `memory-bank/systemPatterns.md`
+   - System architecture
+   - Key technical decisions
+   - Design patterns in use
+   - Component relationships
+   - Critical implementation paths
+
+5. `memory-bank/techContext.md`
+   - Technologies used
+   - Development setup
+   - Technical constraints
+   - Dependencies
+   - Tool usage patterns
+
+6. `memory-bank/progress.md`
+   - What works
+   - What's left to build
+   - Current status
+   - Known issues
+   - Evolution of project decisions
+
+### Additional Context
+
+Create additional files/folders within memory-bank/ when they help organize:
+- Complex feature documentation
+- Integration specifications
+- API documentation
+- Testing strategies
+- Deployment procedures
+
+## Documentation Updates
+
+Memory Bank updates occur when:
+1. Discovering new project patterns
+2. After implementing significant changes
+3. When user requests with **update memory bank** (MUST review ALL files)
+4. When context needs clarification
+
+REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.
+
+---
+
+# LearnPlay Development Rules
+
+## 1. Browser Testing Policy (STRICT)
+
+- **ALL browser testing MUST use webclaw** (`npx -y webclaw-mcp`)
+- **ONLY webclaw is to take screenshots of browser pages** — never use any other screenshot tool or manual method
+- **NEVER use Playwright** — Playwright is strictly forbidden in this project. Do not install, import, or reference Playwright anywhere
+- **Remove all Playwright files and references** — If any Playwright code, scripts, or configuration exists, delete it immediately
+- Use webclaw's `navigate_to`, `page_snapshot`, `click`, `type_text`, `screenshot`, and other browser tools for all visual verification
+- When you need to verify UI changes, render correctness, or visual regression — use webclaw exclusively
+- Use `evaluate` for JavaScript-based checks (reading DOM state, checking localStorage, etc.)
+- Use `page_snapshot` to get an accessibility tree of the current page for interactive element identification
+
+## 2. Technology Stack
+
+### Frontend
+- **React 18** — UI component library
+- **TypeScript 5.6.3** — Static type checking
+- **Vite 5.x** — Build tool and dev server
+- **TailwindCSS 3.x** + `tailwindcss-animate` — Utility-first CSS framework
+- **Radix UI** — Accessible, headless component primitives
+- **wouter** — Lightweight routing
+- **React Hook Form** + **Zod** + **zod-validation-error** — Form handling and validation
+- **Framer Motion** — Animations
+- **Recharts** — Data visualization / charts
+- **@uppy/core**, **@uppy/dashboard**, **@uppy/aws-s3** — File uploads
+- **socket.io-client** — Real-time client communication
+- **@tanstack/react-query** — Server state management
+- **embla-carousel-react**, **vaul**, **cmdk**, **input-otp**, **react-day-picker**, **react-resizable-panels** — Specialized UI components
+- **lucide-react** — Icon library
+- **react-icons** — Additional icon library
+- **flag-icons** — Country flag icons
+- **canvas-confetti** — Confetti animations
+- **date-fns** + **date-fns-tz** — Date manipulation
+- **clsx**, **tailwind-merge** — Conditional class name merging
+- **class-variance-authority** — Component variant management
+- **pptx-in-html-out**, **pptx-preview**, **docx**, **mammoth**, **pdf-parse**, **pdfkit**, **fast-xml-parser** — Document processing
+
+### Backend
+- **Express.js** — HTTP server framework
+- **Socket.IO** — Real-time bidirectional communication
+- **ws** — WebSocket implementation
+- **Passport.js** + **passport-local** — Authentication
+- **express-session** + **connect-pg-simple** — Session management with PostgreSQL store
+- **bcrypt** — Password hashing
+- **multer** — Multipart/form-data (file upload) parsing
+- **nodemailer** + **mailersend** — Email sending
+- **memoizee** — Function result caching
+- **open-id-client** — OpenID Connect support
+- **sharp** — Image processing
+- **archiver**, **unzipper** — Archive handling
+- **archiver** — Archive creation
+- **axios** — HTTP client
+- **wss** — WebSocket server
+- **memoizee** — Caching
+
+### Database
+- **PostgreSQL** — Primary database
+- **Drizzle ORM** (`drizzle-orm`) — Type-safe ORM
+- **Drizzle Kit** (`drizzle-kit`) — Migration tooling
+- **drizzle-zod** — Schema-to-Zod integration
+- **@neondatabase/serverless** — Neon serverless PostgreSQL driver
+
+### Testing
+- **Jest** (`jest`) — Test runner and framework
+- **ts-jest** — TypeScript support for Jest
+- **Supertest** (`supertest`) — HTTP assertion library
+- **@jest/globals** — Jest global functions
+- **@types/jest** — TypeScript types for Jest
+
+### Build Tools
+- **Vite 5.x** — Frontend build tool and dev server
+- **esbuild** — Server bundling (`@esbuild-plugins/node-globals-polyfill`, etc.)
+- **TypeScript 5.6.3** — Static type checking
+- **tsx** — Node.js runtime with TypeScript/ESM support
+- **postcss** + **autoprefixer** — CSS processing
+- **@vitejs/plugin-react** — React Fast Refresh plugin
+- **tailwindcss** + **@tailwindcss/vite** + **@tailwindcss/typography** — TailwindCSS tooling
+
+### Cloud/Storage
+- **@google-cloud/storage** — Google Cloud Storage client
+- **@replit/object-storage** — Replit object storage client
+- **@google/genai** — Google Generative AI client
+
+## 3. Project Structure
+
+```
+LearnPlayLocal/
+├── Cloud-On-Prem/              # Main application codebase
+│   ├── client/                  # Frontend (React + Vite)
+│   │   ├── public/              # Static assets
+│   │   └── src/                 # Source code
+│   │       └── tests/           # Frontend tests
+│   ├── server/                  # Backend (Express.js)
+│   │   └── tests/               # Backend tests
+│   ├── shared/                  # Shared code between client and server
+│   ├── drizzle/                 # Drizzle ORM migrations
+│   │   └── migrations/          # Migration files
+│   ├── scripts/                 # Utility and validation scripts
+│   ├── tests/                   # Integration/load tests (k6, etc.)
+│   ├── cloud/                   # Cloud deployment scripts
+│   ├── onprem/                  # On-prem deployment scripts
+│   ├── contracts/               # Contract definitions
+│   │   └── schema/              # Schema contracts
+│   ├── vite.config.ts           # Vite configuration
+│   ├── tailwind.config.ts       # TailwindCSS configuration
+│   ├── drizzle.config.ts        # Drizzle ORM configuration
+│   ├── tsconfig.json            # TypeScript configuration
+│   └── package.json             # Dependencies
+├── scripts/                     # Root-level utility scripts
+├── memory-bank/                 # Project documentation (Memory Bank)
+│   ├── projectbrief.md          # Project brief and goals
+│   ├── productContext.md        # Product vision and context
+│   ├── activeContext.md         # Current focus and recent changes
+│   ├── systemPatterns.md        # Architecture and design patterns
+│   ├── techContext.md           # Technology stack and setup
+│   └── progress.md              # Status and known issues
+└── .clinerules                  # This file
+```
+
+## 4. Deployment Modes
+
+### Cloud
+- Deployed to LearnPlay cloud infrastructure
+- Base URL: `https://stcloud.learnplay.co.za` (staging)
+- Configuration managed via `cloud/` scripts
+- Deployment scripts: `cloud/master-install.sh`, `cloud/update.sh`
+
+### On-Premise
+- Self-hosted deployments
+- Base URL: `https://stonprem.learnplay.co.za` (staging)
+- Configuration managed via `onprem/` scripts
+- Deployment scripts: `onprem/master-install.sh`, `onprem/update.sh`
+
+Both modes share the same codebase but may have different configurations and deployment pathways.
+
+## 5. Development Workflow
+
+### Starting Development
+```bash
+cd Cloud-On-Prem
+npm run dev              # Start dev server (tsx, single run)
+npm run dev:watch        # Start dev server with file watcher
+```
+
+### Building
+```bash
+npm run build            # Full production build (Vite + esbuild)
+```
+
+### Validation & Auditing
+```bash
+npm run check            # Full validation suite (type checking, naming, governance, theme audits)
+```
+
+### Testing
+```bash
+npm run test                    # Full test suite
+npm run test:server             # Backend tests only
+npm run test:client             # Frontend tests only
+npm run test:viewer-critical    # Critical path tests (viewer, navigation, translations, themes)
+npm run test:critical           # All critical tests
+npm run test:critical:integration  # Critical integration tests
+npm run coverage                # Coverage report
+```
+
+### Database
+```bash
+npm run db:push                # Push schema to database (drizzle-kit push)
+```
+
+### Load Testing
+```bash
+npm run load:test:app2000:cloud       # 2000 user load test (cloud)
+npm run load:test:app2000:onprem      # 2000 user load test (onprem)
+npm run load:test:appshort:cloud      # Short profile load test (cloud)
+npm run load:test:appshort:onprem     # Short profile load test (onprem)
+```
+
+### Migration Governance
+```bash
+npm run migration:validate                           # Validate migration governance
+npm run migration:drift:check                        # Detect schema drift
+npm run migration:verify:dev:cloud                   # Verify dev cloud migration
+npm run migration:verify:dev:onprem                  # Verify dev onprem migration
+npm run migration:verify:runtime:cloud               # Verify runtime contract (cloud)
+npm run migration:verify:runtime:onprem              # Verify runtime contract (onprem)
+```
+
+## 6. Coding Standards
+
+- **TypeScript strictly enforced** — All code should be fully typed
+- **Zod for runtime validation** — Validate all external inputs at boundaries
+- **Drizzle ORM for database operations** — Prefer Drizzle queries over raw SQL
+- **Component composition** — Prefer small, composable components over monolithic ones
+- **Server components and client components** — Clearly mark which is which
+- **API responses should be Zod-validated** — Use schema validation for all API payloads
+- **Follow existing naming conventions** — Snake case for DB columns/tables, camelCase in application code
+- **Use environment variables** — Never hardcode secrets; use the secrets manager system
+
+## 7. UI/Theming Guidelines
+
+- **TailwindCSS** is the primary styling mechanism
+- **Radix UI** provides accessible, headless component primitives
+- **Theme system** supports dual-token architecture with branding themes
+- **Accessibility**: Follow WCAG contrast ratios, use ARIA attributes, ensure keyboard navigation
+- **Component contracts**: UI components have defined contracts validated by `check:theme-contracts`
+- **Visual regression**: Theme rendering is audited via `check:theme-visual-regression`
+- **UIKit parity**: Component consistency across cloud/onprem is checked via `check:uikit-parity`
+
+## 8. API Development
+
+- **RESTful endpoints** via Express.js
+- **Real-time features** via Socket.IO
+- **Session-based authentication** via Passport.js with `passport-local` strategy
+- **All API responses should be Zod-validated** — Schema-first validation
+- **Webhook events** are captured for deduplication and auditing
+- **Database migrations** are managed via Drizzle in `drizzle/migrations/`
+- **Migration naming**: Use descriptive SQL filenames with sequential numbering
+
+## 9. Environment & Secrets Management
+
+- **Never commit secrets** — Use the secrets manager scripts (`cloud/secrets-manager.sh`, `onprem/generate-vault.sh`)
+- **Environment variables** are managed per deployment mode
+- **Database credentials**, **API keys**, and **tokens** are stored in encrypted vaults
+- **Sync admin parity**: Use `sync-admin-parity.sh` to maintain admin account consistency across environments
+
+## 10. Data Processing & Document Handling
+
+- **PDF processing**: `pdf-parse` for text extraction, `pdfkit` for generation
+- **Document processing**: `mammoth` for .docx, `docx` for creation, `fast-xml-parser` for XML
+- **Presentation handling**: `pptx-in-html-out` for parsing, `pptx-preview` for rendering
+- **Image processing**: `sharp` for resizing, optimization, format conversion
+- **Asset storage**: Google Cloud Storage or Replit Object Storage
+
+## 11. AI/ML Integration
+
+- **Google Generative AI** (`@google/genai`) for AI features
+- **AI thumbnail generation**: Supported via migration `0009_ai_thumbnail_generation.sql`
+- **AI columns on platform pricing**: Supported via migration `0060_add_platform_pricing_ai_columns.sql`
+
+## 12. Enterprise Features
+
+- **Enterprise portal**: Managed via migrations `0056-enterprise_portal.sql` through `0065-enterprise_demo_metrics_telemetry.sql`
+- **License lifecycle**: Managed via migration `0062-enterprise_license_lifecycle_and_telemetry.sql`
+- **Business profile fields**: Managed via migration `0063-enterprise_customer_business_profile_fields.sql`
+- **Keyring system**: Managed via migrations `0057-enterprise_keyring.sql`, `0064-enterprise_metrics_and_royalty.sql`
+
+## 13. Gamification & Content
+
+- **Gamification catalog**: Defined in migration `0066_gamification_catalog_dedup_and_uniqueness.sql`
+- **Course framework**: V2 segments in migration `0061_course_framework_v2_segments.sql`
+- **Lesson/Topic structure**: Lessons scoped to topics via migration `0011_add_course_lessons_topic_id.sql`
+- **Quiz system**: Generation enums in migration `0051_add_quiz_generation_enum.sql`, draft/source contracts in `0069_quiz_draft_source_contracts.sql`
+- **Podcast system**: Pricing and ledger tables in `0070_podcast_pricing_no_loss_fields.sql` and `0071_podcast_ledger_tables.sql`
+
+## 14. Translation & Internationalization
+
+- **Translation index and analytics**: Migration `0072_translation_index_and_analytics.sql`
+- **Platform theme singleton**: Migration `0073_platform_theme_singleton_index.sql`
+- **Content translation active job uniqueness**: Migration `0100_content_translation_active_job_uniqueness.sql`
+
+## 15. Communication Channels
+
+When working on this project:
+- Be concise and direct in code comments
+- Follow existing patterns before introducing new ones
+- Run `npm run check` before committing major changes
+- Use webclaw for all browser-based verification
+- Document any new migrations with clear SQL comments
+- **MUST read ALL memory bank files at the start of every task**
