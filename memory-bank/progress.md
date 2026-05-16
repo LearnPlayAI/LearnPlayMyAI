@@ -82,22 +82,39 @@
 ### Completed Tasks
 1. ✅ Memory Bank initialized with full project documentation
 2. ✅ Browser testing via webclaw verified homepage rendering
-3. ✅ All 6 core Memory Bank files created:
-   - projectbrief.md - Project overview and goals
-   - productContext.md - Product vision and user flows
-   - activeContext.md - Current focus and recent changes
-   - systemPatterns.md - Architecture and design patterns
-   - techContext.md - Technology stack and setup
-   - progress.md - Status and known issues
+3. ✅ All 6 core Memory Bank files created and maintained
+4. ✅ Native dev setup analysis — 100% native approach selected (zero Docker)
+5. ✅ Host system profiled — all dependencies present except ffmpeg
+6. ✅ Production path mapping documented (100+ paths traced from codebase)
+7. ✅ Native dev setup IMPLEMENTED and VERIFIED (2026-05-16)
 
 ## Known Issues
 
 ### Infrastructure
 - No known critical issues
+- ffmpeg installed but poppler-utils was already present on host
 
 ### Development
-- Memory Bank is newly initialized - needs regular updates after significant changes
-- ActiveContext.md should be updated after each development session
+- Memory Bank updated regularly after significant changes
+- ⚠️ Session secrets are placeholder values — regenerate for production use
+- ⚠️ .env file is shared between Cloud and OnPrem — must switch to run servers separately
+- ⚠️ License private key not configured (expected in dev mode)
+
+### Completed Implementation Actions (2026-05-16)
+1. ✅ Installed ffmpeg package via apt
+2. ✅ Created PostgreSQL user `learnplay` with password
+3. ✅ Created PostgreSQL databases `learnplay_cloud` and `learnplay_onprem`
+4. ✅ Ran `npm install` — all 140+ dependencies installed
+5. ✅ Created `uploads/` and `.backups/` directory structures
+6. ✅ Created `.env.cloud` — Cloud dev environment (port 5000)
+7. ✅ Created `.env.onprem` — OnPrem dev environment (port 5001)
+8. ✅ Updated `.gitignore` with new entries (.env files, version.json, .backups/)
+9. ✅ Pushed schema to both cloud and onprem databases via `npx drizzle-kit push`
+10. ✅ Verified Cloud dev server starts on port 5000
+11. ✅ Verified OnPrem dev server starts on port 5001
+12. ✅ Created server-startup skill — automated dev server lifecycle management (start/restart/stop)
+13. ✅ Created server-startup reference docs — database connection details and environment config
+14. ✅ Updated `.clinerules` with Section 17 — server-startup skill invocation guidelines
 
 ## Evolution of Project Decisions
 
